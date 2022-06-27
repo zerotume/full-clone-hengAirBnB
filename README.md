@@ -2,7 +2,7 @@
 
 ## Database Schema Design
 
-`<insert database schema design here>`
+![DB Schema](dbSchema.JPG)
 
 ## API Documentation
 
