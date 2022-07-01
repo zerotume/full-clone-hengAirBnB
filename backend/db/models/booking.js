@@ -26,9 +26,9 @@ module.exports = (sequelize, DataTypes) => {
     startDate: {
       type:DataTypes.DATE,
       allowNull:false,
-      validate:{
-        isAfter:((new Date()).toISOString().split('T'))[0]
-      }
+      // validate:{
+      //   isAfter:((new Date()).toISOString().split('T'))[0]
+      // }
     },
     endDate: {
       type:DataTypes.DATE,

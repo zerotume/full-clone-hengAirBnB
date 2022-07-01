@@ -61,7 +61,7 @@ module.exports = (sequelize, DataTypes) => {
         len:[3,256]
       }
     },
-    pwd: {
+    hashedpwd: {
       type:DataTypes.STRING.BINARY,
       allowNull:false,
       validate:{

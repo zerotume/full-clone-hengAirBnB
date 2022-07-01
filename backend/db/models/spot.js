@@ -66,7 +66,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:false,
       validate:{
         len:[2,50],
-        isAlpha:true
+        is:/([A-Za-z ])*/g
       }
     },
     lat: {
