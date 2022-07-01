@@ -2,15 +2,16 @@
 const {
   Model, Validator
 } = require('sequelize');
+const bcrypt = require('bcryptjs');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     toSafeObject(){
-      const {id, username, email} = this;
-      return {id, username, email};
+      const {id, username, email, firstName, lastName} = this;
+      return {id, username, email, firstName, lastName};
     }
 
     validatePassword(password){
-      return bcrypt.compareSync(password, this.hashedPassword.toString());
+      return bcrypt.compareSync(password, this.hashedpwd.toString());
     }
 
     static getCurrentUserById(id){//async maybe?
@@ -32,12 +33,14 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
 
-    static async signup({username, email, password}){
-      const hashedPassword = bcrypt.hashSync(password);
+    static async signup({username, email, password, firstName, lastName}){
+      const hashedpwd = bcrypt.hashSync(password);
       const user = await User.create({
         username,
         email,
-        hashedPassword
+        hashedpwd,
+        firstName,
+        lastName
       });
       return await User.scope('currentUser').findByPk(user.id);
     }
@@ -82,7 +85,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:false,
       validate:{
         len:[1,256],
-        is: /^([A-Za-z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff\s]*)$/g
       }
     },
     lastName: {
@@ -90,7 +92,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:false,
       validate:{
         len:[1,256],
-        is: /^([A-Za-z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff\s]*)$/g
       }
     },
     email: {
