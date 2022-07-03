@@ -12,12 +12,13 @@ router.get('/', async (req, res) => {
         },
         include:{
             model:Image,
-            attributes:[]
+            attributes:[],
+            where:{
+                reviewId:null
+            }
         },
-        where:{
-            reviewId:null
-        },
-        raw:true
+        raw:true,
+        order:[['id']]
     });
     return res.json(result);
 });
