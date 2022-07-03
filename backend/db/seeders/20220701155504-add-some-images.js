@@ -27,6 +27,24 @@ module.exports = {
         spotId:3,
         reviewId:null
       },
+      {
+        url:'https://backofthebrain.files.wordpress.com/2012/06/many-cats-in-the-room.jpg',
+        imageType:'spot',
+        spotId:1,
+        reviewId:null
+      },
+      {
+        url:'https://www.gtgoodtimes.com/wp-content/uploads/2019/02/15022019catnip.jpg',
+        imageType:'spot',
+        spotId:2,
+        reviewId:null
+      },
+      {
+        url:'https://www.indy100.com/media-library/image.jpg?id=28042782&width=1245&quality=85&coordinates=111%2C0%2C111%2C0&height=700https://www.popo8.com/host/data/201911/27/10/p1574919097_94132.jpg_b.jpg',
+        imageType:'spot',
+        spotId:4,
+        reviewId:null
+      },
     ]
     /**
      * Add seed commands here.
