@@ -5,7 +5,7 @@ const cors = require('cors');
 const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
-const { restoreUser } = require('./utils/auth.js');
+const { restoreUser, requireAuth } = require('./utils/auth.js');
 
 const { environment } = require('./config');
 const isProduction = environment === 'production';
@@ -38,7 +38,7 @@ app.use(
     })
 );
 
-app.get('/mypage', restoreUser, (req, res) => {
+app.get('/mypage',  restoreUser, requireAuth, (req, res) => {
     const {user} = req;
     if(user) {
         return res.json({user: user.toSafeObject()});
@@ -74,8 +74,9 @@ app.use((err,_req,res, _next) => {
   res.status(err.status || 500);
   console.error(err);
   res.json({
-    title:err.title || 'Server Error',
+    title:isProduction?null:(err.title || 'Server Error'),
     message:err.message,
+    statusCode:err.status,
     errors:err.errors,
     stack: isProduction?null:err.stack
   });
