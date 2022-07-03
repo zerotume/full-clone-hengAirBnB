@@ -37,6 +37,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+     return queryInterface.bulkInsert('Images', imgs);
   },
 
   async down (queryInterface, Sequelize) {
@@ -46,5 +47,9 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+     const Op = Sequelize.Op;
+     return queryInterface.bulkDelete('Images', {
+       spotId: { [Op.in]: [1,2,3,4] }
+     }, {});
   }
 };
