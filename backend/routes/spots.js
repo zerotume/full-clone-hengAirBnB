@@ -14,6 +14,9 @@ router.get('/', async (req, res) => {
             model:Image,
             attributes:[]
         },
+        where:{
+            reviewId:null
+        },
         raw:true
     });
     return res.json(result);
