@@ -93,6 +93,8 @@ router.post('/signup', validateSignup, async (req,res,next) => {
             err.errors = {};
             err.errors[(e.errors)[0].path] = `User with that ${(e.errors)[0].path} already exists.`
             return next(err);
+        }else{
+            return next(e);
         }
     }
 
