@@ -60,7 +60,16 @@ const requireAuth = (req, _res, next) => {
 }
 
 const AuthorCheck = (req, _res, next) => {
+    let currentUid = req.user.toJSON().id;
+    if(currentUid !== req.permit){
+        const err = new Error("Forbidden");
+        err.title = "Forbidden";
+        err.message = "Forbidden";
+        err.status = 403;
+        return next(err);
+    }
 
+    return next();
 }
 
 const spotReq = async (req, _res, next) => {
@@ -97,4 +106,4 @@ const imageReq = async (req, _res, next) => {
 
 
 
-module.exports = {setTokenCookie, restoreUser, requireAuth, spotReq};
+module.exports = {setTokenCookie, restoreUser, requireAuth, AuthorCheck, spotReq};
