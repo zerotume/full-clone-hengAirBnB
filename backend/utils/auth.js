@@ -88,6 +88,13 @@ const spotReq = async (req, _res, next) => {
 
 const reviewReq = async (req, _res, next) => {
     let review = await Review.findByPk(req.params.id);
+    if(!review){
+        const err = new Error("Review couldn't be found");
+        err.title = "Review couldn't be found";
+        err.message = "Review couldn't be found";
+        err.status = 404;
+        return next(err);
+    }
     req.review = review.toJSON();
     req.permit = req.review.userId;
     return next();
@@ -95,15 +102,31 @@ const reviewReq = async (req, _res, next) => {
 
 const bookingReq = async (req, _res, next) => {
     let booking = await Booking.findByPk(req.params.id);
+    if(!booking){
+        const err = new Error("Booking couldn't be found");
+        err.title = "Booking couldn't be found";
+        err.message = "Booking couldn't be found";
+        err.status = 404;
+        return next(err);
+    }
     req.booking = booking.toJSON();
     req.permit = req.booking.userId;
     return next();
 }
 
 const imageReq = async (req, _res, next) => {
-
+    let image = await Image.findByPk(req.params.id);
+    if(!image){
+        const err = new Error("Image couldn't be found");
+        err.title = "Image couldn't be found";
+        err.message = "Image couldn't be found";
+        err.status = 404;
+        return next(err);
+    }
 }
 
 
 
-module.exports = {setTokenCookie, restoreUser, requireAuth, AuthorCheck, spotReq};
+module.exports = {
+    setTokenCookie, restoreUser, requireAuth,
+    AuthorCheck, reviewReq,  spotReq, bookingReq, imageReq};
