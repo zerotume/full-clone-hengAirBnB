@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const {jwtConfig} = require('../config');
-const {User} = require('../db/models');
+const {User, Spot, Image, Review, Booking} = require('../db/models');
 
 const {secret, expiresIn} = jwtConfig;
 
@@ -57,5 +57,41 @@ const requireAuth = (req, _res, next) => {
     err.status = 401;
     return next(err);
 }
+
+const AuthorCheck = (req, _res, next) => {
+
+}
+
+const spotReq = (spotid) => {
+    return (req, _res, next) => {
+        let spot = await Spot.findByPk(spotid);
+        req.spot = spot.toJSON();
+        req.permit = req.spot.ownerId;
+        return next();
+    }
+}
+
+const reviewReq = (reviewid) => {
+    return (req, _res, next) => {
+        let review = await Review.findByPk(reviewid);
+        req.review = review.toJSON();
+        req.permit = req.review.userId;
+        return next();
+    }
+}
+
+const bookingReq = (bookingid) => {
+    return (req, _res, next) => {
+
+    }
+}
+
+const imageReq = (imgid) => {
+    return (req, _res, next) => {
+
+    }
+}
+
+
 
 module.exports = {setTokenCookie, restoreUser, requireAuth};

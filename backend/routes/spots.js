@@ -11,7 +11,7 @@ router.get('/myspots', restoreUser, requireAuth, async (req,res) => {
         where:{ownerId:myid},
         attributes:{
             include:[
-                [sequelize.col('Images.url'), 'previewImage']
+                [sequelize.col('Images.url'), 'previewImage']//so alias will be used here
             ]
         },
         include:{
@@ -80,7 +80,7 @@ router.get('/', async (req, res) => {
     result.Spots = await Spot.findAll({
         attributes:{
             include:[
-                [sequelize.col('Images.url'), 'previewImage']
+                [sequelize.col('Images.url'), 'previewImage']//so alias will be used here
             ]
         },
         include:{
