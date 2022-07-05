@@ -209,4 +209,12 @@ router.post('/', validateSpot, restoreUser, requireAuth, async (req, res, next) 
     return res.json({...spot.toJSON()});
 });
 
+router.delete('/:id', validateSpot,
+    restoreUser, requireAuth, spotReq, AuthorCheck,
+    async (req, res) => {
+        let spot = req.spot;
+        await spot.destroy();
+        res.json({"message": "Successfully deleted","statusCode": 200});
+})
+
 module.exports = router;
