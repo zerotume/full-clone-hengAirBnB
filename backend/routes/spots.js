@@ -4,6 +4,33 @@ const {Spot, Image, Review, User, sequelize} = require('../db/models');
 const {setTokenCookie, restoreUser, requireAuth, AuthorCheck, spotReq,spotImgReq} = require('../utils/auth.js');
 const {handleValidationErrors} = require('../utils/validation.js');
 const {check} = require('express-validator');
+const user = require('../db/models/user');
+
+router.get('/:id/reviews', spotReq, async (req, res) => {
+    let reviews = await Review.findAll({
+        where:{
+            spotId:req.params.id
+        },
+        include:[
+            {
+                model:User
+            },
+            {
+                model:Image,
+                where:{
+                    imageType:'review'
+                },
+                attributes:['url'],
+                required:false,
+                raw:true
+            }
+        ]
+    });
+
+
+    return res.json({Reviews:reviews});
+});
+
 
 router.get('/myspots', restoreUser, requireAuth, async (req,res) => {
     let myid = req.user.toJSON().id;
@@ -20,7 +47,7 @@ router.get('/myspots', restoreUser, requireAuth, async (req,res) => {
             where:{imageType:'spot'},
             attributes:[]
         }
-    })
+    });
 
     return res.json(myspots);
 });
@@ -215,6 +242,6 @@ router.delete('/:id', validateSpot,
         let spot = req.spot;
         await spot.destroy();
         res.json({"message": "Successfully deleted","statusCode": 200});
-})
+});
 
 module.exports = router;

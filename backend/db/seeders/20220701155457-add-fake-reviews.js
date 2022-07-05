@@ -25,6 +25,12 @@ module.exports = {
       stars:3
     },
     {
+      userId:1,
+      spotId:3,
+      review:'Purrrrrrrr....',
+      stars:5
+    },
+    {
       userId:3,
       spotId:4,
       review:'Had a big feast! But could you ban the human feeding me rice?',
