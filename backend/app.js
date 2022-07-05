@@ -5,7 +5,7 @@ const cors = require('cors');
 const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
-const { restoreUser, requireAuth, AuthorCheck, spotReq } = require('./utils/auth.js');
+const { restoreUser, requireAuth, AuthorCheck, spotReq,spotImgReq } = require('./utils/auth.js');
 
 const { environment } = require('./config');
 const isProduction = environment === 'production';
@@ -55,6 +55,12 @@ app.get('/test-req-set/:id', restoreUser, requireAuth, spotReq, AuthorCheck, (re
     //this is only the tester of request setter and auth checker
     return res.json(req.spot);
 });
+
+app.get('/test-image/:id', restoreUser, requireAuth, spotImgReq, AuthorCheck, (req, res) => {
+    //this is only the tester of request setter and auth checker
+    return res.json(req.image);
+});
+
 
 app.use(routes);
 

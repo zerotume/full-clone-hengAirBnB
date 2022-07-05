@@ -114,8 +114,22 @@ const bookingReq = async (req, _res, next) => {
     return next();
 }
 
-const imageReq = async (req, _res, next) => {
-    let image = await Image.findByPk(req.params.id);
+/*
+
+    For Someone testing this:
+    image 1,2,3 are review images
+    image 4,5,6,7 are spot images
+
+*/
+
+
+const spotImgReq = async (req, _res, next) => {
+    let image = await Image.findByPk(req.params.id, {
+        include:{
+            model:Spot,
+            attributes:['ownerId']
+        }
+    });
     if(!image){
         const err = new Error("Image couldn't be found");
         err.title = "Image couldn't be found";
@@ -123,10 +137,56 @@ const imageReq = async (req, _res, next) => {
         err.status = 404;
         return next(err);
     }
+
+    req.image = image.toJSON();
+
+    if(req.image.imageType !== 'spot'){
+        const err = new Error("Not a spot image!");
+        err.title = "Not a spot image!";
+        err.message = "Not a spot image!";
+        err.status = 400;
+        return next(err);
+    }
+
+    req.permit = req.image.Spot.ownerId;
+    return next();
 }
+
+const reviewImgReq = async (req, _res, next) => {
+    let image = await Image.findByPk(req.params.id, {
+        include:{
+            model:Review,
+            attributes:['userId']
+        }
+    });
+
+    if(!image){
+        const err = new Error("Image couldn't be found");
+        err.title = "Image couldn't be found";
+        err.message = "Image couldn't be found";
+        err.status = 404;
+        return next(err);
+    }
+
+
+    req.image = image.toJSON();
+
+    if(req.image.imageType !== 'review'){
+        const err = new Error("Not a review image!");
+        err.title = "Not a review image!";
+        err.message = "Not a review image!";
+        err.status = 400;
+        return next(err);
+    }
+
+    req.permit = req.image.Review.userId;
+    return next();
+}
+
 
 
 
 module.exports = {
     setTokenCookie, restoreUser, requireAuth,
-    AuthorCheck, reviewReq,  spotReq, bookingReq, imageReq};
+    AuthorCheck, reviewReq, spotReq, bookingReq,
+    spotImgReq, reviewImgReq};
