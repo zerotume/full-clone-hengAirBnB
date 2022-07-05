@@ -53,6 +53,7 @@ const requireAuth = (req, _res, next) => {
 
     const err = new Error('Authentication required');
     err.title = 'Authentication required';
+    err.message = 'Authentication required';
     //err.errors = ['Authentication required'];
     err.status = 401;
     return next(err);
@@ -62,36 +63,38 @@ const AuthorCheck = (req, _res, next) => {
 
 }
 
-const spotReq = (spotid) => {
-    return (req, _res, next) => {
-        let spot = await Spot.findByPk(spotid);
-        req.spot = spot.toJSON();
-        req.permit = req.spot.ownerId;
-        return next();
+const spotReq = async (req, _res, next) => {
+    let spot = await Spot.findByPk(req.params.id);
+    if(!spot){
+        const err = new Error("Spot couldn't be found");
+        err.title = "Spot couldn't be found";
+        err.message = "Spot couldn't be found";
+        err.status = 404;
+        return next(err);
     }
+    req.spot = spot.toJSON();
+    req.permit = req.spot.ownerId;
+    return next();
 }
 
-const reviewReq = (reviewid) => {
-    return (req, _res, next) => {
-        let review = await Review.findByPk(reviewid);
-        req.review = review.toJSON();
-        req.permit = req.review.userId;
-        return next();
-    }
+const reviewReq = async (req, _res, next) => {
+    let review = await Review.findByPk(req.params.id);
+    req.review = review.toJSON();
+    req.permit = req.review.userId;
+    return next();
 }
 
-const bookingReq = (bookingid) => {
-    return (req, _res, next) => {
-
-    }
+const bookingReq = async (req, _res, next) => {
+    let booking = await Booking.findByPk(req.params.id);
+    req.booking = booking.toJSON();
+    req.permit = req.booking.userId;
+    return next();
 }
 
-const imageReq = (imgid) => {
-    return (req, _res, next) => {
+const imageReq = async (req, _res, next) => {
 
-    }
 }
 
 
 
-module.exports = {setTokenCookie, restoreUser, requireAuth};
+module.exports = {setTokenCookie, restoreUser, requireAuth, spotReq};

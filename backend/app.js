@@ -5,7 +5,7 @@ const cors = require('cors');
 const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
-const { restoreUser, requireAuth } = require('./utils/auth.js');
+const { restoreUser, requireAuth, spotReq } = require('./utils/auth.js');
 
 const { environment } = require('./config');
 const isProduction = environment === 'production';
@@ -50,6 +50,11 @@ app.get('/mypage',  restoreUser, requireAuth, (req, res) => {
 app.get('/', (req, res) => {
     res.json({message:"whyyyy"});
   });
+
+app.get('/test-req-set/:id', spotReq, (req, res) => {
+    //this is only the tester of request setter and auth checker
+    return res.json(req.spot);
+});
 
 app.use(routes);
 
