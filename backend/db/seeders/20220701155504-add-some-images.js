@@ -40,7 +40,7 @@ module.exports = {
         reviewId:null
       },
       {
-        url:'https://www.indy100.com/media-library/image.jpg?id=28042782&width=1245&quality=85&coordinates=111%2C0%2C111%2C0&height=700https://www.popo8.com/host/data/201911/27/10/p1574919097_94132.jpg_b.jpg',
+        url:'https://www.indy100.com/media-library/image.jpg?id=28042782&width=1245&quality=85&coordinates=111%2C0%2C111%2C0&height=700',
         imageType:'spot',
         spotId:4,
         reviewId:null

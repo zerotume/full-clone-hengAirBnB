@@ -1,6 +1,28 @@
 const express = require('express');
 const router = express.Router();
 const {Spot, Image, Review, User, sequelize} = require('../db/models');
+const {setTokenCookie, restoreUser, requireAuth} = require('../utils/auth.js');
+
+
+router.get('/myspots', restoreUser, requireAuth, async (req,res) => {
+    let myid = req.user.toJSON().id;
+
+    let myspots = await Spot.findAll({
+        where:{ownerId:myid},
+        attributes:{
+            include:[
+                [sequelize.col('Images.url'), 'previewImage']
+            ]
+        },
+        include:{
+            model:Image,
+            where:{imageType:'spot'},
+            attributes:[]
+        }
+    })
+
+    return res.json(myspots);
+});
 
 router.get('/:id', async (req, res, next) => {
 
