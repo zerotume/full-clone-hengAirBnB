@@ -140,6 +140,42 @@ const validateSpot = [
     handleValidationErrors
 ];
 
+router.put('/:id', validateSpot,
+        restoreUser, requireAuth, spotReq, AuthorCheck,
+        async (req, res, next) => {
+            let spot = req.spot;
+            const {address,city,state,country,lat,lng,name,description,price} = req.body;
+            try{
+                spot.set({
+                    address,
+                    city,
+                    state,
+                    country,
+                    lat,
+                    lng,
+                    name,
+                    description,
+                    price
+                });
+                await spot.save();
+            }catch(e){
+                if(e.name === 'SequelizeUniqueConstraintError'){
+                    const err = Error('Spot already exists');
+                    err.title = 'Spot already exists'
+                    err.message = 'Spot already exists';
+                    err.statusCode = 403;
+                    err.errors = {};
+                    err.errors[(e.errors)[0].path] = `Spot with that ${(e.errors)[0].path} already exists.`
+                    return next(err);
+                }else{
+                    return next(e);
+                }
+            }
+
+            let updated = await Spot.findByPk(req.params.id);
+            return res.json(updated);
+});
+
 router.post('/', validateSpot, restoreUser, requireAuth, async (req, res, next) => {
     const {address,city,state,country,lat,lng,name,description,price} = req.body;
     const ownerId = req.user.toJSON().id;

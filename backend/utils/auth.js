@@ -81,8 +81,8 @@ const spotReq = async (req, _res, next) => {
         err.status = 404;
         return next(err);
     }
-    req.spot = spot.toJSON();
-    req.permit = req.spot.ownerId;
+    req.spot = spot;
+    req.permit = req.spot.toJSON().ownerId;
     return next();
 }
 
@@ -95,8 +95,8 @@ const reviewReq = async (req, _res, next) => {
         err.status = 404;
         return next(err);
     }
-    req.review = review.toJSON();
-    req.permit = req.review.userId;
+    req.review = review;
+    req.permit = req.review.toJSON().userId;
     return next();
 }
 
@@ -109,8 +109,8 @@ const bookingReq = async (req, _res, next) => {
         err.status = 404;
         return next(err);
     }
-    req.booking = booking.toJSON();
-    req.permit = req.booking.userId;
+    req.booking = booking;
+    req.permit = req.booking.toJSON().userId;
     return next();
 }
 
@@ -138,9 +138,9 @@ const spotImgReq = async (req, _res, next) => {
         return next(err);
     }
 
-    req.image = image.toJSON();
-
-    if(req.image.imageType !== 'spot'){
+    req.image = image;
+    currentImg = image.toJSON();
+    if(currentImg.imageType !== 'spot'){
         const err = new Error("Not a spot image!");
         err.title = "Not a spot image!";
         err.message = "Not a spot image!";
@@ -148,7 +148,7 @@ const spotImgReq = async (req, _res, next) => {
         return next(err);
     }
 
-    req.permit = req.image.Spot.ownerId;
+    req.permit = currentImg.Spot.ownerId;
     return next();
 }
 
@@ -169,7 +169,8 @@ const reviewImgReq = async (req, _res, next) => {
     }
 
 
-    req.image = image.toJSON();
+    req.image = image;
+    currentImg = image.toJSON();
 
     if(req.image.imageType !== 'review'){
         const err = new Error("Not a review image!");
@@ -179,7 +180,7 @@ const reviewImgReq = async (req, _res, next) => {
         return next(err);
     }
 
-    req.permit = req.image.Review.userId;
+    req.permit = currentImg.Review.userId;
     return next();
 }
 
