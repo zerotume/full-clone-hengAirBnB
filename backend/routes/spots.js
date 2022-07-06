@@ -28,7 +28,6 @@ router.get('/:id/reviews', spotReq, async (req, res) => {
         ]
     });
 
-
     return res.json({Reviews:reviews});
 });
 

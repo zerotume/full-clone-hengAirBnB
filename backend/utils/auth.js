@@ -59,6 +59,17 @@ const requireAuth = (req, _res, next) => {
     return next(err);
 }
 
+const refuseOwner = (req, _res, next) => {
+    let currentUid = req.user.toJSON().id;
+    if(currentUid === req.permit && req.spot){
+        const err = new Error("You can't book or review your own spot.");
+        err.title = "You can't book or review your own spot.";
+        err.message = "You can't book or review your own spot.";
+        err.status = 418;
+        return next(err);
+    }
+}
+
 const AuthorCheck = (req, _res, next) => {
     let currentUid = req.user.toJSON().id;
     if(currentUid !== req.permit){
@@ -189,5 +200,6 @@ const reviewImgReq = async (req, _res, next) => {
 
 module.exports = {
     setTokenCookie, restoreUser, requireAuth,
-    AuthorCheck, reviewReq, spotReq, bookingReq,
+    AuthorCheck,refuseOwner,
+    reviewReq, spotReq, bookingReq,
     spotImgReq, reviewImgReq};
