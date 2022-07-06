@@ -30,4 +30,34 @@ router.get('/myreview', restoreUser, requireAuth, async (req, res) => {
     res.json({Reviews:reviews});
 });
 
+const validateReview = [
+    check('review')
+        .exists({checkFalsy:true})
+        .notEmpty()
+        .withMessage('Review text is required'),
+    check('stars')
+        .exists({checkFalsy:true})
+        .notEmpty()
+        .isInt({min:1, max:5})
+        .withMessage('Stars must be an integer from 1 to 5'),
+    handleValidationErrors
+];
+
+router.put('/:id', restoreUser, requireAuth, reviewReq, AuthorCheck,
+    validateReview, async (req, res, next) => {
+        let {review, stars} = req.body;
+        let thatReview = req.review;
+        try{
+            thatReview.set({
+                review,
+                stars
+            });
+            await thatReview.save();
+        }catch(err){
+            next(err);
+        }
+
+        return res.json(thatReview);
+    });
+
 module.exports = router;
