@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model,Validator
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Booking extends Model {
@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Booking.init({
     startDate: {
-      type:DataTypes.DATE,
+      type:DataTypes.DATEONLY,
       allowNull:false,
       unique:true,
       // validate:{
@@ -32,11 +32,15 @@ module.exports = (sequelize, DataTypes) => {
       // }
     },
     endDate: {
-      type:DataTypes.DATE,
+      type:DataTypes.DATEONLY,
       allowNull:false,
       unique:true,
       validate:{
-        isAfter:this.startDate
+        timeTraveler(value){
+          if(this.startDate > value){
+            throw new Error('End date must be after the start date.');
+          }
+        }
       }
     },
     spotId: {

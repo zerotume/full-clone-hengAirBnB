@@ -1,10 +1,59 @@
 const express = require('express');
 const router = express.Router();
-const {Spot, Image, Review, User, sequelize} = require('../db/models');
+const {Spot, Image, Review, User, Booking, sequelize} = require('../db/models');
 const {setTokenCookie, restoreUser, requireAuth, AuthorCheck, refuseOwner, spotReq,spotImgReq} = require('../utils/auth.js');
 const {handleValidationErrors} = require('../utils/validation.js');
 const {check} = require('express-validator');
 const user = require('../db/models/user');
+
+
+// const validateBooking = [
+//     check('startDate')
+//         .exists({checkFalsy:true})
+//         .notEmpty()
+//         .isDate()
+//         .withMessage('Start date YYYY-MM-DD is required'),
+//     check('endDate')
+//         .exists({checkFalsy:true})
+//         .notEmpty()
+//         .isInt({min:1, max:5})
+//         .withMessage('End date YYYY-MM-DD is required'),
+//     handleValidationErrors
+// ];
+
+router.post('/:id/bookings', restoreUser, requireAuth, spotReq, refuseOwner,
+         async (req,res,next) => {
+        let d = new Date();
+        let today = d.toISOString().slice(0,10);
+        let startDate = today;
+        let endDate = today;
+        let userId = req.user.toJSON().id;
+        let spotId = req.spot.toJSON().id;
+        let newBooking;
+        try{
+            newBooking = await Booking.create({
+                userId,
+                spotId,
+                startDate,
+                endDate
+            });
+        }catch(e){
+            if(e.name === 'SequelizeUniqueConstraintError'){
+                const err = Error('User already has a review for this spot');
+                err.title = 'User already has a review for this spot'
+                err.message = 'User already has a review for this spot';
+                err.errors = {
+                    startDate:"Start date conflicts with an existing booking",
+                    endDate: "End date conflicts with an existing booking"
+                };
+                err.status = 403;
+                return next(err);
+            }else{
+                return next(e);
+            }
+        }
+        return res.json(newBooking);
+});
 
 router.get('/:id/reviews', spotReq, async (req, res) => {
     let reviews = await Review.findAll({
