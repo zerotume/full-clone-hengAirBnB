@@ -68,6 +68,8 @@ const refuseOwner = (req, _res, next) => {
         err.status = 418;
         return next(err);
     }
+
+    return next();
 }
 
 const AuthorCheck = (req, _res, next) => {

@@ -45,10 +45,32 @@ const validateReview = [
     handleValidationErrors
 ];
 
-router.post('/:id/reviews', spotReq, refuseOwner, validateReview, async (req, res) => {
+router.post('/:id/reviews', restoreUser, requireAuth, spotReq, refuseOwner,
+            validateReview, async (req, res, next) => {
+    let userId = req.user.toJSON().id;
+    let spotId = req.spot.toJSON().id;
+    let {review,stars} = req.body;
+    let newReview;
+    try{
+        newReview = await Review.create({
+            userId,
+            spotId,
+            review,
+            stars
+        });
+    }catch(e){
+        if(e.name === 'SequelizeUniqueConstraintError'){
+            const err = Error('User already has a review for this spot');
+            err.title = 'User already has a review for this spot'
+            err.message = 'User already has a review for this spot';
+            err.status = 403;
+            return next(err);
+        }else{
+            return next(e);
+        }
+    }
 
-
-    return res.json({Reviews:reviews});
+    return res.json(newReview);
 });
 
 
@@ -211,7 +233,7 @@ router.put('/:id', validateSpot,
                     const err = Error('Spot already exists');
                     err.title = 'Spot already exists'
                     err.message = 'Spot already exists';
-                    err.statusCode = 403;
+                    err.status = 403;
                     err.errors = {};
                     err.errors[(e.errors)[0].path] = `Spot with that ${(e.errors)[0].path} already exists.`
                     return next(err);
@@ -246,7 +268,7 @@ router.post('/', validateSpot, restoreUser, requireAuth, async (req, res, next) 
             const err = Error('Spot already exists');
             err.title = 'Spot already exists'
             err.message = 'Spot already exists';
-            err.statusCode = 403;
+            err.status = 403;
             err.errors = {};
             err.errors[(e.errors)[0].path] = `Spot with that ${(e.errors)[0].path} already exists.`
             return next(err);
