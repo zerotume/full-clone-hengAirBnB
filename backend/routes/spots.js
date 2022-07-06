@@ -166,7 +166,6 @@ router.get('/myspots', restoreUser, requireAuth, async (req,res) => {
 });
 
 router.get('/:id', async (req, res, next) => {
-    console.log(req.params.id)
     let result = await Spot.findOne({
         where:{
             id:req.params.id
@@ -196,16 +195,15 @@ router.get('/:id', async (req, res, next) => {
         ],
         group:['Spot.id','Owner.id']
     });
-    result = result.toJSON();
-    console.log(result);
-    if(!result.id){
+
+    if(!result){
         const err = Error('Spot couldn\'t be found');
         err.status = 404;
         err.title = 'Spot couldn\'t be found';
         err.message = 'Spot couldn\'t be found';
         return next(err);
     }
-
+    result = result.toJSON();
     let imgs = await Image.findAll({
         where:{
             spotId:req.params.id
