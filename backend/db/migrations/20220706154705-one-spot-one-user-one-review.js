@@ -9,7 +9,7 @@ module.exports = {
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
      await queryInterface.addConstraint('Reviews', {
-      fields: ['SpotId', 'UserId'],
+      fields: ['spotId', 'userId'],
       type: 'unique',
       name: 'one_user_review_once_on_spot'
     });

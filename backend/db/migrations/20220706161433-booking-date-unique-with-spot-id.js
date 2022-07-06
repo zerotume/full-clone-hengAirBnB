@@ -9,13 +9,13 @@ module.exports = {
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
      await queryInterface.addConstraint('Bookings', {
-      fields: ['SpotId', 'startDate'],
+      fields: ['spotId', 'startDate'],
       type: 'unique',
       name: 'one_spot_one_startDate'
     });
 
     await queryInterface.addConstraint('Bookings', {
-      fields: ['SpotId', 'endDate'],
+      fields: ['spotId', 'endDate'],
       type: 'unique',
       name: 'one_spot_one_endDate'
     });
