@@ -46,7 +46,7 @@ router.post('/:id/images', validateImage, restoreUser, requireAuth, spotReq, Aut
         let reviewId = null;
         let spotId = req.spot.toJSON().id;
         let imageType = 'spot';
-
+        let newImage;
         try{
             newImage = await Image.create({
                 url,
