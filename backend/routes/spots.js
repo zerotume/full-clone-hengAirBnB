@@ -194,7 +194,7 @@ router.get('/:id', async (req, res, next) => {
                 attributes:[]
             },
         ],
-        group:[Spot.id]
+        group:['Spot.id']
     });
     result = result.toJSON();
     console.log(result);
