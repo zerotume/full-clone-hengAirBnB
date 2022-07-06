@@ -378,7 +378,7 @@ router.post('/', validateSpot, restoreUser, requireAuth, async (req, res, next) 
     return res.json({...spot.toJSON()});
 });
 
-router.delete('/:id', validateSpot,
+router.delete('/:id',
     restoreUser, requireAuth, spotReq, AuthorCheck,
     async (req, res) => {
         let spot = req.spot;

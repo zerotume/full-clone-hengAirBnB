@@ -31,6 +31,44 @@ router.get('/myreview', restoreUser, requireAuth, async (req, res) => {
     res.json({Reviews:reviews});
 });
 
+const validateImage = [
+    check('url')
+        .exists({checkFalsy:true})
+        .notEmpty()
+        .withMessage('Url must be a valid picture url'),
+    handleValidationErrors
+];
+
+router.post('/:id/images', validateImage, restoreUser, requireAuth, reviewReq, AuthorCheck,
+    async (req, res, next) => {
+        let {url} = req.body;
+        let reviewId = req.review.toJSON().id;
+        let spotId = req.review.toJSON().spotId;
+        let imageType = 'review';
+        let newImage;
+        try{
+            newImage = await Image.create({
+                url,
+                imageType,
+                spotId,
+                reviewId
+            });
+        }catch(err){
+            next(err);
+        }
+
+        let result = await Image.findByPk(newImage.toJSON().id,{
+            attributes:[
+                'id',
+                ['reviewId','imageableId'],
+                ['imageType','imageableType',],
+                'url'
+            ]
+        });
+
+        res.json(result);
+    });
+
 const validateReview = [
     check('review')
         .exists({checkFalsy:true})

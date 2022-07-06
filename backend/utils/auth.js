@@ -135,6 +135,19 @@ const bookingReq = async (req, _res, next) => {
 
 */
 
+const imageReq = async (req, _res, next) => {
+    let image = await Image.findByPk(req.params.id);
+    if(!image){
+        const err = new Error("Image couldn't be found");
+        err.title = "Image couldn't be found";
+        err.message = "Image couldn't be found";
+        err.status = 404;
+        return next(err);
+    }
+    req.image = image;
+    req.permit = req.image.toJSON().userId;
+    return next();
+}
 
 const spotImgReq = async (req, _res, next) => {
     let image = await Image.findByPk(req.params.id, {
@@ -204,4 +217,4 @@ module.exports = {
     setTokenCookie, restoreUser, requireAuth,
     AuthorCheck,refuseOwner,
     reviewReq, spotReq, bookingReq,
-    spotImgReq, reviewImgReq};
+    imageReq, spotImgReq, reviewImgReq};
