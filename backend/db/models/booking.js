@@ -26,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     startDate: {
       type:DataTypes.DATE,
       allowNull:false,
+      unique:true,
       // validate:{
       //   isAfter:((new Date()).toISOString().split('T'))[0]
       // }
@@ -33,6 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     endDate: {
       type:DataTypes.DATE,
       allowNull:false,
+      unique:true,
       validate:{
         isAfter:this.startDate
       }
