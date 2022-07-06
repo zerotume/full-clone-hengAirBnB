@@ -41,7 +41,7 @@ const validateImage = [
 ];
 
 router.post('/:id/images', validateImage, restoreUser, requireAuth, spotReq, AuthorCheck,
-    async (req,res) => {
+    async (req, res, next) => {
         let {url} = req.body;
         let reviewId = null;
         let spotId = req.spot.toJSON().id;
@@ -54,8 +54,8 @@ router.post('/:id/images', validateImage, restoreUser, requireAuth, spotReq, Aut
                 spotId,
                 reviewId
             });
-        }catch(e){
-            console.error(e);
+        }catch(err){
+            next(err);
         }
 
         let result = await Image.findByPk(newImage.toJSON().id,{
