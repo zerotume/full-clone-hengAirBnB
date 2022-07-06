@@ -22,7 +22,8 @@ router.get('/myreview', restoreUser, requireAuth, async (req, res) => {
                 model:Image,
                 as:'images',
                 where:{imageType:'review'},
-                attributes:['url']
+                attributes:['url'],
+                required:false
             }
         ]
     });
@@ -59,5 +60,17 @@ router.put('/:id', restoreUser, requireAuth, reviewReq, AuthorCheck,
 
         return res.json(thatReview);
     });
+
+router.delete('/:id', restoreUser, requireAuth, reviewReq, AuthorCheck,
+    async (req, res) => {
+        let thatReview = req.review;
+
+        await thatReview.destroy();
+
+        return res.json({
+            message: "Successfully deleted",
+            statusCode: 200
+          });
+});
 
 module.exports = router;
