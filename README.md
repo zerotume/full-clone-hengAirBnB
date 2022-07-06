@@ -75,6 +75,7 @@ information.
 
 * Require Authentication: false
 * Request
+  * Note: "email" should be "credential".
   * Method: POST
   * URL: /users/login
   * Headers:
@@ -89,6 +90,7 @@ information.
     ```
 
 * Successful Response
+  * Note: You should also set a username for now.
   * Status Code: 200
   * Headers:
     * Content-Type: application/json
