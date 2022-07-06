@@ -21,6 +21,55 @@ const user = require('../db/models/user');
 //     handleValidationErrors
 // ];
 
+// let imgExt = [
+//     '.bmp',
+//     '.tif',
+//     '.tiff',
+//     '.jpg',
+//     '.jpeg',
+//     '.gif',
+//     '.png',
+//     '.eps',
+//     '.raw'];
+
+const validateImage = [
+    check('url')
+        .exists({checkFalsy:true})
+        .notEmpty()
+        .withMessage('Url must be a valid picture url'),
+    handleValidationErrors
+];
+
+router.post('/:id/images', validateImage, restoreUser, requireAuth, spotReq, AuthorCheck,
+    async (req,res) => {
+        let {url} = req.body;
+        let reviewId = null;
+        let spotId = req.spot.toJSON().id;
+        let imageType = 'spot';
+
+        try{
+            newImage = await Image.create({
+                url,
+                imageType,
+                spotId,
+                reviewId
+            });
+        }catch(e){
+            console.error(e);
+        }
+
+        let result = await Image.findByPk(newImage.toJSON().id,{
+            attributes:[
+                'id',
+                ['spotId','imageableId'],
+                ['imageType','imageableType',],
+                'url'
+            ]
+        });
+
+        res.json(result);
+    });
+
 router.post('/:id/bookings', restoreUser, requireAuth, spotReq, refuseOwner,
          async (req,res,next) => {
         let d = new Date();
@@ -38,7 +87,6 @@ router.post('/:id/bookings', restoreUser, requireAuth, spotReq, refuseOwner,
                 endDate
             });
         }catch(e){
-            console.log(e);
             if(e.name === 'SequelizeUniqueConstraintError'){
                 const err = Error('User already has a review for this spot');
                 err.title = 'Sorry, this spot is already booked for the specified dates'
