@@ -206,7 +206,8 @@ router.get('/myspots', restoreUser, requireAuth, async (req,res) => {
             model:Image,
             as:'previewImage',
             where:{imageType:'spot'},
-            attributes:['url']
+            attributes:['url'],
+            required:false,
         }
     });
 
@@ -263,26 +264,7 @@ router.get('/:id', async (req, res, next) => {
     return res.json(result);
 });
 
-router.get('/', async (req, res) => {
-    let result = {};
-    result.Spots = await Spot.findAll({
-        attributes:{
-            // include:[
-            //     [sequelize.col('Images.url'), 'previewImage']//so alias will be used here
-            // ]
-        },
-        include:{
-            model:Image,
-            as:'previewImage',
-            attributes:['url'],
-            where:{
-                reviewId:null
-            }
-        },
-        order:[['id']]
-    });
-    return res.json(result);
-});
+
 
 const validateSpot = [
     check('address')
@@ -402,6 +384,28 @@ router.delete('/:id', validateSpot,
         let spot = req.spot;
         await spot.destroy();
         res.json({"message": "Successfully deleted","statusCode": 200});
+});
+
+router.get('/', async (req, res) => {
+    let result = {};
+    result.Spots = await Spot.findAll({
+        attributes:{
+            // include:[
+            //     [sequelize.col('Images.url'), 'previewImage']//so alias will be used here
+            // ]
+        },
+        include:{
+            model:Image,
+            as:'previewImage',
+            attributes:['url'],
+            where:{
+                reviewId:null
+            },
+            required:false,
+        },
+        order:[['id']]
+    });
+    return res.json(result);
 });
 
 module.exports = router;
