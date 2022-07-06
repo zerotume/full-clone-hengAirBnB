@@ -26,7 +26,6 @@ module.exports = (sequelize, DataTypes) => {
     startDate: {
       type:DataTypes.DATEONLY,
       allowNull:false,
-      unique:true,
       // validate:{
       //   isAfter:((new Date()).toISOString().split('T'))[0]
       // }
@@ -34,7 +33,6 @@ module.exports = (sequelize, DataTypes) => {
     endDate: {
       type:DataTypes.DATEONLY,
       allowNull:false,
-      unique:true,
       validate:{
         timeTraveler(value){
           if(this.startDate > value){
@@ -54,6 +52,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Booking',
+    scopes:{
+      notOwner:{
+        attributes:['spotId','startDate','endDate']
+      },
+    }
   });
   return Booking;
 };

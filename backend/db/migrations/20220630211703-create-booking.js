@@ -11,12 +11,10 @@ module.exports = {
       startDate: {
         type: Sequelize.DATEONLY,
         allowNull:false,
-        unique:true,
       },
       endDate: {
         type: Sequelize.DATEONLY,
         allowNull:false,
-        unique:true,
       },
       spotId: {
         type: Sequelize.INTEGER,

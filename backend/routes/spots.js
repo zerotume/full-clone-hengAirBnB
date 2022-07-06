@@ -38,10 +38,11 @@ router.post('/:id/bookings', restoreUser, requireAuth, spotReq, refuseOwner,
                 endDate
             });
         }catch(e){
+            console.log(e);
             if(e.name === 'SequelizeUniqueConstraintError'){
                 const err = Error('User already has a review for this spot');
-                err.title = 'User already has a review for this spot'
-                err.message = 'User already has a review for this spot';
+                err.title = 'Sorry, this spot is already booked for the specified dates'
+                err.message = 'Sorry, this spot is already booked for the specified dates';
                 err.errors = {
                     startDate:"Start date conflicts with an existing booking",
                     endDate: "End date conflicts with an existing booking"
@@ -53,6 +54,26 @@ router.post('/:id/bookings', restoreUser, requireAuth, spotReq, refuseOwner,
             }
         }
         return res.json(newBooking);
+});
+
+router.get('/:id/bookings',restoreUser, requireAuth, spotReq,
+    async (req,res) => {
+        let currentUser = req.user.toJSON().id;
+        let spot = req.spot.toJSON();
+        let bookings;
+        if(currentUser === spot.ownerId){
+            bookings = await Booking.findAll({
+                where:{spotId:spot.id},
+                include:{
+                    model:User,
+                }
+            });
+        }else{
+            bookings = await Booking.scope('notOwner').findAll({
+                where:{spotId:spot.id}
+            });
+        }
+        return res.json({Bookings:bookings});
 });
 
 router.get('/:id/reviews', spotReq, async (req, res) => {
