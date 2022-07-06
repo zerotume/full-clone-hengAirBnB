@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {Spot, Image, Review, User, sequelize} = require('../db/models');
-const {setTokenCookie, restoreUser, requireAuth, AuthorCheck, spotReq,spotImgReq} = require('../utils/auth.js');
+const {setTokenCookie, restoreUser, requireAuth, AuthorCheck, refuseOwner, spotReq,spotImgReq} = require('../utils/auth.js');
 const {handleValidationErrors} = require('../utils/validation.js');
 const {check} = require('express-validator');
 const user = require('../db/models/user');
@@ -27,6 +27,26 @@ router.get('/:id/reviews', spotReq, async (req, res) => {
             }
         ]
     });
+
+    return res.json({Reviews:reviews});
+});
+
+
+const validateReview = [
+    check('review')
+        .exists({checkFalsy:true})
+        .notEmpty()
+        .withMessage('Review text is required'),
+    check('stars')
+        .exists({checkFalsy:true})
+        .notEmpty()
+        .isInt({min:1, max:5})
+        .withMessage('Stars must be an integer from 1 to 5'),
+    handleValidationErrors
+];
+
+router.post('/:id/reviews', spotReq, refuseOwner, validateReview, async (req, res) => {
+
 
     return res.json({Reviews:reviews});
 });
