@@ -78,6 +78,26 @@ router.put('/:id', restoreUser, requireAuth, bookingReq, AuthorCheck,
         }
 
         res.json(booking);
-    });
+});
+
+router.delete('/:id', restoreUser, requireAuth, bookingReq, AuthorCheck,
+     async (req,res,next) => {
+
+        let booking = req.booking;
+        if(booking.toJSON().startDate <= today){
+            const err = Error("Bookings that have been started can't be deleted");
+            err.title = "Bookings that have been started can't be deleted"
+            err.message = "Bookings that have been started can't be deleted";
+            err.status = 400;
+            return next(err);
+        }
+
+        await booking.destroy();
+
+        res.json({
+            message: "Successfully deleted",
+            statusCode: 200
+        });
+});
 
 module.exports = router;
