@@ -972,7 +972,7 @@ Create and return a new booking from a spot specified by id.
       "spotId": 1,
       "userId": 2,
       "startDate": "2021-11-19",
-      "endDate": "2021-11-20",
+      "endDate": "2021-11-19",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-19 20:39:36"
     }
