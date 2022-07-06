@@ -166,7 +166,7 @@ router.get('/myspots', restoreUser, requireAuth, async (req,res) => {
 });
 
 router.get('/:id', async (req, res, next) => {
-
+    console.log(req.params.id)
     let result = await Spot.findOne({
         where:{
             id:req.params.id
@@ -190,13 +190,13 @@ router.get('/:id', async (req, res, next) => {
             },
             {
                 model:Review,
-                required:true,
+                required:false,
                 attributes:[]
             },
         ],
     });
-
     result = result.toJSON();
+    console.log(result);
     if(!result.id){
         const err = Error('Spot couldn\'t be found');
         err.status = 404;
