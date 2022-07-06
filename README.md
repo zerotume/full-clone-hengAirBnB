@@ -217,6 +217,7 @@ Returns all the spots.
   * Body: none
 
 * Successful Response
+  * Note: previewImage will be an array of nested objects with key "url"
   * Status Code: 200
   * Headers:
     * Content-Type: application/json
@@ -256,6 +257,7 @@ Returns all the spots owned (created) by the current user.
   * Body: none
 
 * Successful Response
+  * Note: previewImage will be an array of nested objects with key "url"
   * Status Code: 200
   * Headers:
     * Content-Type: application/json
@@ -295,6 +297,7 @@ Returns the details of a spot specified by its id.
   * Body: none
 
 * Successful Response
+  * Note: images looks like exactly the body shows.
   * Status Code: 200
   * Headers:
     * Content-Type: application/json
@@ -551,6 +554,7 @@ Returns all the reviews written by the current user.
   * Body: none
 
 * Successful Response
+  * Note: images will be an array of nested objects with key "url"
   * Status Code: 200
   * Headers:
     * Content-Type: application/json
@@ -603,6 +607,7 @@ Returns all the reviews that belong to a spot specified by id.
   * Body: none
 
 * Successful Response
+  * Note: images will be an array of nested objects with key "url"
   * Status Code: 200
   * Headers:
     * Content-Type: application/json
@@ -841,6 +846,7 @@ Return all the bookings that the current user has made.
   * Body: none
 
 * Successful Response
+  * Note: previewImage will be an array of nested objects with key "url"
   * Status Code: 200
   * Headers:
     * Content-Type: application/json
@@ -1300,6 +1306,7 @@ Return spots filtered by query parameters.
   * Body: none
 
 * Successful Response
+  * Note: previewImage will be an array of nested objects with key "url"
   * Status Code: 200
   * Headers:
     * Content-Type: application/json

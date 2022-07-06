@@ -17,6 +17,7 @@ router.get('/:id/reviews', spotReq, async (req, res) => {
             },
             {
                 model:Image,
+                as:'images',
                 where:{
                     imageType:'review'
                 },
@@ -38,14 +39,15 @@ router.get('/myspots', restoreUser, requireAuth, async (req,res) => {
     let myspots = await Spot.findAll({
         where:{ownerId:myid},
         attributes:{
-            include:[
-                [sequelize.col('Images.url'), 'previewImage']//so alias will be used here
-            ]
+            // include:[
+            //     [sequelize.col('Images.url'), 'previewImage']//so alias will be used here
+            // ]
         },
         include:{
             model:Image,
+            as:'previewImage',
             where:{imageType:'spot'},
-            attributes:[]
+            attributes:['url']
         }
     });
 
@@ -107,18 +109,18 @@ router.get('/', async (req, res) => {
     let result = {};
     result.Spots = await Spot.findAll({
         attributes:{
-            include:[
-                [sequelize.col('Images.url'), 'previewImage']//so alias will be used here
-            ]
+            // include:[
+            //     [sequelize.col('Images.url'), 'previewImage']//so alias will be used here
+            // ]
         },
         include:{
             model:Image,
-            attributes:[],
+            as:'previewImage',
+            attributes:['url'],
             where:{
                 reviewId:null
             }
         },
-        raw:true,
         order:[['id']]
     });
     return res.json(result);

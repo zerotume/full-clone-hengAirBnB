@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
 
       Review.hasMany(
         models.Image,
-          { foreignKey: 'reviewId', onDelete: 'CASCADE',  hooks: true }
+          { foreignKey: 'reviewId', onDelete: 'CASCADE',  hooks: true ,as:'images',}
       );
     }
   }
