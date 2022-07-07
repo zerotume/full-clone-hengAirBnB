@@ -439,29 +439,16 @@ router.get('/', validateFilters, async (req, res) => {
 
 
     let opMinLat = minLat===undefined?({}):({[Op.gte]:minLat});
-    let opMaxLat = minLat===undefined?({}):({[Op.lte]:maxLat});
-    let opMinLng = minLat===undefined?({}):({[Op.gte]:minLng});
-    let opMaxLng = minLat===undefined?({}):({[Op.lte]:maxLng});
-    let opMinPri = minLat===undefined?({}):({[Op.gte]:minPrice});
-    let opMaxPri = minLat===undefined?({}):({[Op.lte]:maxPrice});
+    let opMaxLat = maxLat===undefined?({}):({[Op.lte]:maxLat});
+    let opMinLng = minLng===undefined?({}):({[Op.gte]:minLng});
+    let opMaxLng = maxLng===undefined?({}):({[Op.lte]:maxLng});
+    let opMinPri = minPrice===undefined?({}):({[Op.gte]:minPrice});
+    let opMaxPri = maxPrice===undefined?({}):({[Op.lte]:maxPrice});
 
-    let where = {
-        lat:{
-            ...opMinLat,
-            ...opMaxLat
-        },
-        lng:{
-            ...opMinLng,
-            ...opMaxLng
-        },
-        price:{
-            ...opMinPri,
-            ...opMaxPri
-        }
-    }
-    if(minLat === undefined && maxLat === undefined){
-
-    }
+    let where = {};
+    if(minLat !== undefined || maxLat !== undefined)where.lat = {...opMinLat, ...opMaxLat};
+    if(minLng !== undefined || maxLng !== undefined)where.lng = {...opMinLng, ...opMaxLng};
+    if(minPrice !== undefined || maxPrice !== undefined)where.price = {...opMinPri, ...opMaxPri};
 
     let result = {};
     result.Spots = await Spot.findAll({
