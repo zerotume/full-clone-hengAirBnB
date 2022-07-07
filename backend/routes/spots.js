@@ -5,7 +5,8 @@ const {setTokenCookie, restoreUser, requireAuth, AuthorCheck, refuseOwner, spotR
 const {handleValidationErrors} = require('../utils/validation.js');
 const {check} = require('express-validator');
 const user = require('../db/models/user');
-
+const { Op } = require('sequelize');
+const { ResultWithContext } = require('express-validator/src/chain');
 
 // const validateBooking = [
 //     check('startDate')
@@ -386,9 +387,85 @@ router.delete('/:id',
         res.json({"message": "Successfully deleted","statusCode": 200});
 });
 
-router.get('/', async (req, res) => {
+const validateFilters = [
+    check('page')
+        .optional()
+        .isInt({min:0})
+        .withMessage('Page must be greater than or equal to 0'),
+    check('size')
+        .optional()
+        .isInt({min:0})
+        .withMessage('Size must be greater than or equal to 0'),
+    check('minLat')
+        .optional()
+        .isDecimal()
+        .withMessage('Maximum latitude is invalid'),
+    check('maxLat')
+        .optional()
+        .isDecimal()
+        .withMessage('Minimum latitude is invalid'),
+    check('minLng')
+        .optional()
+        .isDecimal()
+        .withMessage('Maximum longitude is invalid'),
+    check('maxLng')
+        .optional()
+        .isDecimal()
+        .withMessage('Minimum longitude is invalid'),
+    check('minPrice')
+        .optional()
+        .isFloat({min:0})
+        .withMessage('Maximum price must be greater than 0'),
+    check('maxPrice')
+        .optional()
+        .isFloat({min:0})
+        .withMessage('Minimum price must be greater than 0'),
+    handleValidationErrors
+];
+
+router.get('/', validateFilters, async (req, res) => {
+    let {page,size,minLat,maxLat,minLng,maxLng,minPrice,maxPrice} = req.query;
+    page = page?parseInt(page):0;
+    size = size?parseInt(size):20;
+    page = (page>10)?10:page;
+    size = (size===0 || size > 20)?20:size;
+
+    let pagination = {};
+
+    if(page > 0){
+        pagination.limit = size;
+        pagination.offset = (page-1)*size;
+    }
+
+
+    let opMinLat = minLat===undefined?({}):({[Op.gte]:minLat});
+    let opMaxLat = minLat===undefined?({}):({[Op.lte]:maxLat});
+    let opMinLng = minLat===undefined?({}):({[Op.gte]:minLng});
+    let opMaxLng = minLat===undefined?({}):({[Op.lte]:maxLng});
+    let opMinPri = minLat===undefined?({}):({[Op.gte]:minPrice});
+    let opMaxPri = minLat===undefined?({}):({[Op.lte]:maxPrice});
+
+    let where = {
+        lat:{
+            ...opMinLat,
+            ...opMaxLat
+        },
+        lng:{
+            ...opMinLng,
+            ...opMaxLng
+        },
+        price:{
+            ...opMinPri,
+            ...opMaxPri
+        }
+    }
+    if(minLat === undefined && maxLat === undefined){
+
+    }
+
     let result = {};
     result.Spots = await Spot.findAll({
+        where,
         attributes:{
             // include:[
             //     [sequelize.col('Images.url'), 'previewImage']//so alias will be used here
@@ -403,8 +480,12 @@ router.get('/', async (req, res) => {
             },
             required:false,
         },
-        order:[['id']]
+        order:[['id']],
+        ...pagination
     });
+    // result = result.toJSON();
+    result.page = page;
+    result.size = page===0?0:size;
     return res.json(result);
 });
 
