@@ -71,12 +71,35 @@ router.post('/:id/images', validateImage, restoreUser, requireAuth, spotReq, Aut
         res.json(result);
     });
 
+let d = new Date();
+let today = d.toISOString().slice(0,10);
+
+const validateBooking = [
+    check('startDate')
+        .exists({checkFalsy:true})
+        .notEmpty()
+        .isDate()
+        .withMessage('Start date YYYY-MM-DD is required'),
+    check('endDate')
+        .exists({checkFalsy:true})
+        .notEmpty()
+        .isDate()
+        .withMessage('End date YYYY-MM-DD is required'),
+    handleValidationErrors
+];
+
 router.post('/:id/bookings', restoreUser, requireAuth, spotReq, refuseOwner,
-         async (req,res,next) => {
-        let d = new Date();
-        let today = d.toISOString().slice(0,10);
-        let startDate = today;
-        let endDate = today;
+    validateBooking, async (req,res,next) => {
+        let {startDate, endDate} = req.body;
+
+        if(startDate < today || endDate < today){
+            const err = Error('You cannot set the booking to the past.');
+            err.title = 'You cannot set the booking to the past.'
+            err.message = 'You cannot set the booking to the past.';
+            err.status = 400;
+            return next(err);
+        }
+
         let userId = req.user.toJSON().id;
         let spotId = req.spot.toJSON().id;
         let newBooking;
@@ -89,7 +112,7 @@ router.post('/:id/bookings', restoreUser, requireAuth, spotReq, refuseOwner,
             });
         }catch(e){
             if(e.name === 'SequelizeUniqueConstraintError'){
-                const err = Error('User already has a review for this spot');
+                const err = Error('Sorry, this spot is already booked for the specified dates');
                 err.title = 'Sorry, this spot is already booked for the specified dates'
                 err.message = 'Sorry, this spot is already booked for the specified dates';
                 err.errors = {
