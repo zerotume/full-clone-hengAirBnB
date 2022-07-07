@@ -22,7 +22,7 @@ router.get('/myreview', restoreUser, requireAuth, async (req, res) => {
                 model:Image,
                 as:'images',
                 where:{imageType:'review'},
-                attributes:['url'],
+                attributes:['id','url'],
                 required:false
             }
         ]

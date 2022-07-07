@@ -163,7 +163,7 @@ router.get('/:id/reviews', spotReq, async (req, res) => {
                 where:{
                     imageType:'review'
                 },
-                attributes:['url'],
+                attributes:['id','url'],
                 required:false,
                 raw:true
             }
@@ -230,7 +230,7 @@ router.get('/myspots', restoreUser, requireAuth, async (req,res) => {
             model:Image,
             as:'previewImage',
             where:{imageType:'spot'},
-            attributes:['url'],
+            attributes:['id','url'],
             required:false,
         }
     });
@@ -281,7 +281,7 @@ router.get('/:id', async (req, res, next) => {
         where:{
             spotId:req.params.id
         },
-        attributes:['url'],
+        attributes:['id','url'],
         raw:true
     });
     result.images = imgs.map(e => e.url);
@@ -413,7 +413,7 @@ router.delete('/:id',
 const validateFilters = [
     check('page')
         .optional()
-        .isInt({min:0})
+        .isInt({min:1})
         .withMessage('Page must be greater than or equal to 0'),
     check('size')
         .optional()
@@ -448,17 +448,19 @@ const validateFilters = [
 
 router.get('/', validateFilters, async (req, res) => {
     let {page,size,minLat,maxLat,minLng,maxLng,minPrice,maxPrice} = req.query;
-    page = page?parseInt(page):0;
+    page = page?parseInt(page):1;
+    //changed: page should be 1 minimumly
     size = size?parseInt(size):20;
-    page = (page>10)?10:page;
-    size = (size===0 || size > 20)?20:size;
+    page = (page > 10)?10:page;
+    //when size is 0, it gives nothing
+    size = (size > 20)?20:size;
 
     let pagination = {};
 
-    if(page > 0){
-        pagination.limit = size;
-        pagination.offset = (page-1)*size;
-    }
+    // if(page > 0){
+    pagination.limit = size;
+    pagination.offset = (page-1)*size;
+    // }
 
 
     let opMinLat = minLat===undefined?({}):({[Op.gte]:minLat});
@@ -484,7 +486,7 @@ router.get('/', validateFilters, async (req, res) => {
         include:{
             model:Image,
             as:'previewImage',
-            attributes:['url'],
+            attributes:['id','url'],
             where:{
                 reviewId:null
             },
@@ -493,9 +495,10 @@ router.get('/', validateFilters, async (req, res) => {
         order:[['id']],
         ...pagination
     });
+
     // result = result.toJSON();
     result.page = page;
-    result.size = page===0?0:size;
+    result.size = result.Spots.length;
     return res.json(result);
 });
 

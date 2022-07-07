@@ -6,6 +6,8 @@
 
 ## API Documentation
 
+Note: adding the id column to image queries makes it more friendly to frontend.
+
 ## All endpoints that require authentication
 
 All endpoints that require a current user to be logged in.
@@ -1304,8 +1306,8 @@ Return spots filtered by query parameters.
   * Method: GET
   * URL: /spots
   * Query Parameters
-    * page: integer, minimum: 0, maximum: 10, default: 0
-    * size: integer, minimum: 0, maximum: 20, default: 20
+    * page: integer, minimum: 0, maximum: 10, default: 0(should be 1)
+    * size: integer, minimum: 0, maximum: 20, default: 20(0 means no results)
     * minLat: decimal, optional
     * maxLat: decimal, optional
     * minLng: decimal, optional
@@ -1317,6 +1319,7 @@ Return spots filtered by query parameters.
 * Successful Response
   * Note: previewImage will be an array of nested objects with key "url"
   * Status Code: 200
+  * Note: Will "records on current size" and "total number of pages" make sense for this?
   * Headers:
     * Content-Type: application/json
   * Body:
