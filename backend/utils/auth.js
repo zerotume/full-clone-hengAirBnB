@@ -145,7 +145,22 @@ const imageReq = async (req, _res, next) => {
         return next(err);
     }
     req.image = image;
-    req.permit = req.image.toJSON().userId;
+    let imgJson = image.toJSON();
+    let target;
+    if(imgJson.imageType === 'spot'){
+        target = await Spot.findByPk(imgJson.spotId);
+        req.permit = target.toJSON().ownerId;
+    }else if(imgJson.imageType === 'review'){
+        target = await Review.findByPk(imgJson.reviewId);
+        req.permit = target.toJSON().userId;
+    }else{
+        const err = new Error("Wat? Server seems strange");
+        err.title = "Wat? Server seems strange";
+        err.message = "Wat? Server seems strange";
+        err.status = 500;
+        return next(err);
+    }
+
     return next();
 }
 
