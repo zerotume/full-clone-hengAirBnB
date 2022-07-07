@@ -43,9 +43,26 @@ router.post('/:id/images', validateImage, restoreUser, requireAuth, reviewReq, A
     async (req, res, next) => {
         let {url} = req.body;
         let reviewId = req.review.toJSON().id;
+
+        let imgCount = await Image.count({
+            where:{
+                reviewId
+            }
+        });
+
+        if(imgCount >= 10){
+            const err = Error("Maximum number of images for this resource was reached");
+            err.title = "Maximum number of images for this resource was reached"
+            err.message = "Maximum number of images for this resource was reached";
+            err.status = 400;
+            return next(err);
+        }
+
         let spotId = req.review.toJSON().spotId;
         let imageType = 'review';
         let newImage;
+
+
         try{
             newImage = await Image.create({
                 url,
