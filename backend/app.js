@@ -38,7 +38,7 @@ app.use(
     })
 );
 
-app.get('/mypage',  restoreUser, requireAuth, (req, res) => {
+app.get('/api/mypage',  restoreUser, requireAuth, (req, res) => {
     const {user} = req;
     if(user) {
         return res.json({user: user.toSafeObject()});

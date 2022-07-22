@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const {Spot, Image, Review, User, Booking, sequelize} = require('../db/models');
-const {setTokenCookie, restoreUser, requireAuth, AuthorCheck, refuseOwner, spotReq,spotImgReq} = require('../utils/auth.js');
-const {handleValidationErrors} = require('../utils/validation.js');
+const {Spot, Image, Review, User, Booking, sequelize} = require('../../db/models');
+const {setTokenCookie, restoreUser, requireAuth, AuthorCheck, refuseOwner, spotReq,spotImgReq} = require('../../utils/auth.js');
+const {handleValidationErrors} = require('../../utils/validation.js');
 const {check} = require('express-validator');
-const user = require('../db/models/user');
+const user = require('../../db/models/user');
 const { Op } = require('sequelize');
 const { ResultWithContext } = require('express-validator/src/chain');
 
