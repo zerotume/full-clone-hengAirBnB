@@ -47,9 +47,6 @@ app.get('/api/mypage',  restoreUser, requireAuth, (req, res) => {
     }
 });
 
-app.get('/', (req, res) => {
-    res.json({message:"whyyyy"});
-  });
 
 app.get('/test-req-set/:id', restoreUser, requireAuth, spotReq, AuthorCheck, (req, res) => {
     //this is only the tester of request setter and auth checker
