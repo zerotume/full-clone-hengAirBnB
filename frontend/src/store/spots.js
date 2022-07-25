@@ -5,7 +5,8 @@ import { csrfFetch } from "./csrf";
 // const LOGIN_SESSION = 'session/loginSession';
 // const LOGOUT_SESSION = 'session/logoutSession';
 
-const GET_ALL_SPOTS = 'session/getAllSpots';
+const GET_ALL_SPOTS = 'spots/getAllSpots';
+const GET_ONE_SPOT = 'spots/getOneSpot';
 
 // const loginSession = (user) => {
 //     return {
@@ -21,6 +22,13 @@ const readAllSpots = (spots) => {
     }
 }
 
+const readOneSpot = (currentSpot) => {
+    return{
+        type:GET_ONE_SPOT,
+        currentSpot
+    }
+}
+
 // const logoutSession = () => {
 //     return{
 //         type:LOGOUT_SESSION
@@ -32,9 +40,19 @@ export const readAllSpotsAction = () => async dispatch => {
 
     if(response.ok){
         const data = await response.json();
-        console.log(data)
+        // console.log(data)
         dispatch(readAllSpots(data.Spots));
         return response;
+    }
+}
+
+export const readOneSpotAction = (id) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${id}`);
+
+    if(response.ok){
+        const data = await response.json();
+        dispatch(readOneSpot(data));
+        return data;
     }
 }
 
@@ -85,6 +103,12 @@ const spotsReducer = (state = {}, action) => {
             newState.spotsArray = action.spots;
             action.spots.forEach(e => newState[e.id] = e);
             return newState;
+        case GET_ONE_SPOT:
+            newState.currentSpot = action.currentSpot;
+            return {...newState, [action.currentSpot.id]:{
+                ...newState[action.currentSpot.id],
+                ...action.currentSpot
+            }};
         default:
             return state;
     }
