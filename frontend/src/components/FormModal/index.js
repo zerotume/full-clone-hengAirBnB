@@ -31,13 +31,13 @@ function FormModal(){
       </ul>
       {showLogin && (
         <Modal onClose={() => setShowLogin(false)}>
-          <button onClick={signupClick}>Change to Signup</button>
+          <span>Not having an account?</span><button className="user-logsign-button" onClick={signupClick}>Change to Signup</button>
           <LoginForm />
         </Modal>
       )}
       {showSignup && (
         <Modal onClose={() => setShowSignup(false)}>
-          <button onClick={loginClick}>Change to Login</button>
+          <span>Already Registered?</span><button className="user-logsign-button" onClick={loginClick}>Change to Login</button>
           <SignupForm />
         </Modal>
       )}

@@ -2,11 +2,13 @@
     border-bottom: 0.1rem solid #ebebeb;
     font-family: 'Nunito', sans-serif;
     font-size: 1.5rem;
-    height:4.4rem;
+    height:5rem;
     width:calc(1760vw/1920*100);
     color:  #ff385c;
     display: flex;
     align-items: center;
+    position: fixed;
+    top:0;
 }
 
 .icon-nav{
@@ -53,11 +55,72 @@
     font-size: 1rem;
 }
 
-ul.profile-dropdown {
-    list-style-type: none;
+.menu-holder {
+    background-color: white;
+    position: fixed;
+    right:180px;
+    height:243px;
+    width:240px;
+    border: 1px solid #ebebeb;
+    top:4.3rem;
+    border-radius: 0.6rem;
+    box-shadow: 0.2px -0.2px 1px 1px rgba(177, 177, 177, 0.2);;
+}
+
+ul.profile-dropdown{
+    list-style-type:none;
+    margin:0px;
+    padding: 0px;
+    font-family: inherit;
+}
+
+.user-info{
+    text-align: center;
+    color:darkslategray;
+    font-size: 1.2rem;
+}
+
+ul.profile-dropdown:first-child{
+    margin-top: 8px;
 }
 
 ul.profile-dropdown button{
-    background-color: white;
+    background-color: transparent;
     border: none;
+    font-size: 16px;
+    height:42px;
+    width:240px;
+    text-align: left;
+    padding-left: 1rem;
+    font-family: inherit;
+}
+
+ul.profile-dropdown button:hover{
+    background-color: rgba(177, 177, 177, 0.2);
+}
+
+.user-form{
+    display: flex;
+    flex-direction: column;
+    font-family: 'Roboto', sans-serif;
+}
+
+.user-form input{
+    font-family: inherit;
+    height: 100%;
+    width: 100%;
+}
+
+.user-form button{
+    font-family: inherit;
+}
+
+.user-logsign-button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    color:darkblue;
 }

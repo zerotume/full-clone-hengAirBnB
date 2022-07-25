@@ -39,7 +39,9 @@ function NotLoggedButton(){
                 <i className="user-button-icon fas fa-user-circle"></i>
             </button>
             {showMenu && (
-                <FormModal />
+                <div className="menu-holder">
+                    <FormModal />
+                </div>
             )}
         </>
     );

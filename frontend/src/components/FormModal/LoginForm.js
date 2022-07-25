@@ -27,23 +27,26 @@ function LoginForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="user-form" onSubmit={handleSubmit}>
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error.message}</li>)}
       </ul>
+
       <label>
-        Credential: (Username or Email)
         <input
+          className='user-input'
           type="text"
           value={credential}
+          placeholder="Username or Email"
           onChange={(e) => setCredential(e.target.value)}
           required
         />
       </label>
       <label>
-        Password:
         <input
+          className='user-input'
           type="password"
+          placeholder='Password'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
