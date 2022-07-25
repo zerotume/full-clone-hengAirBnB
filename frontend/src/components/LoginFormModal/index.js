@@ -1,3 +1,24 @@
+import { useState } from "react";
+import LoginForm from "./LoginForm";
+import Modal from "../../context/Modal";
+
+function LoginFormModal(){
+  const [showModal,setShowModal] = useState(false);
+
+  return (
+    <div>
+      <button onClick={() => setShowModal(true)}>Log In</button>
+      {showModal && (
+        <Modal onClose={() => setShowModal(false)}>
+          <LoginForm />
+        </Modal>
+      )}
+    </div>
+  )
+}
+
+export default LoginFormModal;
+/*
 import React, { useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
@@ -54,3 +75,4 @@ function LoginFormPage() {
 }
 
 export default LoginFormPage;
+*/

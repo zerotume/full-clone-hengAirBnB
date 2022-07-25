@@ -7,7 +7,7 @@ function HeaderBar(){
         // <div className="header-container">
             <header className='header-bar'>
                 <div className='icon-holder'>
-                <Link className="icon-nav" exact to="/">
+                <Link className="icon-nav" to="/">
                     <i className="fa-solid fa-cat fa-xl"></i>
                     <span className='icon-text'>catbnb</span>
                 </Link>

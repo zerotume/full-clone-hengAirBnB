@@ -1,11 +1,11 @@
 import React, {  createContext, createRef, useContext, useEffect, useRef, useState } from "react";
-import { ReactDOM } from "react-dom";
+import ReactDOM from 'react-dom';
 import "./Modal.css";
 
 export const ModalContext = createContext();
 
 export function ModalProvider({children}){
-    const modalRef = useRef()
+    const modalRef = useRef();
     const [value, setValue] = useState();
 
     useEffect(() => {
@@ -30,10 +30,12 @@ function Modal({onClose, children}){
     return ReactDOM.createPortal(
             <div id="modal">
                 <div id="modal-background" onClick={onClose}></div>
-                <div id="mocal-content">
+                <div id="modal-content">
                     {children}
                 </div>
             </div>
             ,modalNode
     );
 }
+
+export default Modal;
