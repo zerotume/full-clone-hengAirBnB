@@ -2,16 +2,26 @@
 import { NavLink, Link } from 'react-router-dom';
 import './headerbar.css';
 
+function IconLink(){
+    return (
+        <div className='icon-holder'>
+            <Link className="icon-nav" to="/">
+                <i className="fa-solid fa-cat fa-xl"></i>
+                <span className='icon-text'>catbnb</span>
+            </Link>
+    </div>
+    );
+}
+
+function userLink(){
+
+}
+
 function HeaderBar(){
     return (
         // <div className="header-container">
             <header className='header-bar'>
-                <div className='icon-holder'>
-                <Link className="icon-nav" to="/">
-                    <i className="fa-solid fa-cat fa-xl"></i>
-                    <span className='icon-text'>catbnb</span>
-                </Link>
-                </div>
+                <IconLink />
             </header>
 
         // </div>

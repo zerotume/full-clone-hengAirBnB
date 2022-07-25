@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import NotLoggedButton from "./NotLoggedButton";
 import ProfileButton from "./ProfileButton";
-import FormModal from "../FormModal";
+
 
 
 
@@ -12,20 +13,13 @@ function Navigation({sessionLoaded}){
     if(sessionUser){
         sessionLinks = (<ProfileButton user={sessionUser} />);
     }else{
-        sessionLinks = (
-            <div>
-                <FormModal />
-            </div>
-        );
+        sessionLinks = (<NotLoggedButton />);
     }
 
     return (
-        <ul>
-            <li>
-                <NavLink exact to="/">Home</NavLink>
-                {sessionLoaded && sessionLinks}
-            </li>
-        </ul>
+                <div>
+                    {sessionLoaded && sessionLinks}
+                </div>
     );
 }
 

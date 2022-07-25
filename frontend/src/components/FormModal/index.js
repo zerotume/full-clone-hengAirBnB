@@ -23,8 +23,10 @@ function FormModal(){
 
   return (
     <div>
-      <button onClick={loginClick}>Log In</button>
-      <button onClick={signupClick}>Sign up</button>
+      <ul className="profile-dropdown">
+          <li><button onClick={loginClick}>Log In</button></li>
+          <li><button onClick={signupClick}>Sign up</button></li>
+      </ul>
       {showLogin && (
         <Modal onClose={() => setShowLogin(false)}>
           <button onClick={signupClick}>Change to Signup</button>
