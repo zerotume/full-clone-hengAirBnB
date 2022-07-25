@@ -72,6 +72,7 @@ app.use((_req, _res, next) => {
 
 app.use((err, _req, _res, next) => {
   if(err instanceof ValidationError){
+    // console.log(err)
     err.errors = err.errors.map(e => e.message);
     err.title = 'Validation error';
   }
@@ -80,14 +81,15 @@ app.use((err, _req, _res, next) => {
 
 app.use((err,_req,res, _next) => {
   res.status(err.status || 500);
-  console.error(err);
-  res.json({
+  // console.error(err);
+  let errors = [{
     title:isProduction?undefined:(err.title || 'Server Error'),
     message:err.message,
     statusCode:err.status,
     errors:err.errors,
     stack: isProduction?undefined:err.stack
-  });
+  }]
+  res.json({errors});
 });
 
 module.exports = app;

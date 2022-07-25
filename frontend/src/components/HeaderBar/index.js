@@ -1,6 +1,7 @@
 // import {ReactComponent as logo} from '../../assets/icon/catbnb.svg';
 import { NavLink, Link } from 'react-router-dom';
 import './headerbar.css';
+import Navigation from '../Navigation';
 
 function IconLink(){
     return (
@@ -17,11 +18,12 @@ function userLink(){
 
 }
 
-function HeaderBar(){
+function HeaderBar({sessionLoaded}){
     return (
         // <div className="header-container">
             <header className='header-bar'>
                 <IconLink />
+                <Navigation sessionLoaded={sessionLoaded}/>
             </header>
 
         // </div>

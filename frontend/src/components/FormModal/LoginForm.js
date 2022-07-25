@@ -21,6 +21,7 @@ function LoginForm() {
     return dispatch(sessionActions.loginAction(user))
       .catch(async (res) => {
         const data = await res.json();
+        console.log(data);
         if (data && data.errors) setErrors(data.errors);
       });
   }
@@ -28,7 +29,7 @@ function LoginForm() {
   return (
     <form onSubmit={handleSubmit}>
       <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        {errors.map((error, idx) => <li key={idx}>{error.message}</li>)}
       </ul>
       <label>
         Credential: (Username or Email)

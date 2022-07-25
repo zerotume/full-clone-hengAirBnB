@@ -1,4 +1,5 @@
 const {validationResult} = require('express-validator');
+const { ValidationError } = require('sequelize');
 
 const handleValidationErrors = (req, _res, next) => {
     const validationErrors = validationResult(req);
@@ -16,11 +17,11 @@ const handleValidationErrors = (req, _res, next) => {
             }
         }
 
-        const err = Error('Validation error');
+        const err = new Error('Validation Error');
         err.errors = errors;
         err.status = 400;
-        err.title = 'Validation error';
-        err.message = 'Validation error';
+        err.title = 'Validation Error';
+        err.message = 'Validation Error';
         next(err);
     }
     next();

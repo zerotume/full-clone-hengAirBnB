@@ -17,8 +17,8 @@ function App() {
 
   return (
     <div>
-      <HeaderBar />
-      <Navigation sessionLoaded={sessionLoaded}/>
+      <HeaderBar sessionLoaded={sessionLoaded}/>
+
       <Switch>
         {/* <Route path="/login">
           <LoginFormPage />

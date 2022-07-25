@@ -3,7 +3,10 @@
     font-family: 'Nunito', sans-serif;
     font-size: 1.5rem;
     height:4.4rem;
+    width:calc(1760vw/1920*100);
     color:  #ff385c;
+    display: flex;
+    align-items: center;
 }
 
 .icon-nav{
@@ -12,14 +15,49 @@
 }
 
 .icon-holder{
-    padding-top: 1rem;
+    /* padding-top: 1rem; */
     padding-left: 8.4rem;
+    justify-self: flex-start;
+    margin-right: auto;
 }
 
 .icon-text{
-    font-weight: bold;
+    font-weight:900;
 }
 
 .fa-cat{
     padding:0.3rem;
+}
+
+
+.user-button{
+    justify-self:flex-end;
+    margin-left: auto;
+    height: 2.625rem;
+    width: 4.8125rem;
+    border: 1px solid #ebebeb;
+    border-radius: 1.3125rem;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 0.5rem;
+    color: #717171;
+}
+
+.user-button-icon{
+    font-size: 1.8125rem;
+}
+
+.user-button-text{
+    font-size: 1rem;
+}
+
+ul.profile-dropdown {
+    list-style-type: none;
+}
+
+ul.profile-dropdown button{
+    background-color: white;
+    border: none;
 }

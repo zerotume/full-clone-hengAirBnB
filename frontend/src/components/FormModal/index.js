@@ -9,12 +9,14 @@ function FormModal(){
 
   const loginClick = e => {
     e.preventDefault();
+    e.stopPropagation()
     setShowLogin(true);
     setShowSignup(false);
   }
 
   const signupClick = e => {
     e.preventDefault();
+    e.stopPropagation()
     setShowSignup(true);
     setShowLogin(false);
   }
@@ -22,7 +24,7 @@ function FormModal(){
 
 
   return (
-    <div>
+    <div onClick={e => e.stopPropagation()}>
       <ul className="profile-dropdown">
           <li><button onClick={loginClick}>Log In</button></li>
           <li><button onClick={signupClick}>Sign up</button></li>

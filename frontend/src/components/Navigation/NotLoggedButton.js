@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
 import FormModal from "../FormModal";
+import "./Navigation.css";
 
 
 function NotLoggedButton(){
@@ -32,14 +33,15 @@ function NotLoggedButton(){
     // }
 
     return (
-        <div>
+        <>
             <button className="user-button" onClick={openMenu}>
-                <i className="fas fa-user-circle"></i>
+                <i className="user-button-text fas fa-bars fa-lg"></i>
+                <i className="user-button-icon fas fa-user-circle"></i>
             </button>
             {showMenu && (
                 <FormModal />
             )}
-        </div>
+        </>
     );
 }
 
