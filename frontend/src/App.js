@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router";
+import HeaderBar from "./components/HeaderBar";
 import LoginFormPage from "./components/LoginFormPage";
 import Navigation from "./components/Navigation";
 import SignupFormPage from "./components/SignupFormPage";
@@ -16,7 +17,7 @@ function App() {
 
   return (
     <div>
-      <h1>Hello from App</h1>
+      <HeaderBar />
       <Navigation sessionLoaded={sessionLoaded}/>
       <Switch>
         <Route path="/login">

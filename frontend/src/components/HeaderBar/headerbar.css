@@ -1,0 +1,25 @@
+.header-bar{
+    border-bottom: 0.1rem solid #ebebeb;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.5rem;
+    height:4.4rem;
+    color:  #ff385c;
+}
+
+.icon-nav{
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.icon-holder{
+    padding-top: 1rem;
+    padding-left: 8.4rem;
+}
+
+.icon-text{
+    font-weight: bold;
+}
+
+.fa-cat{
+    padding:0.3rem;
+}
