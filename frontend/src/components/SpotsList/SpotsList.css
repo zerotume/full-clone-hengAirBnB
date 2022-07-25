@@ -1,0 +1,22 @@
+.spots-index{
+    top:6rem;
+    position: relative;
+    width:98.125rem;
+    left:9.46875rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-column-gap: 1.5rem;
+    grid-row-gap: 2.5rem;
+    font-family: 'Roboto', sans-serif;
+    color:#222222;
+}
+
+.card-holder{
+    height: 24.125rem;
+    width: 18.8125rem
+}
+
+.spot-card-img{
+    width: 18.8125rem;
+    height: 17.875rem;
+}

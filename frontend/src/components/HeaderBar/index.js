@@ -21,10 +21,10 @@ function userLink(){
 function HeaderBar({sessionLoaded}){
     return (
         // <div className="header-container">
-            <header className='header-bar'>
+            <div className='header-bar'>
                 <IconLink />
                 <Navigation sessionLoaded={sessionLoaded}/>
-            </header>
+            </div>
 
         // </div>
     );
