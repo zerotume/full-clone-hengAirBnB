@@ -38,6 +38,9 @@ function App() {
         <Route path='/spots/:id'>
           {spotsLoaded && <SpotsDetailShow />}
         </Route>
+        <Route exact path='/spots'>
+          {spotsLoaded && <SpotsList />}
+        </Route>
       </Switch>
     </div>
   );
