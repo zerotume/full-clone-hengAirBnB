@@ -27,7 +27,7 @@ function LoginForm() {
   }
 
   return (
-    <form className="user-form" onSubmit={handleSubmit}>
+    <form className="user-form catbnb-form" onSubmit={handleSubmit}>
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error.message}</li>)}
       </ul>

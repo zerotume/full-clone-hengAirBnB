@@ -2,3 +2,8 @@
 body{
     font-family: 'Nunito', sans-serif;
 }
+
+a{
+    text-decoration: inherit;
+    color:inherit;
+}

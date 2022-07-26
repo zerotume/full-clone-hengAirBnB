@@ -1,16 +1,23 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { readUserSpotsAction } from "../../store/spots";
+import { deleteSpotAction, readUserSpotsAction } from "../../store/spots";
 import HeaderBar from "../HeaderBar";
+import {Link} from "react-router-dom"
 
 function MySpots({sessionLoaded}){
     const user = useSelector(state => state.session.user);
 
-const dispatch = useDispatch();
+    const dispatch = useDispatch();
     let mySpots = useSelector(state => state.spots.mySpots);
     useEffect(() => {
         dispatch(readUserSpotsAction());
     },[dispatch]);
+
+    const deleteClick = id => async e => {
+        e.preventDefault();
+        await dispatch(deleteSpotAction(id));
+    }
+
     if(!user) {
         return (
             <>
@@ -52,11 +59,13 @@ const dispatch = useDispatch();
                     {mySpots.mySpotsArray.map(e => (
                         <tr className="my-spots-table-content my-table-content">
                             <td>
-                                <button><i class="fa-solid fa-circle-trash"></i></button>
+                                <button onClick={deleteClick(e.id)}><i class="fa-solid fa-trash"></i></button>
                             </td>
                             <td className="my-spots-table-img-text my-table-img-text">
-                                <img src={e.previewImage[0].url}></img>
-                                <span>{e.name}</span>
+                                <Link to={`/spots/${e.id}`}>
+                                    <img src={e.previewImage&&e.previewImage[0]?e.previewImage[0].url:'https://images.freeimages.com/images/large-previews/064/cat-1537181.jpg'}></img>
+                                    <span>{e.name}</span>
+                                </Link>
                             </td>
                             <td>
                                 <span>{e.address}</span>
@@ -69,6 +78,11 @@ const dispatch = useDispatch();
                             </td>
                             <td>
                                 <span>{e.updatedAt}</span>
+                            </td>
+                            <td>
+                                <Link to={`/spots/${e.id}/edit`}>
+                                    Edit
+                                </Link>
                             </td>
                         </tr>
                     ))}

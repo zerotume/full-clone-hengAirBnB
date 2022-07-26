@@ -308,12 +308,12 @@ const validateSpot = [
         .notEmpty()
         .withMessage('Country is required'),
     check('lat')
-        .exists({checkFalsy:true})
+        .exists({checkFalsy:false})
         .notEmpty()
         .isFloat({min:-89.9999999, max:89.9999999})
         .withMessage('Latitude is not valid'),
     check('lng')
-        .exists({checkFalsy:true})
+        .exists({checkFalsy:false})
         .notEmpty()
         .isFloat({min:-179.9999999, max:179.9999999})
         .withMessage('Longitude is not valid'),
@@ -371,6 +371,7 @@ router.put('/:id', validateSpot,
 
 router.post('/', validateSpot, restoreUser, requireAuth, async (req, res, next) => {
     const {address,city,state,country,lat,lng,name,description,price} = req.body;
+
     const ownerId = req.user.toJSON().id;
     let spot;
     try{
@@ -493,7 +494,7 @@ router.get('/', validateFilters, async (req, res) => {
             required:false,
         },
         order:[['id']],
-        ...pagination
+        // ...pagination
     });
 
     // result = result.toJSON();
