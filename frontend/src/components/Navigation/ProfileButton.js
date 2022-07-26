@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
 import "./Navigation.css";
+import {Link} from 'react-router-dom';
 
 
 function ProfileButton({user}){
@@ -43,6 +44,10 @@ function ProfileButton({user}){
                         <li className="user-info">Hello, {user.username}!</li>
                         <li>
                             <button onClick={logout}>Log Out</button>
+                        </li>
+                        <li>
+                            <Link to="/spots/myspots"><button>My Spots</button></Link>
+
                         </li>
                     </ul>
                 </div>
