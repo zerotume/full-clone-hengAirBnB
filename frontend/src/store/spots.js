@@ -54,7 +54,7 @@ const updateOneSpot = (spot) => {
     }
 }
 
-const DeleteOneSpot = (id) => {
+const deleteOneSpot = (id) => {
     return{
         type:DELETE_ONE_SPOT,
         id
@@ -74,7 +74,7 @@ export const deleteSpotAction = (id) => async dispatch => {
 
     if(response.ok){
         const data = await response.json();
-        dispatch(DeleteOneSpot(id));
+        dispatch(deleteOneSpot(id));
         return data;
     }
 

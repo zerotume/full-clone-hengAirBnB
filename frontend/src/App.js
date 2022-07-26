@@ -7,6 +7,7 @@ import Navigation from "./components/Navigation";
 import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from './store/session';
 import * as spotActions from './store/spots';
+import * as bookingActions from './store/booking';
 import SpotsList from "./components/SpotsList";
 import SpotsDetailShow from "./components/SpotsDetailShow";
 import MySpots from "./components/SpotsList/MySpots";
