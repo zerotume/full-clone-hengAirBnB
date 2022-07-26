@@ -12,7 +12,7 @@ function SpotsDetailShow(){
         dispatch(readOneSpotAction(id));
     },[dispatch,id])
 
-    if(!currentSpot || !currentSpot.Owner || !currentSpot.images){console.log('here');return null};
+    if(!currentSpot || !currentSpot.Owner || !currentSpot.images){console.log('Not Rendered');return null};
 
         return (
             <div className="detail-holder">
