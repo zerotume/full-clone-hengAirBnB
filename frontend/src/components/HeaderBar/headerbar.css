@@ -3,7 +3,6 @@
     font-family: 'Nunito', sans-serif;
     font-size: 1.5rem;
     height:5rem;
-    width:calc(1760vw/1920*100);
     color:  #ff385c;
     display: flex;
     align-items: center;
@@ -12,6 +11,16 @@
     z-index: 5;
     background-color: white;
 }
+
+.header-bar.main{
+    width:110rem;
+}
+
+.header-bar.sub{
+    width:80rem;
+    padding-left: 15.4rem;
+}
+
 
 .icon-nav{
     color: inherit;

@@ -14,14 +14,12 @@ function IconLink(){
     );
 }
 
-function userLink(){
 
-}
 
-function HeaderBar({sessionLoaded}){
+function HeaderBar({sessionLoaded, main}){
     return (
         // <div className="header-container">
-            <div className='header-bar'>
+            <div className={'header-bar ' + (main?"main":"sub")}>
                 <IconLink />
                 <Navigation sessionLoaded={sessionLoaded}/>
             </div>

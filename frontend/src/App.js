@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div>
-      <HeaderBar sessionLoaded={sessionLoaded}/>
+
 
       <Switch>
         {/* <Route path="/login">
@@ -33,13 +33,13 @@ function App() {
           <SignupFormPage />
         </Route> */}
         <Route exact path='/'>
-          {spotsLoaded && <SpotsList />}
+          {spotsLoaded && <SpotsList sessionLoaded={sessionLoaded}/>}
         </Route>
         <Route path='/spots/:id'>
-          {spotsLoaded && <SpotsDetailShow />}
+          {spotsLoaded && <SpotsDetailShow sessionLoaded={sessionLoaded}/>}
         </Route>
         <Route exact path='/spots'>
-          {spotsLoaded && <SpotsList />}
+          {spotsLoaded && <SpotsList sessionLoaded={sessionLoaded}/>}
         </Route>
       </Switch>
     </div>
