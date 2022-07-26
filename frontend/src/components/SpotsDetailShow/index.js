@@ -34,7 +34,7 @@ function SpotsDetailShow({sessionLoaded}){
                 <div className="detail-holder">
                     <div className="title-info">
                         <div className="title-name">{`${currentSpot.name} in ${currentSpot.address}!`}<Link to={`/spots/${id}/edit`}></Link></div>
-                        <div className="title-review">{currentSpot.avgStarRating?`★ ${currentSpot.avgStarRating.toFixed(2)}`:`No Reviews`}</div>
+                        <div className="title-review">{currentSpot.avgStarRating?`★ ${parseInt(currentSpot.avgStarRating).toFixed(2)}`:`No Reviews`}</div>
                         {currentSpot.ownerId === userId && (
                             <div className="title-owner-buttons">
                                 <Link to={`/spots/${id}/edit`}><button>edit</button></Link>
