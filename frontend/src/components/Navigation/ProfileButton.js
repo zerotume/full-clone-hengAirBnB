@@ -47,7 +47,9 @@ function ProfileButton({user}){
                         </li>
                         <li>
                             <Link to="/spots/myspots"><button>My Spots</button></Link>
-
+                        </li>
+                        <li>
+                            <Link to="/spots/newSpot"><button>Create a spot</button></Link>
                         </li>
                     </ul>
                 </div>
