@@ -4,6 +4,7 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import { readOneSpotAction, deleteSpotAction } from "../../store/spots";
 import "./SpotsDetailShow.css";
 import HeaderBar from "../HeaderBar";
+import { readSpotBookingsAction } from "../../store/bookings";
 
 
 function SpotsDetailShow({sessionLoaded}){
@@ -12,9 +13,14 @@ function SpotsDetailShow({sessionLoaded}){
     const {id} = useParams();
     let currentSpot = useSelector(state => state.spots[id]);
     let userId = useSelector(state => state.session.user.id);
+    let bookings = useSelector(state => state.bookings)
     useEffect(() => {
         dispatch(readOneSpotAction(id));
-    },[dispatch,id])
+    },[dispatch,id]);
+
+    useEffect(() => {
+        dispatch(readSpotBookingsAction(id));
+    },[dispatch,id]);
     const history = useHistory();
 
     const deleteClick = async e => {
@@ -26,8 +32,46 @@ function SpotsDetailShow({sessionLoaded}){
         }
     }
 
+    const dateString = (new Date()).toISOString();
+
+    const getBookingStatus = (startDate,endDate) => {
+        if(startDate > dateString){
+            return 'Oncoming'
+        }else if(startDate <= dateString && endDate >= dateString){
+            return 'Enjoying'
+        }else{
+            return 'Finished'
+        }
+    }
+
     if(!currentSpot || !currentSpot.Owner || !currentSpot.images){return null};
 
+    let bookingContent;
+    if(!bookings ||
+        !bookings.spotBookings ||
+        !bookings.spotBookings.spotBookingsArray ||
+        !bookings.spotBookings.spotBookingsArray.length){
+            bookingContent = (<span>Not bookings for this spot!</span>)
+        }else{
+            let spotBookings = bookings.spotBookings;
+            bookingContent = (
+             <ul>
+                <span>Bookings for this spot</span>
+                {spotBookings.spotBookingsArray.map(e => (
+                    <li>
+                        <span>
+                            {getBookingStatus(e.startDate)} Booking: <br />
+                        </span>
+                        <span>Start Date: {e.startDate}</span><br />
+                        <span>End Date: {e.endDate}</span><br />
+                        {currentSpot.ownerId === userId && (
+                            <span>Booked by: {e.User.firstName} {e.User.lastName}<br /></span>
+                        )}
+                    </li>
+                ))}
+             </ul>
+            )
+        }
         return (
             <>
                 <HeaderBar sessionLoaded={sessionLoaded} main={false}/>
@@ -69,7 +113,9 @@ function SpotsDetailShow({sessionLoaded}){
                             <div className="detail-info-sleep"></div>
                             <div className="detail-info-amenities"></div>
                         </div>
-                        <div className="detail-info-right-booking"></div>
+                        <div className="detail-info-right-booking">
+                            {bookingContent}
+                        </div>
                     </div>
                 </div>
             </>

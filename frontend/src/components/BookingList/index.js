@@ -27,7 +27,7 @@ function BookingList({sessionLoaded}){
         if(startDate > dateString){
             return 'Oncoming'
         }else if(startDate <= dateString && endDate >= dateString){
-            return 'Enjoying it'
+            return 'Enjoying'
         }else{
             return 'Finished'
         }
