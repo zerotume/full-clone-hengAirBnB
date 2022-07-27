@@ -5,6 +5,7 @@ import { readOneSpotAction, deleteSpotAction } from "../../store/spots";
 import "./SpotsDetailShow.css";
 import HeaderBar from "../HeaderBar";
 import { readSpotBookingsAction } from "../../store/bookings";
+import BookingForm from "../BookingForm/BookingForm";
 
 
 function SpotsDetailShow({sessionLoaded}){
@@ -32,7 +33,7 @@ function SpotsDetailShow({sessionLoaded}){
         }
     }
 
-    const dateString = (new Date()).toISOString();
+    const dateString = (new Date()).toISOString().slice(0,10);
 
     const getBookingStatus = (startDate,endDate) => {
         if(startDate > dateString){
@@ -112,9 +113,16 @@ function SpotsDetailShow({sessionLoaded}){
                             <div className="detail-info-description"></div>
                             <div className="detail-info-sleep"></div>
                             <div className="detail-info-amenities"></div>
+                            <div className="detail-info-current-bookings">{bookingContent}</div>
                         </div>
                         <div className="detail-info-right-booking">
-                            {bookingContent}
+                            {currentSpot.ownerId !== userId && (
+                                <BookingForm formType={"Create Booking"} booking={{spotId:id}}/>
+                            )}
+                            {currentSpot.ownerId === userId && (
+                                <h1>You cannot book your own spot!</h1>
+                            )}
+
                         </div>
                     </div>
                 </div>

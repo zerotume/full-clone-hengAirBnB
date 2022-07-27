@@ -22,3 +22,10 @@ ul{
     padding: 0px;
     font-family: inherit;
 }
+
+button {
+    border:none;
+    background-color: transparent;
+    font-family: inherit;
+    font-size:inherit;
+}

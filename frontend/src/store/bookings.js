@@ -63,7 +63,7 @@ export const deleteBookingAction = (id) => async dispatch => {
 }
 
 export const createBookingAction = (booking) => async dispatch => {
-    const response = await csrfFetch(`/api/spots/${booking.spotId}`,{
+    const response = await csrfFetch(`/api/spots/${booking.spotId}/bookings`,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify(booking)
@@ -124,7 +124,7 @@ const bookingReducer = (state = {}, action) => {
             newState.spotBookings = {};
             newState.spotBookings.spotBookingsArray = action.spotBookings;
             action.spotBookings.forEach(e => {
-                console.log(e.id)
+                // console.log(e.id)
                 newState.spotBookings[e.id] = e;
             });
             return newState;

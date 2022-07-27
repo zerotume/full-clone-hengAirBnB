@@ -90,6 +90,7 @@ const validateBooking = [
 
 router.post('/:id/bookings', restoreUser, requireAuth, spotReq, refuseOwner,
     validateBooking, async (req,res,next) => {
+        // console.log(req.body)
         let {startDate, endDate} = req.body;
 
         if(startDate < today || endDate < today){
