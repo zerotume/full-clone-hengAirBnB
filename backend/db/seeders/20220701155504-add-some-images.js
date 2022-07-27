@@ -40,7 +40,7 @@ module.exports = {
         reviewId:null
       },
       {
-        url:'https://www.popo8.com/host/data/201911/27/10/p1574919097_94132.jpg_b.jpg',
+        url:'https://live.staticflickr.com/8175/7937196104_11ba2a548b.jpg',
         imageType:'spot',
         spotId:3,
         reviewId:null
@@ -64,7 +64,7 @@ module.exports = {
         reviewId:null
       },
       {
-        url:'https://www.popo8.com/host/data/201911/27/10/p1574919097_94132.jpg_b.jpg',
+        url:'https://live.staticflickr.com/8175/7937196104_11ba2a548b.jpg',
         imageType:'spot',
         spotId:7,
         reviewId:null
@@ -88,7 +88,7 @@ module.exports = {
         reviewId:null
       },
       {
-        url:'https://www.popo8.com/host/data/201911/27/10/p1574919097_94132.jpg_b.jpg',
+        url:'https://live.staticflickr.com/8175/7937196104_11ba2a548b.jpg',
         imageType:'spot',
         spotId:11,
         reviewId:null
@@ -112,7 +112,7 @@ module.exports = {
         reviewId:null
       },
       {
-        url:'https://www.popo8.com/host/data/201911/27/10/p1574919097_94132.jpg_b.jpg',
+        url:'https://live.staticflickr.com/8175/7937196104_11ba2a548b.jpg',
         imageType:'spot',
         spotId:15,
         reviewId:null
@@ -136,7 +136,7 @@ module.exports = {
         reviewId:null
       },
       {
-        url:'https://www.popo8.com/host/data/201911/27/10/p1574919097_94132.jpg_b.jpg',
+        url:'https://live.staticflickr.com/8175/7937196104_11ba2a548b.jpg',
         imageType:'spot',
         spotId:19,
         reviewId:null
