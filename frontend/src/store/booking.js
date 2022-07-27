@@ -1,3 +1,4 @@
+import { bindActionCreators } from "redux";
 import { csrfFetch } from "./csrf";
 
 const GET_USER_BOOKINGS = 'booking/getUserBookings';
@@ -94,7 +95,7 @@ export const readUserBookingsAction = () => async dispatch => {
 
     if(response.ok){
         const data = await response.json();
-        dispatch(getUserBookings(data));
+        dispatch(getUserBookings(data.Bookings));
         return data;
     }
 }
@@ -104,7 +105,7 @@ export const readSpotBookingsAction = (spotId) => async dispatch => {
 
     if(response.ok){
         const data = await response.json();
-        dispatch(getSpotBookings(data));
+        dispatch(getSpotBookings(data.Bookings));
         return data;
     }
 }
@@ -112,6 +113,46 @@ export const readSpotBookingsAction = (spotId) => async dispatch => {
 const bookingReducer = (state = {}, action) => {
     let newState = {...state};
     switch(action.type){
+        case GET_USER_BOOKINGS:
+            newState.myBookings = {};
+            newState.myBookings.myBookingsArray = action.myBookings;
+            action.myBookings.forEach(e => {
+                newState.myBookings[e.id] = e;
+            });
+            return newState;
+        case GET_SPOT_BOOKINGS:
+            newState.spotBookings = {};
+            newState.spotBookings.spotBookingsArray = action.spotBookings;
+            action.spotBookings.forEach(e => {
+                newState.spotBookings[e.id] = e;
+            });
+            return newState;
+        case ADD_ONE_BOOKING:
+        case EDIT_ONE_BOOKING:
+            newState.myBookings = {
+                ...state.myBookings,
+                [action.booking.id]:{
+                    ...state[action.booking.id],
+                    ...action.booking
+                }
+            };
+            delete newState.myBookings.myBookingsArray;
+            newState.myBookings.myBookingsArray = Object.values(newState.myBookings);
+            return newState;
+        case DELETE_ONE_BOOKING:
+            newState.myBookings = {...state.myBookings};
+            newState.spotBookings = {...state.spotBookings};
+            if(newState.myBookings[action.id]){
+                delete newState.myBookings[action.id];
+                delete newState.myBookings.myBookingsArray;
+                newState.myBookings.myBookingsArray = Object.values(newState.myBookings);
+            }
+            if(newState.spotBookings[action.id]){
+                delete newState.spotBookings[action.id];
+                delete newState.spotBookings.spotBookingsArray;
+                newState.spotBookings.spotBookingsArray = Object.values(newState.spotBookings);
+            }
+            return newState;
         default:
             return newState;
     }
