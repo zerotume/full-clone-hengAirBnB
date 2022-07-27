@@ -6,7 +6,7 @@ import { createBookingAction,updateBookingAction } from "../../store/bookings";
 import HeaderBar from "../HeaderBar";
 
 
-function BookingForm({booking, formType}){
+function BookingForm({booking, formType, setShowEdit}){
     const todayString = (new Date()).toISOString().slice(0,10);
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
@@ -37,6 +37,7 @@ function BookingForm({booking, formType}){
             startDate,
             endDate
         }
+        // console.log(booking)
         setErrors([]);
         // console.log(booking);
 
@@ -54,7 +55,10 @@ function BookingForm({booking, formType}){
                         // console.log(prevData);
                     });
         // console.log(newBooking);
-        if(newBooking)history.push(`/mybookings`);
+        if(newBooking){
+            if(formType==="Update Booking")setShowEdit(-1);
+            history.push(`/mybookings`);
+        }
     }
 
     return(

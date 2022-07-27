@@ -123,6 +123,7 @@ const bookingReq = async (req, _res, next) => {
         return next(err);
     }
     req.booking = booking;
+    // console.log(booking);
     req.permit = req.booking.toJSON().userId;
     return next();
 }

@@ -9,7 +9,7 @@ import BookingForm from '../BookingForm/BookingForm';
 
 function BookingList({sessionLoaded}){
     const user = useSelector(state => state.session.user);
-    const [showEdit,setShowEdit] = useState('-1');
+    const [showEdit,setShowEdit] = useState(-1);
 
     const dispatch = useDispatch();
     let bookings = useSelector(state => state.bookings);
@@ -129,9 +129,9 @@ function BookingList({sessionLoaded}){
                                     </button>
                                 </td>
                             </tr>
-                            <div display={e.id===showEdit}>
-                                <BookingForm formType={"Update Booking"} booking={e} />
-                                <button></button>
+                            <div hidden={e.id!==showEdit}>
+                                <BookingForm formType={"Update Booking"} booking={e} setShowEdit={setShowEdit}/>
+                                <button onClick={() => setShowEdit(-1)}>Close Edit Window</button>
                             </div>
                         </>
                     ))}

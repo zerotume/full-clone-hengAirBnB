@@ -76,8 +76,8 @@ export const createBookingAction = (booking) => async dispatch => {
     }
 }
 
-export const updateBookingAction = (booking,id) => async dispatch => {
-    const response = await csrfFetch(`/api/bookings/${id}`,{
+export const updateBookingAction = (booking) => async dispatch => {
+    const response = await csrfFetch(`/api/bookings/${booking.id}`,{
         method:'PUT',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify(booking)
@@ -133,8 +133,8 @@ const bookingReducer = (state = {}, action) => {
             newState.myBookings = {
                 ...state.myBookings,
                 [action.booking.id]:{
-                    ...state[action.booking.id],
-                    ...action.booking
+                    ...state.myBookings[action.booking.id],
+                    ...action.booking,
                 }
             };
             delete newState.myBookings.myBookingsArray;
