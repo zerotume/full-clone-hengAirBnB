@@ -7,12 +7,13 @@ import Navigation from "./components/Navigation";
 import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from './store/session';
 import * as spotActions from './store/spots';
-import * as bookingActions from './store/booking';
+import * as bookingActions from './store/bookings';
 import SpotsList from "./components/SpotsList";
 import SpotsDetailShow from "./components/SpotsDetailShow";
 import MySpots from "./components/SpotsList/MySpots";
 import CreateSpotForm from "./components/SpotsUpdate/CreateSpotForm";
 import EditSpotForm from "./components/SpotsUpdate/EditSpotFrom";
+import BookingList from "./components/BookingList";
 
 function App() {
   const dispatch = useDispatch();
@@ -53,6 +54,9 @@ function App() {
         </Route>
         <Route exact path='/spots'>
           {spotsLoaded && <SpotsList sessionLoaded={sessionLoaded}/>}
+        </Route>
+        <Route exact path='/mybookings'>
+          {spotsLoaded && <BookingList sessionLoaded={sessionLoaded}/>}
         </Route>
       </Switch>
     </div>

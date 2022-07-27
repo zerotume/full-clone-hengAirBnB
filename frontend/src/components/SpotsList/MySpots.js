@@ -35,7 +35,7 @@ function MySpots({sessionLoaded}){
         <>
             <HeaderBar sessionLoaded={sessionLoaded} main={false}/>
             <div className="sub-page-holder">
-                <table className="my-spots-table">
+                <table className="my-spots-table my-stuff-table">
                     <tr className="my-spots-table-header my-table-header">
                         <td>
                             Delete?

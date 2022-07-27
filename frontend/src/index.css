@@ -7,3 +7,11 @@ a{
     text-decoration: inherit;
     color:inherit;
 }
+
+.my-stuff-table td{
+    border:1px solid #999999;
+    padding: 2rem;
+}
+table.my-stuff-table{
+    border-spacing: 0;
+}
