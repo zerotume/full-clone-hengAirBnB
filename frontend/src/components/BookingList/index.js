@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteSpotAction, readUserSpotsAction } from "../../store/spots";
 import HeaderBar from "../HeaderBar";
 import {Link} from "react-router-dom"
-import {readUserBookingsAction} from '../../store/bookings';
+import {readUserBookingsAction, deleteBookingAction} from '../../store/bookings';
 import BookingForm from '../BookingForm/BookingForm';
 
 function BookingList({sessionLoaded}){
@@ -20,7 +20,7 @@ function BookingList({sessionLoaded}){
 
     const deleteClick = id => async e => {
         e.preventDefault();
-        // await dispatch(deleteSpotAction(id));
+        await dispatch(deleteBookingAction(id));
     }
 
 
@@ -124,7 +124,7 @@ function BookingList({sessionLoaded}){
                                 </td>
 
                                 <td>
-                                    <button onClick={() => setShowEdit(e.id)}>
+                                    <button onClick={() => setShowEdit(e.id)} disabled={dateString > e.startDate}>
                                         Edit Booking
                                     </button>
                                 </td>
