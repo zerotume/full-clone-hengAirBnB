@@ -8,17 +8,19 @@
     align-items: center;
     position: sticky;
     top:0;
-    z-index: 5;
     background-color: white;
 }
 
 .header-bar.main{
-    width:110rem;
+    width:119rem;
 }
 
 .header-bar.sub{
-    width:80rem;
-    padding-left: 15.4rem;
+    width:119rem;
+}
+
+header{
+    border-bottom: 0.1rem solid #ebebeb;
 }
 
 
@@ -134,4 +136,12 @@ ul.profile-dropdown button:hover{
     font-size: 1rem;
     font-weight: bold;
     color:darkblue;
+}
+
+.header-bar.sub .icon-holder{
+    padding-left: 23.8125rem;
+}
+
+.header-bar.sub .user-button{
+    margin-right: 23.8125rem;
 }

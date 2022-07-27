@@ -30,14 +30,22 @@ function FormModal(){
           <li><button onClick={signupClick}>Sign up</button></li>
       </ul>
       {showLogin && (
-        <Modal onClose={() => setShowLogin(false)}>
-          <span>Not having an account?</span><button className="user-logsign-button" onClick={signupClick}>Change to Signup</button>
+        <Modal className="form-modal" onClose={() => setShowLogin(false)}>
+          <p>Login</p>
+          <div className="form-welcome"><h2>Welcome to Catbnb!</h2></div>
+          <div className="change-form">
+            <span>Not having an account?</span><button className="user-logsign-button" onClick={signupClick}>Change to Signup</button>
+          </div>
           <LoginForm />
         </Modal>
       )}
       {showSignup && (
-        <Modal onClose={() => setShowSignup(false)}>
-          <span>Already Registered?</span><button className="user-logsign-button" onClick={loginClick}>Change to Login</button>
+        <Modal className="form-modal" onClose={() => setShowSignup(false)}>
+          <p>Signup</p>
+          <div className="form-welcome"><h2>Welcome to Catbnb!</h2></div>
+          <div className="change-form">
+            <span>Already Registered?</span><button className="user-logsign-button" onClick={loginClick}>Change to Login</button>
+          </div>
           <SignupForm />
         </Modal>
       )}

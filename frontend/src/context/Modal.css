@@ -8,6 +8,7 @@
     align-items: center;
     justify-content: center;
     font-family: 'Roboto', sans-serif;
+
 }
 
 #modal-background{
@@ -16,12 +17,99 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(255,255,255,0.7);
-    /* z-index: 0; */
+    background-color: rgba(162, 162, 162, 0.7);
 }
 
 #modal-content{
     position: absolute;
     background-color: white;
-    /* z-index: 1; */
+    border-radius: 0.8rem;
+    z-index: 7;
+    top:90px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    align-items: center;
+    height:35.5rem;
+    width:34rem;
+}
+
+#modal-content p{
+    text-align: center;
+    border-bottom: 1px solid #e8e5e5;
+    padding-bottom: 1rem;
+    font-weight: 800;
+    width: 100%;
+}
+
+
+
+
+.user-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:100%
+}
+
+.user-form button{
+    margin-top: 4rem;
+}
+
+.form-welcome{
+    align-self: flex-start;
+    padding-left: 1rem;
+    margin-top: -2rem;
+}
+
+.user-form-input-holder{
+    border:1px solid #AAAAAA;
+    display: flex;
+    flex-direction: column;
+    border-radius: 1rem;
+    z-index: 2;
+    padding:0.2rem;
+    width:28.5rem;
+}
+
+.user-form-input-holder label{
+    border:none;
+    height:2rem;
+    border-top: 1px solid #AAAAAA;
+    width:100%
+}
+
+.user-form-input-holder input{
+    border:none;
+    background-color: transparent;
+    width:100%;
+    font-size: 0.9rem;
+    font-weight: 600;
+    outline: none;
+}
+
+.user-form-input-holder label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-form-input-holder label:first-child{
+    border-top:none;
+}
+
+.user-form ul{
+    align-self: start;
+    margin-left:1rem;
+}
+
+.user-form button{
+    background-color: #dd1262;
+    font-size: 1rem;
+    font-weight: 800;
+    color:whitesmoke;
+    width: 28.5rem;;
+    height:3rem;
+    border-radius: 0.5rem;
+    cursor:pointer
 }

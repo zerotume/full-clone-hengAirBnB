@@ -21,6 +21,8 @@ function SignupForm() {
     const handleSubmit = e => {
         e.preventDefault();
 
+        console.log({firstName, lastName, email, username, password});
+
         if(password !== confirmPassword){
             return setErrors(["password is not equal to confirm password"]);
         }else{
@@ -28,6 +30,7 @@ function SignupForm() {
             return dispatch(sessionActions.signupAction({firstName, lastName, email, username, password}))
                 .catch(async (res) => {
                     const data = await res.json();
+                    console.log(data);
                     if(data && data.errors) setErrors(Object.values(data.errors[0].errors));
                 });
         }
@@ -38,60 +41,63 @@ function SignupForm() {
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
-      <label>
-        <input
-          type="text"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        <input
-          type="text"
-          placeholder="First Name"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        <input
-          type="text"
-          placeholder="Last Name"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-      </label>
+      <div className='user-form-input-holder'>
+
+        <label>
+          <input
+            type="text"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          <input
+            type="text"
+            placeholder="First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          <input
+            type="text"
+            placeholder="Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+        </label>
+      </div>
       <button type="submit">Sign Up</button>
     </form>
     );

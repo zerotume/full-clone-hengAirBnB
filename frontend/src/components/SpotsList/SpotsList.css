@@ -19,6 +19,7 @@
 .spot-card-img{
     width: 18.8125rem;
     height: 17.875rem;
+    border-radius: 2rem;
 }
 
 .my-table-img-text img{

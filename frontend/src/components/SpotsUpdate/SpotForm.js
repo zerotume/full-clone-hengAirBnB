@@ -72,7 +72,7 @@ function SpotForm({spot, formType, sessionLoaded}){
     return(
         <div className="sub-page-holder">
             <HeaderBar sessionLoaded={sessionLoaded} main={false}/>
-                <form className="user-form catbnb-form" onSubmit={handleSubmit}>
+                <form className="catbnb-form spot-form" onSubmit={handleSubmit}>
                 <h2>{formType}</h2>
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}

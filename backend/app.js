@@ -71,6 +71,7 @@ app.use((_req, _res, next) => {
 });
 
 app.use((err, _req, _res, next) => {
+  console.log(err);
   if(err instanceof ValidationError){
     // console.log(err)
     err.errors = err.errors.map(e => e.message);

@@ -13,7 +13,7 @@ function SpotsDetailShow({sessionLoaded}){
     const dispatch = useDispatch();
     const {id} = useParams();
     let currentSpot = useSelector(state => state.spots[id]);
-    let userId = useSelector(state => state.session.user.id);
+    let user = useSelector(state => state.session.user);
     let bookings = useSelector(state => state.bookings)
     useEffect(() => {
         dispatch(readOneSpotAction(id));
@@ -44,6 +44,19 @@ function SpotsDetailShow({sessionLoaded}){
             return 'Finished'
         }
     }
+    let userId;
+    if(!user) {
+        return (
+            <>
+                <HeaderBar sessionLoaded={sessionLoaded} main={false}/>
+                <div className="sub-page-holder">
+                    <span className="log-in-warning">You're not logged in!</span>
+                </div>
+            </>
+        )
+    }else{
+        userId = user.id;
+    }
 
     if(!currentSpot || !currentSpot.Owner || !currentSpot.images){return null};
 
@@ -55,9 +68,10 @@ function SpotsDetailShow({sessionLoaded}){
             bookingContent = (<span>Not bookings for this spot!</span>)
         }else{
             let spotBookings = bookings.spotBookings;
+
             bookingContent = (
              <ul>
-                <span>Bookings for this spot</span>
+                <span className="spot-booking-header">Bookings for this spot</span>
                 {spotBookings.spotBookingsArray.map(e => (
                     <li>
                         <span>
@@ -79,20 +93,20 @@ function SpotsDetailShow({sessionLoaded}){
                 <div className="detail-holder">
                     <div className="title-info">
                         <div className="title-name">{`${currentSpot.name} in ${currentSpot.address}!`}<Link to={`/spots/${id}/edit`}></Link></div>
-                        <div className="title-review">{currentSpot.avgStarRating?`★ ${parseInt(currentSpot.avgStarRating).toFixed(2)}`:`No Reviews`}</div>
+                        <div className="title-review">{currentSpot.avgStarRating?`★ ${parseInt(currentSpot.avgStarRating).toFixed(2)}`:`★ New!`}{" · "}{currentSpot.city}, {currentSpot.state}, {currentSpot.country}</div>
                         {currentSpot.ownerId === userId && (
                             <div className="title-owner-buttons">
-                                <Link to={`/spots/${id}/edit`}><button>edit</button></Link>
+                                <Link to={`/spots/${id}/edit`}>edit</Link>
                                 <button onClick={deleteClick}>delete this spot</button>
                             </div>
                         )}
                     </div>
                     <div className="image-holder">
-                        <img className="detail-img-1" src={currentSpot.images.length?currentSpot.images[0]:'https://images.freeimages.com/images/large-previews/064/cat-1537181.jpg'} alt=""></img>
-                        <img className="detail-img-2" src={currentSpot.images.length?currentSpot.images[0]:'https://images.freeimages.com/images/large-previews/064/cat-1537181.jpg'} alt=""></img>
-                        <img className="detail-img-3" src={currentSpot.images.length?currentSpot.images[0]:'https://images.freeimages.com/images/large-previews/064/cat-1537181.jpg'} alt=""></img>
-                        <img className="detail-img-4" src={currentSpot.images.length?currentSpot.images[0]:'https://images.freeimages.com/images/large-previews/064/cat-1537181.jpg'} alt=""></img>
-                        <img className="detail-img-5" src={currentSpot.images.length?currentSpot.images[0]:'https://images.freeimages.com/images/large-previews/064/cat-1537181.jpg'} alt=""></img>
+                        <img className="detail-img-1 detail-img-big" src={currentSpot.images.length?currentSpot.images[0]:'https://images.freeimages.com/images/large-previews/064/cat-1537181.jpg'} alt=""></img>
+                        <img className="detail-img-2 detail-img-small" src={currentSpot.images.length?currentSpot.images[0]:'https://images.freeimages.com/images/large-previews/064/cat-1537181.jpg'} alt=""></img>
+                        <img className="detail-img-3 detail-img-small" src={currentSpot.images.length?currentSpot.images[0]:'https://images.freeimages.com/images/large-previews/064/cat-1537181.jpg'} alt=""></img>
+                        <img className="detail-img-4 detail-img-small" src={currentSpot.images.length?currentSpot.images[0]:'https://images.freeimages.com/images/large-previews/064/cat-1537181.jpg'} alt=""></img>
+                        <img className="detail-img-5 detail-img-small" src={currentSpot.images.length?currentSpot.images[0]:'https://images.freeimages.com/images/large-previews/064/cat-1537181.jpg'} alt=""></img>
                     </div>
                     <div className="detail-info">
                         <div className="detail-info-left-wrap">

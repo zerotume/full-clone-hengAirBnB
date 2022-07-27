@@ -63,7 +63,7 @@ function BookingForm({booking, formType, setShowEdit}){
 
     return(
         <div className="booking-form-holder">
-                <form className="user-form catbnb-form booking-form" onSubmit={handleSubmit}>
+                <form className="catbnb-form booking-form" onSubmit={handleSubmit}>
                 <h2>{formType}</h2>
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
@@ -72,7 +72,7 @@ function BookingForm({booking, formType, setShowEdit}){
 
 
             <label>
-                Start Date:
+                Start Date:</label>
                 <input
                 type="date"
                 placeholder="mm/dd/yyyy"
@@ -80,9 +80,9 @@ function BookingForm({booking, formType, setShowEdit}){
                 onChange={(e) => setStartDate(e.target.value)}
                 required
                 />
-            </label>
+
             <label>
-                End Date:
+                End Date:</label>
                 <input
                 type="date"
                 placeholder="mm/dd/yyyy"
@@ -90,8 +90,8 @@ function BookingForm({booking, formType, setShowEdit}){
                 onChange={(e) => setEndDate(e.target.value)}
                 required
                 />
-            </label>
-            <input type="Submit" value={formType} />
+
+            <input className="user-form-input-button booking-form-input-button" type="Submit" value={formType} />
             </form>
         </div>
     );
