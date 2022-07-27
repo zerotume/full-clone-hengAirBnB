@@ -64,7 +64,7 @@ function SpotsDetailShow({sessionLoaded}){
                         </span>
                         <span>Start Date: {e.startDate}</span><br />
                         <span>End Date: {e.endDate}</span><br />
-                        {currentSpot.ownerId === userId && (
+                        {currentSpot.ownerId === userId && e.User && (
                             <span>Booked by: {e.User.firstName} {e.User.lastName}<br /></span>
                         )}
                     </li>

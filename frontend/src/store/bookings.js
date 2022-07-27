@@ -124,6 +124,7 @@ const bookingReducer = (state = {}, action) => {
             newState.spotBookings = {};
             newState.spotBookings.spotBookingsArray = action.spotBookings;
             action.spotBookings.forEach(e => {
+                console.log(e.id)
                 newState.spotBookings[e.id] = e;
             });
             return newState;

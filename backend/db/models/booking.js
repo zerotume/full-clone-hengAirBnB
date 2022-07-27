@@ -54,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Booking',
     scopes:{
       notOwner:{
-        attributes:['spotId','startDate','endDate']
+        attributes:['id','spotId','startDate','endDate']
       },
     }
   });
