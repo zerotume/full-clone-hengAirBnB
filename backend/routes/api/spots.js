@@ -508,7 +508,7 @@ router.get('/', validateFilters, async (req, res) => {
                     },
         ],
         order:[['id']],
-        group:[['Spot.id']],
+        group:[['Spot.id'],["previewImage.id"]],
         // ...pagination
     });
 
