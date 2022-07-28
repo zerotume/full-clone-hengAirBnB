@@ -10,7 +10,7 @@ a{
 
 .my-stuff-table td{
     border:1px solid #999999;
-    padding: 2rem;
+    padding:3.3vh;
 }
 table.my-stuff-table{
     border-spacing: 0;
@@ -31,14 +31,14 @@ button {
 }
 
 .header-bar.main button.user-button{
-    margin-right: 8.75rem;
+    margin-right: 7.35vw;
 }
 
 div.spot-info-holder{
-    margin-top:0.5rem;
+    margin-top:0.82vh;
     display: flex;
     flex-direction: row-reverse;
-    font-size: 0.875rem;
+    font-size: 1.45vh;
 }
 
 div.spot-info-left{
@@ -75,18 +75,18 @@ div.spot-card-price span{
 }
 
 .title-name{
-    font-size: 2rem;
-    margin-top: 1rem;
+    font-size: 3.3vh;
+    margin-top: 1.65vh;
     font-weight: 600;
 }
 
 .title-review{
-    margin-top:0.2rem;
+    margin-top:0.33vh;
 }
 .detail-holder{
     position: relative;
-    width: 70rem;
-    margin-left: 24rem;
+    width: 58.85vw;
+    margin-left: 20.2vw;
     font-family: 'Roboto', sans-serif;;
 }
 
@@ -94,22 +94,22 @@ div.spot-card-price span{
     display: block;
     text-align: center;
     background-color: #dd1262;
-    font-size: 1rem;
+    font-size: 1.65vh;
     font-weight: 800;
     color:whitesmoke;
-    width: 12rem;
-    height:2rem;
-    line-height: 2rem;
-    border-radius: 0.5rem;
-    margin: 0.5rem;
+    width: 10.1vw;
+    height:3.31vh;
+    line-height: 3.31vh;
+    border-radius: 0.83vh;
+    margin: 0.83vh;
     cursor:pointer
 }
 
 .detail-holder .image-holder{
-    margin-top:2rem;
+    margin-top:3.31vh;
     display: grid;
-    width:64rem;
-    height:32rem;
+    width:53.81vw;
+    height:52.9vh;
     grid-template-columns: repeat(4,1fr);
     grid-template-rows: repeat(2,1fr);
     white-space: nowarp;
@@ -146,25 +146,25 @@ img.detail-img-5{
 }
 
 .detail-holder .image-holder img{
-    border-radius: 1rem;
+    border-radius: 1.65vh;
 }
 
 .detail-img-small{
     width:97%;
     height:97%;
-    margin-left: 1rem;
-    margin-top: 0.3rem;
+    margin-left: 0.84vw;
+    margin-top: 0.5vh;
 }
 
 .detail-info-head-host{
-    font-size: 1.4rem;
+    font-size: 2.31vh;
     font-weight: 600;
-    margin-top:2rem;
+    margin-top:3.31vh;
 }
 
 .detail-info-head-avaliable{
-    font-size: 1.2rem;
-    margin-top:0.2rem;
+    font-size: 2vh;
+    margin-top:0.33vh;
 }
 
 .detail-info{
@@ -173,30 +173,30 @@ img.detail-img-5{
 
 .detail-info-head-text{
     border-bottom: 1px solid #AAAAAA;
-    padding-bottom: 1rem;
-    width: 50rem;
+    padding-bottom: 1.65vh;
+    width: 42vw;
 }
 
 .detail-info-right-booking{
     margin-left:auto;
-    margin-right:6rem;
-    margin-top:3rem;
+    margin-right:5.04vw;
+    margin-top:5vh;
     position: sticky;
 }
 
 .spot-booking-header{
-    font-size: 1.25rem;
+    font-size: 2.07vh;
     font-weight: bold;
 }
 
 .user-form button{
     background-color: #dd1262;
-    font-size: 1rem;
+    font-size: 1.65vh;
     font-weight: 800;
     color:whitesmoke;
-    width: 28.5rem;;
-    height:3rem;
-    border-radius: 0.5rem;
+    width: 24vw;
+    height:5vh;
+    border-radius: 0.42vw;
     cursor:pointer
 }
 
@@ -205,27 +205,27 @@ img.detail-img-5{
     flex-direction: column;
     justify-content: center;
     border: 1px solid #AAAAAA;
-    border-radius: 0.5rem;
+    border-radius: 0.42vw;
     align-items: center;
 }
 
 .catbnb-form h2{
-    margin: 1rem 1rem;
+    margin: 1.65vh 0.84vw;
 }
 
 .booking-form-input-button{
     background-color: #dd1262;
-    font-size: 1rem;
+    font-size: 1.65vh;
     font-weight: 800;
     color:whitesmoke;
-    border-radius: 0.5rem;
+    border-radius: 0.83vh;
     cursor:pointer;
     border:none;
-    line-height:2rem;
-    margin-top: 1rem;
+    line-height:3.3vh;
+    margin-top: 1.65vh;
     font-family: 'Nunito', sans-serif;
     width:90%;
-    margin-bottom:1rem;
+    margin-bottom:1.65vh;
 }
 
 .booking-form input:not(.booking-form-input-button){
@@ -235,12 +235,12 @@ img.detail-img-5{
 
 .booking-form label{
     align-self: flex-start;
-    margin-left: 1rem;
+    margin-left: 0.84vw;
     font-weight: 600;
 }
 
 .detail-info-current-bookings li{
-    margin-top: 0.8rem;
+    margin-top: 1.32vh;
 }
 
 .form-page-holder{
@@ -261,7 +261,7 @@ img.detail-img-5{
 
 .form-leftside-bg h1{
     color: whitesmoke;
-    font-size: 3rem;
+    font-size: 5vh;
 }
 
 .cat-form-wrapper{
@@ -273,14 +273,14 @@ img.detail-img-5{
 }
 
 .spot-form{
-    padding-top: 2rem;
-    height:37.5rem;
-    width:32.25rem;
+    padding-top: 3.3vh;
+    height:62vh;
+    width:27.1vw;
 }
 
 .spot-form label{
     width:75%;
-    height:2.5rem;
+    height:4.13vh;
 }
 
 .spot-form input:not(.spot-submit){
@@ -289,20 +289,20 @@ img.detail-img-5{
 }
 
 .spot-submit{
-    height:2.5rem;
-    margin-top: 4rem;
+    height:4.13vh;
+    margin-top: 6.61vh;
     width:30%;
     align-self: flex-start;
     border:none;
     color:white;
     background-color: #111111;
-    border-radius: 0.5rem;
-    margin-left: 1.5rem;
+    border-radius: 0.83vh;
+    margin-left: 1.26vw;
     font-weight: 600;
     font-family: 'Nunito', sans-serif;
 }
 
 .spot-form h2{
-    margin-top: 0rem;
-    margin-bottom: 4rem;
+    margin-top: 0vw;
+    margin-bottom: 6.61vh;
 }

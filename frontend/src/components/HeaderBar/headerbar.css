@@ -1,8 +1,8 @@
 .header-bar{
     border-bottom: 0.1rem solid #ebebeb;
     font-family: 'Nunito', sans-serif;
-    font-size: 1.5rem;
-    height:5rem;
+    font-size: 3.18vh;
+    height:8.26vh;
     color:  #ff385c;
     display: flex;
     align-items: center;
@@ -30,8 +30,7 @@ header{
 }
 
 .icon-holder{
-    /* padding-top: 1rem; */
-    padding-left: 8.4rem;
+    padding-left: 7.06vw;
     justify-self: flex-start;
     margin-right: auto;
 }
@@ -41,42 +40,42 @@ header{
 }
 
 .fa-cat{
-    padding:0.3rem;
+    padding:0.5vh;
 }
 
 
 .user-button{
     justify-self:flex-end;
     margin-left: auto;
-    height: 2.625rem;
-    width: 4.8125rem;
+    height: 4.34vh;
+    width: 4.05vw;
     border: 1px solid #ebebeb;
-    border-radius: 1.3125rem;
+    border-radius: 2.17vh;
     background-color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    column-gap: 0.5rem;
+    column-gap: 0.83vh;
     color: #717171;
 }
 
 .user-button-icon{
-    font-size: 1.8125rem;
+    font-size: 3vh;
 }
 
 .user-button-text{
-    font-size: 1rem;
+    font-size: 1.65vh;
 }
 
 .menu-holder {
     background-color: white;
     position: fixed;
-    right:180px;
-    height:243px;
-    width:240px;
+    right:9.46vw;
+    height:25.1vh;
+    width:12.61vw;
     border: 1px solid #ebebeb;
-    top:4.3rem;
-    border-radius: 0.6rem;
+    top:8.11vh;
+    border-radius: 1vh;
     box-shadow: 0.2px -0.2px 1px 1px rgba(177, 177, 177, 0.2);;
 }
 
@@ -90,21 +89,21 @@ ul.profile-dropdown{
 .user-info{
     text-align: center;
     color:darkslategray;
-    font-size: 1.2rem;
+    font-size: 2vh;
 }
 
 ul.profile-dropdown:first-child{
-    margin-top: 8px;
+    margin-top: 0.42vh;
 }
 
 ul.profile-dropdown button{
     background-color: transparent;
     border: none;
-    font-size: 16px;
-    height:42px;
-    width:240px;
+    font-size: 1.65vh;
+    height:4.34vh;
+    width:12.61vw;
     text-align: left;
-    padding-left: 1rem;
+    padding-left: 0.84vw;
     font-family: inherit;
 }
 
@@ -133,7 +132,7 @@ ul.profile-dropdown button:hover{
     border: none;
     cursor: pointer;
     font-family: 'Roboto', sans-serif;
-    font-size: 1rem;
+    font-size: 1.65vh;
     font-weight: bold;
     color:darkblue;
 }
