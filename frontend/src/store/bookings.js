@@ -110,7 +110,7 @@ export const readSpotBookingsAction = (spotId) => async dispatch => {
     }
 }
 
-const bookingReducer = (state = {}, action) => {
+const bookingReducer = (state = {myBookings:{}}, action) => {
     let newState = {...state};
     switch(action.type){
         case GET_USER_BOOKINGS:
@@ -130,10 +130,11 @@ const bookingReducer = (state = {}, action) => {
             return newState;
         case ADD_ONE_BOOKING:
         case EDIT_ONE_BOOKING:
+            console.log(action.booking.id);
             newState.myBookings = {
                 ...state.myBookings,
                 [action.booking.id]:{
-                    ...state.myBookings[action.booking.id],
+                    ...newState.myBookings[action.booking.id],
                     ...action.booking,
                 }
             };
