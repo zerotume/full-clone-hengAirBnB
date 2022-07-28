@@ -1,28 +1,28 @@
 .spots-index{
-    top:6rem;
+    top:9.92vh;
     position: relative;
-    width:98.125rem;
-    left:9.46875rem;
+    width:82.5vw;
+    left:8vw;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-column-gap: 1.5rem;
-    grid-row-gap: 2.5rem;
+    grid-column-gap: 1.26vw;
+    grid-row-gap: 4.13vh;
     font-family: 'Roboto', sans-serif;
     color:#222222;
 }
 
 .card-holder{
-    height: 24.125rem;
-    width: 18.8125rem
+    height: 40vh;
+    width: 15.82vw;
 }
 
 .spot-card-img{
-    width: 18.8125rem;
-    height: 17.875rem;
-    border-radius: 2rem;
+    width: 15.82vw;
+    height: 30vh;
+    border-radius: 3.31vh;
 }
 
 .my-table-img-text img{
-    width: 6rem;
-    height:6rem;
+    width: 5.04vw;
+    height:9.91vh;
 }

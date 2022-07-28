@@ -23,21 +23,21 @@
 #modal-content{
     position: absolute;
     background-color: white;
-    border-radius: 0.8rem;
+    border-radius: 1.322vh;
     z-index: 7;
-    top:90px;
+    top:9.3vh;
     display: flex;
     flex-direction: column;
-    row-gap: 1rem;
+    row-gap: 1.65vh;
     align-items: center;
-    height:35.5rem;
-    width:34rem;
+    height:58.7vh;
+    width:28.6vw;
 }
 
 #modal-content p{
     text-align: center;
     border-bottom: 1px solid #e8e5e5;
-    padding-bottom: 1rem;
+    padding-bottom: 1.65vh;
     font-weight: 800;
     width: 100%;
 }
@@ -53,28 +53,28 @@
 }
 
 .user-form button{
-    margin-top: 4rem;
+    margin-top: 6.61vh;
 }
 
 .form-welcome{
     align-self: flex-start;
-    padding-left: 1rem;
-    margin-top: -2rem;
+    padding-left: 0.84vw;
+    margin-top: -3.31vh;
 }
 
 .user-form-input-holder{
     border:1px solid #AAAAAA;
     display: flex;
     flex-direction: column;
-    border-radius: 1rem;
+    border-radius: 1.65vh;
     z-index: 2;
-    padding:0.2rem;
-    width:28.5rem;
+    padding:0.331vh;
+    width:24vw;
 }
 
 .user-form-input-holder label{
     border:none;
-    height:2rem;
+    height:3.31vh;
     border-top: 1px solid #AAAAAA;
     width:100%
 }
@@ -83,7 +83,7 @@
     border:none;
     background-color: transparent;
     width:100%;
-    font-size: 0.9rem;
+    font-size: 1.49vh;
     font-weight: 600;
     outline: none;
 }
@@ -100,16 +100,16 @@
 
 .user-form ul{
     align-self: start;
-    margin-left:1rem;
+    margin-left:0.841vw;
 }
 
 .user-form button{
     background-color: #dd1262;
-    font-size: 1rem;
+    font-size: 0.84vw;
     font-weight: 800;
     color:whitesmoke;
-    width: 28.5rem;;
-    height:3rem;
-    border-radius: 0.5rem;
+    width: 24vw;
+    height:5vh;
+    border-radius: 0.826vh;
     cursor:pointer
 }

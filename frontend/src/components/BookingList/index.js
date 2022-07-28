@@ -131,7 +131,7 @@ function BookingList({sessionLoaded}){
                             </tr>
                             <div hidden={e.id!==showEdit}>
                                 <BookingForm formType={"Update Booking"} booking={e} setShowEdit={setShowEdit}/>
-                                <button onClick={() => setShowEdit(-1)}>Close Edit Window</button>
+                                <button className='close-booking-form-button' onClick={() => setShowEdit(-1)}>x</button>
                             </div>
                         </>
                     ))}
@@ -141,10 +141,12 @@ function BookingList({sessionLoaded}){
     }
 
     return (
-        <div className="sub-page-holder">
+        <>
             <HeaderBar sessionLoaded={sessionLoaded} main={false}/>
-            {bookingContent}
-        </div>
+            <div className="sub-page-holder">
+                {bookingContent}
+            </div>
+        </>
     )
 }
 
