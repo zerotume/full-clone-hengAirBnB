@@ -223,17 +223,18 @@ router.get('/myspots', restoreUser, requireAuth, async (req,res) => {
     let myspots = await Spot.findAll({
         where:{ownerId:myid},
         attributes:{
-            // include:[
-            //     [sequelize.col('Images.url'), 'previewImage']//so alias will be used here
-            // ]
+
         },
-        include:{
-            model:Image,
-            as:'previewImage',
-            where:{imageType:'spot'},
-            attributes:['id','url'],
-            required:false,
-        }
+        include:[
+                {
+                    model:Image,
+                    as:'previewImage',
+                    where:{imageType:'spot'},
+                    attributes:['id','url'],
+                    required:false,
+                },
+
+        ]
     });
 
     return res.json(myspots);
@@ -480,21 +481,34 @@ router.get('/', validateFilters, async (req, res) => {
     let result = {};
     result.Spots = await Spot.findAll({
         where,
+        subQuery: false,
         attributes:{
-            // include:[
-            //     [sequelize.col('Images.url'), 'previewImage']//so alias will be used here
-            // ]
+            include:[
+                [
+                    sequelize.fn("AVG", sequelize.col("Reviews.stars")),
+                    "avgStarRating"
+                ]
+            ]
         },
-        include:{
-            model:Image,
-            as:'previewImage',
-            attributes:['id','url'],
-            where:{
-                reviewId:null
-            },
-            required:false,
-        },
+        include:[
+
+                    {
+                        model:Review,
+                        required:false,
+                        attributes:[]
+                    },
+                    {
+                        model:Image,
+                        as:'previewImage',
+                        attributes:['id','url'],
+                        where:{
+                            reviewId:null
+                        },
+                        required:false,
+                    },
+        ],
         order:[['id']],
+        group:[['Spot.id']],
         // ...pagination
     });
 

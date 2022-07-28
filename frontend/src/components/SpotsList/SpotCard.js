@@ -5,7 +5,7 @@ function SpotCard({spot}){
             <img className="spot-card-img" src={spot.previewImage&&spot.previewImage.length?spot.previewImage[0].url:'https://images.freeimages.com/images/large-previews/064/cat-1537181.jpg'} />
             <div className="spot-info-holder">
                 <div className="spot-info-right">
-                    <div className="spot-card-review">★ ?.??</div>
+                    <div className="spot-card-review">★ {spot.avgStarRating!==null?parseInt(spot.avgStarRating).toFixed(2):"New!"}</div>
                 </div>
                 <div className="spot-info-left">
                     <div className="spot-card-name">{spot.name}</div>

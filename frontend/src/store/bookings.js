@@ -130,7 +130,6 @@ const bookingReducer = (state = {myBookings:{}}, action) => {
             return newState;
         case ADD_ONE_BOOKING:
         case EDIT_ONE_BOOKING:
-            console.log(action.booking.id);
             newState.myBookings = {
                 ...state.myBookings,
                 [action.booking.id]:{

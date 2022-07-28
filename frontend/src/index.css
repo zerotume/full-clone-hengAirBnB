@@ -110,6 +110,8 @@ div.spot-card-price span{
     display: grid;
     width:53.81vw;
     height:52.9vh;
+    max-width:53.81vw;
+    max-height:52.9vh;
     grid-template-columns: repeat(4,1fr);
     grid-template-rows: repeat(2,1fr);
     white-space: nowarp;
@@ -120,6 +122,7 @@ img.detail-img-1{
     grid-row:1/3;
     width:100%;
     height:100%;
+    overflow: hidden;
 }
 
 img.detail-img-2{
@@ -154,12 +157,14 @@ img.detail-img-5{
     height:97%;
     margin-left: 0.84vw;
     margin-top: 0.5vh;
+    overflow: hidden;
 }
 
 .detail-info-head-host{
     font-size: 2.31vh;
     font-weight: 600;
     margin-top:3.31vh;
+
 }
 
 .detail-info-head-avaliable{
