@@ -484,3 +484,12 @@ table.my-stuff-table{
     width: 5vw;
     margin-left: 1vw;
 }
+
+form ul{
+    color: #dd1262;
+    font-weight: 600;
+    font-size: 1.3vh;
+    margin-left:1vw;
+    width:100%;
+    margin-bottom: 1vh;
+}
