@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/zerotume/full-clone-hengAirBnB#readme",
   "dependencies": {
-    "file-loader": "^6.2.0"
+    "file-loader": "^6.2.0",
+    "react-datepicker": "^4.8.0"
   }
 }

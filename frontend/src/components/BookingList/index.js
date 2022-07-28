@@ -150,7 +150,7 @@ function BookingList({sessionLoaded}){
                             <img className='booking-left-icon-img' src='https://www.goodfreephotos.com/albums/vector-images/kitten-vector-clipart.png'>
                             </img>
                         </div>
-                        <div className='booking-left-title'>Book your trip...<br /> and see a bigger word!</div>
+                        <div className='booking-left-title'>Book your trip...<br /> and see a bigger world!</div>
                         <div className='booking-left-text'>Time for packing your dream and planning for your next adventure</div>
                         <div className='booking-left-button'><Link to="/">Browse Spots</Link></div>
                     </div>
