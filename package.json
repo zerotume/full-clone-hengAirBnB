@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/zerotume/full-clone-hengAirBnB/issues"
   },
-  "homepage": "https://github.com/zerotume/full-clone-hengAirBnB#readme"
+  "homepage": "https://github.com/zerotume/full-clone-hengAirBnB#readme",
+  "dependencies": {
+    "file-loader": "^6.2.0"
+  }
 }

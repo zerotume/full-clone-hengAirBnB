@@ -146,13 +146,16 @@ function BookingList({sessionLoaded}){
             <div className="sub-page-holder booking-sub-page-holder">
                 <div className='booking-ad-header'>
                     <div className='booking-ad-left-wrap'>
-                        <div className='booking-left-icon'></div>
-                        <div className='booking-left-title'></div>
-                        <div className='booking-left-text'></div>
-                        <div className='booking-left-button'></div>
+                        <div className='booking-left-icon'>
+                            <img className='booking-left-icon-img' src='https://www.goodfreephotos.com/albums/vector-images/kitten-vector-clipart.png'>
+                            </img>
+                        </div>
+                        <div className='booking-left-title'>Book your trip...<br /> and see a bigger word!</div>
+                        <div className='booking-left-text'>Time for packing your dream and planning for your next adventure</div>
+                        <div className='booking-left-button'><Link to="/">Browse Spots</Link></div>
                     </div>
                     <div className='booking-ad-right-wrap'>
-                        <img className='booking-right-img'></img>
+                        <img className='booking-right-img' src='https://live.staticflickr.com/487/19771385285_e9836a9757_b.jpg'></img>
                     </div>
                 </div>
                 <h2 className='booking-content-title'>Your Current Bookings...</h2>
