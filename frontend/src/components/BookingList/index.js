@@ -82,7 +82,7 @@ function BookingList({sessionLoaded}){
                         <td>
                             Status
                         </td>
-                        <td>
+                        <td className='table-edit'>
                             Edit?
                         </td>
                     </tr>
@@ -123,13 +123,13 @@ function BookingList({sessionLoaded}){
                                     {getBookingStatus(e.startDate,e.endDate)}
                                 </td>
 
-                                <td>
+                                <td className='table-edit'>
                                     <button onClick={() => setShowEdit(e.id)} disabled={dateString > e.startDate}>
                                         Edit Booking
                                     </button>
                                 </td>
                             </tr>
-                            <div hidden={e.id!==showEdit}>
+                            <div className='update-booking-show' hidden={e.id!==showEdit}>
                                 <BookingForm formType={"Update Booking"} booking={e} setShowEdit={setShowEdit}/>
                                 <button className='close-booking-form-button' onClick={() => setShowEdit(-1)}>x</button>
                             </div>
@@ -143,7 +143,19 @@ function BookingList({sessionLoaded}){
     return (
         <>
             <HeaderBar sessionLoaded={sessionLoaded} main={false}/>
-            <div className="sub-page-holder">
+            <div className="sub-page-holder booking-sub-page-holder">
+                <div className='booking-ad-header'>
+                    <div className='booking-ad-left-wrap'>
+                        <div className='booking-left-icon'></div>
+                        <div className='booking-left-title'></div>
+                        <div className='booking-left-text'></div>
+                        <div className='booking-left-button'></div>
+                    </div>
+                    <div className='booking-ad-right-wrap'>
+                        <img className='booking-right-img'></img>
+                    </div>
+                </div>
+                <h2 className='booking-content-title'>Your Current Bookings...</h2>
                 {bookingContent}
             </div>
         </>

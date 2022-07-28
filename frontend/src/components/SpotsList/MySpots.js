@@ -35,9 +35,10 @@ function MySpots({sessionLoaded}){
         <>
             <HeaderBar sessionLoaded={sessionLoaded} main={false}/>
             <div className="sub-page-holder">
+                <h1 className="list-page-header">Manage Your Listings</h1>
                 <table className="my-spots-table my-stuff-table">
                     <tr className="my-spots-table-header my-table-header">
-                        <td>
+                        <td className="table-delete">
                             Delete?
                         </td>
                         <td>
@@ -54,6 +55,9 @@ function MySpots({sessionLoaded}){
                         </td>
                         <td>
                             Last Modified
+                        </td>
+                        <td className="table-edit">
+                            Edit Button
                         </td>
                     </tr>
                     {mySpots.mySpotsArray.map(e => (
@@ -79,7 +83,7 @@ function MySpots({sessionLoaded}){
                             <td>
                                 <span>{e.updatedAt}</span>
                             </td>
-                            <td>
+                            <td className="table-edit">
                                 <Link to={`/spots/${e.id}/edit`}>
                                     Edit
                                 </Link>
