@@ -29,7 +29,34 @@ function MySpots({sessionLoaded}){
         )
     }
 
-    if(!mySpots || !mySpots.mySpotsArray)return null;
+    if(!mySpots || !mySpots.mySpotsArray || !mySpots.mySpotsArray.length)return (
+        <>
+            <HeaderBar sessionLoaded={sessionLoaded} main={false}/>
+            <div className="sub-page-holder">
+            <div className='booking-ad-header'>
+                    <div className='booking-ad-left-wrap'>
+                        <div className='booking-left-icon spot-left-icon'>
+                            <img className='booking-left-icon-img spot-left-icon-img' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRWygc_8PN5XndTuEvhnCgYJ0PfIOszbG83w&usqp=CAU'>
+                            </img>
+                        </div>
+                        <div className='booking-left-title'>Create a spot...<br /> and earn not only money!</div>
+                        <div className='booking-left-text'>Our spot hosts benefit not only financial profit from sharing</div>
+                        <div className='booking-left-button'><Link to="/spots/newspot">Share a new spot</Link></div>
+                    </div>
+                    <div className='booking-ad-right-wrap'>
+                        <img className='booking-right-img' src='https://upload.wikimedia.org/wikipedia/commons/6/65/Cat_in_Winter.JPG'></img>
+                    </div>
+                </div>
+                <h1 className="list-page-header">Manage Your Spots</h1>
+                <div className='my-booking-no-content my-no-content'>
+                <div>
+                    <h1>Sorry, you don't have any spots!</h1>
+                </div>
+            </div>
+            </div>
+        </>
+
+    );
 
     return(
         <>
