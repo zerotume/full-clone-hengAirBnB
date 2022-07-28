@@ -2,10 +2,15 @@ import { useState } from "react";
 import LoginForm from "./LoginForm";
 import Modal from "../../context/Modal";
 import SignupForm from "./SignupForm";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import * as sessionActions from '../../store/session';
 
 function FormModal(){
   const [showLogin,setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   const loginClick = e => {
     e.preventDefault();
@@ -21,6 +26,11 @@ function FormModal(){
     setShowLogin(false);
   }
 
+  const demouserClick = e => {
+    e.preventDefault()
+    e.stopPropagation()
+    return dispatch(sessionActions.loginAction({credential:"catuser1", password:"password1"}));
+  }
 
 
   return (
@@ -28,6 +38,7 @@ function FormModal(){
       <ul className="profile-dropdown">
           <li><button onClick={loginClick}>Log In</button></li>
           <li><button onClick={signupClick}>Sign up</button></li>
+          <li><button onClick={demouserClick}>Demouser Login</button></li>
       </ul>
       {showLogin && (
         <Modal className="form-modal" onClose={() => setShowLogin(false)}>
