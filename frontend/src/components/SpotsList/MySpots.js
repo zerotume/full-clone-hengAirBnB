@@ -35,6 +35,20 @@ function MySpots({sessionLoaded}){
         <>
             <HeaderBar sessionLoaded={sessionLoaded} main={false}/>
             <div className="sub-page-holder">
+            <div className='booking-ad-header'>
+                    <div className='booking-ad-left-wrap'>
+                        <div className='booking-left-icon spot-left-icon'>
+                            <img className='booking-left-icon-img spot-left-icon-img' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRWygc_8PN5XndTuEvhnCgYJ0PfIOszbG83w&usqp=CAU'>
+                            </img>
+                        </div>
+                        <div className='booking-left-title'>Create a spot...<br /> and earn not only money!</div>
+                        <div className='booking-left-text'>Our spot hosts benefit not only financial profit from sharing</div>
+                        <div className='booking-left-button'><Link to="/spots/newspot">Share a new spot</Link></div>
+                    </div>
+                    <div className='booking-ad-right-wrap'>
+                        <img className='booking-right-img' src='https://upload.wikimedia.org/wikipedia/commons/6/65/Cat_in_Winter.JPG'></img>
+                    </div>
+                </div>
                 <h1 className="list-page-header">Manage Your Listings</h1>
                 <table className="my-spots-table my-stuff-table">
                     <tr className="my-spots-table-header my-table-header">

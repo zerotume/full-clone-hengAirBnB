@@ -378,11 +378,12 @@ img.detail-img-5{
 
 table.my-stuff-table{
     border-spacing: 0;
+    max-width: 100%;
 }
 
 .sub-page-holder{
-    width:88vw;
-    margin-left: 5vw;
+    width:70vw;
+    margin-left: 14.5vw;
 }
 
 .booking-ad-header{
@@ -474,4 +475,12 @@ table.my-stuff-table{
     box-sizing: border-box;
     overflow: hidden;
     border-radius: 1vw;
+}
+
+
+
+.spot-left-icon{
+    height: 5vw;
+    width: 5vw;
+    margin-left: 1vw;
 }
