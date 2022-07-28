@@ -13,9 +13,9 @@ function SpotForm({spot, formType, sessionLoaded}){
     const [city, setCity] = useState(spot.city || '');
     const [state, setState] = useState(spot.state || '');
     const [country, setCountry] = useState(spot.country || '');
-    const [lat, setLat] = useState(spot.lat || 0);
-    const [lng, setLng] = useState(spot.lng || 0);
-    const [price, setPrice] = useState(spot.price || 0);
+    const [lat, setLat] = useState(spot.lat || "");
+    const [lng, setLng] = useState(spot.lng || "");
+    const [price, setPrice] = useState(spot.price || "");
     const [description, setDescription] = useState(spot.description || '');
     const [errors, setErrors] = useState([]);
     const history = useHistory();
@@ -70,106 +70,114 @@ function SpotForm({spot, formType, sessionLoaded}){
     }
 
     return(
-        <div className="sub-page-holder">
+        <>
             <HeaderBar sessionLoaded={sessionLoaded} main={false}/>
-                <form className="catbnb-form spot-form" onSubmit={handleSubmit}>
-                <h2>{formType}</h2>
-            <ul>
-                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-            </ul>
-            <label>
-                Spot Name:
-                <input
-                type="text"
-                placeholder="Name your spot"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-                />
-            </label>
-            <label>
-                Address:
-                <input
-                type="text"
-                placeholder="Address of your spot"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                required
-                />
-            </label>
-            <label>
-                City:
-                <input
-                type="text"
-                placeholder="City"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                required
-                />
-            </label>
-            <label>
-                State:
-                <input
-                type="text"
-                placeholder="State"
-                value={state}
-                onChange={(e) => setState(e.target.value)}
-                required
-                />
-            </label>
-            <label>
-                Country:
-                <input
-                type="text"
-                placeholder="Country"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-                required
-                />
-            </label>
-            <label>
-                Lat:
-                <input
-                type="number"
-                placeholder="Lat between -90 to 90"
-                value={lat}
-                onChange={(e) => setLat(e.target.value)}
-                required
-                />
-            </label>
-            <label>
-                Lng:
-                <input
-                type="number"
-                placeholder="Lng between -180 to 180"
-                value={lng}
-                onChange={(e) => setLng(e.target.value)}
-                required
-                />
-            </label>
-            <label>
-                Price:
-                <input
-                type="number"
-                placeholder="Price"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-                required
-                />
-            </label>
-            <label>
-                Description:
-                <input
-                type="textarea"
-                placeholder="Describe your spot!"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                required
-                />
-            </label>
-            <input type="Submit" value={formType} />
-            </form>
-        </div>
+            <div className="form-page-holder">
+                <div className="form-leftside-bg">
+                    <h1>Being a host <br/> And <br /> Know More Cats!</h1>
+                </div>
+                <div className="cat-form-wrapper">
+                    <form className="catbnb-form spot-form" onSubmit={handleSubmit}>
+                        <h2>{formType==="create"?"Create a new spot":"Update an exist spot"}</h2>
+                    <ul>
+                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                    </ul>
+                    <label>
+
+                        <input
+                        type="text"
+                        placeholder="Name your spot"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                        />
+                    </label>
+                    <label>
+
+                        <input
+                        type="text"
+                        placeholder="Address of your spot"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                        required
+                        />
+                    </label>
+                    <label>
+
+                        <input
+                        type="text"
+                        placeholder="City"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        required
+                        />
+                    </label>
+                    <label>
+
+                        <input
+                        type="text"
+                        placeholder="State"
+                        value={state}
+                        onChange={(e) => setState(e.target.value)}
+                        required
+                        />
+                    </label>
+                    <label>
+
+                        <input
+                        type="text"
+                        placeholder="Country"
+                        value={country}
+                        onChange={(e) => setCountry(e.target.value)}
+                        required
+                        />
+                    </label>
+                    <label>
+
+                        <input
+                        type="text"
+                        placeholder="Lat between -90 to 90"
+                        value={lat}
+                        onChange={(e) => setLat(e.target.value)}
+                        required
+                        />
+                    </label>
+                    <label>
+
+                        <input
+                        type="text"
+                        placeholder="Lng between -180 to 180"
+                        value={lng}
+                        onChange={(e) => setLng(e.target.value)}
+                        required
+                        />
+                    </label>
+                    <label>
+
+                        <input
+                        type="text"
+                        placeholder="Price"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                        required
+                        />
+                    </label>
+                    <label>
+
+                        <input className="spot-form-textarea"
+                        type="textarea"
+                        placeholder="Describe your spot!"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        required
+                        />
+                    </label>
+                    <input className="spot-submit" type="Submit" value={formType==="create"?"Create New Spot":"Update Your Spot"} />
+                    </form>
+                </div>
+            </div>
+
+        </>
     );
 
 
