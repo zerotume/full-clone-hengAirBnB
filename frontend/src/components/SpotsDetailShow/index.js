@@ -58,7 +58,7 @@ function SpotsDetailShow({sessionLoaded}){
         userId = user.id;
     }
 
-    if(!currentSpot || !currentSpot.Owner || !currentSpot.images){return null};
+    if(!currentSpot || !currentSpot.Owner || !currentSpot.images){return <HeaderBar sessionLoaded={sessionLoaded} main={false}/>};
 
     let bookingContent;
     if(!bookings ||
