@@ -331,7 +331,8 @@ const validateSpot = [
     check('price')
         .exists({checkFalsy:true})
         .notEmpty()
-        .withMessage('Price per day is required'),
+        .isInt()
+        .withMessage('Price per day is required and must be an integer'),
     handleValidationErrors
 ];
 
