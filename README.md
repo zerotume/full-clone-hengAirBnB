@@ -29,6 +29,9 @@ Catbnb is a web application for practicing web developent. It is inspired by Air
 
 You don't have to log in at this page.
 For demo user, you can click the Demouser Login button in the profile menu.
+
+IMPORTANT: You can click the icon to go back to this index page at any other pages.
+
 ![demoLogin](./feature_screenshots/demologin.JPG)
 
 
