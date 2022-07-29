@@ -65,7 +65,7 @@ function SpotsDetailShow({sessionLoaded}){
         !bookings.spotBookings ||
         !bookings.spotBookings.spotBookingsArray ||
         !bookings.spotBookings.spotBookingsArray.length){
-            bookingContent = (<span>Not bookings for this spot!</span>)
+            bookingContent = (<span>No bookings for this spot!</span>)
         }else{
             let spotBookings = bookings.spotBookings;
 
@@ -113,20 +113,20 @@ function SpotsDetailShow({sessionLoaded}){
                             <div className="detail-info-head">
                                 <div className="detail-info-head-text">
                                     <div className="detail-info-head-host">{`Cat's spot hosted by ${currentSpot.Owner.firstName} ${currentSpot.Owner.lastName}`}</div>
-                                    <div className="detail-info-head-avaliable">{`∞ cats · ∞ plots · ∞ toys · 0 dogs`}</div>
+                                    <div className="detail-info-head-avaliable">{`∞ cats · ∞ plots · ∞ toys · 0 dogs ${currentSpot.price} per night!`}</div>
                                 </div>
-                                <img className="detail-info-head-img" />
+                                {/* <img className="detail-info-head-img" /> */}
                             </div>
-                            <div className="detail-info-notice">
+                            {/* <div className="detail-info-notice">
                                 <div className="free-cancelation"></div>
-                            </div>
-                            <div className="detail-info-catcover">
+                            </div> */}
+                            {/* <div className="detail-info-catcover">
                                 <img className="detail-info-catcover-img" />
                                 <div className="detail-info-catcover-text"></div>
-                            </div>
-                            <div className="detail-info-description"></div>
-                            <div className="detail-info-sleep"></div>
-                            <div className="detail-info-amenities"></div>
+                            </div> */}
+                            <div className="detail-info-description">Description: <br />{currentSpot.description}!</div>
+                            {/* <div className="detail-info-sleep"></div>
+                            <div className="detail-info-amenities"></div> */}
                             <div className="detail-info-current-bookings">{bookingContent}</div>
                         </div>
                         <div className="detail-info-right-booking">

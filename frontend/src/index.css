@@ -540,3 +540,12 @@ input.error{
     display: inline;
     margin-top:-2vh;
 }
+
+.detail-info-description{
+    font-size: 2vh;
+    margin-top: 2vh;
+    border-bottom: 1px solid #AAAAAA;
+    margin-bottom: 1vh;
+    padding-bottom:1vh;
+    font-family: 'Nunito', sans-serif;
+}

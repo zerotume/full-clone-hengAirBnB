@@ -16,7 +16,7 @@ function BookingList({sessionLoaded}){
 
     useEffect(() => {
         dispatch(readUserBookingsAction());
-    },[dispatch]);
+    },[dispatch, user]);
 
     const deleteClick = id => async e => {
         e.preventDefault();

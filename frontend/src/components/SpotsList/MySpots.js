@@ -11,7 +11,7 @@ function MySpots({sessionLoaded}){
     let mySpots = useSelector(state => state.spots.mySpots);
     useEffect(() => {
         dispatch(readUserSpotsAction());
-    },[dispatch]);
+    },[dispatch, user]);
 
     const deleteClick = id => async e => {
         e.preventDefault();

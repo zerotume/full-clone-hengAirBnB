@@ -327,7 +327,7 @@ const validateSpot = [
         .withMessage('name is required and must be between 2 and 30 characters'),
     check('address')
         .exists({checkFalsy:true})
-        .isLength({min:3, max:256})
+        .isLength({min:2, max:256})
         .withMessage('Street address is required and between 2 and 256 characters'),
     check('city')
         .exists({checkFalsy:true})
@@ -336,11 +336,11 @@ const validateSpot = [
     check('state')
         .exists({checkFalsy:true})
         .isLength({min:2, max:10})
-        .withMessage('State is required and no more than 10 characters'),
+        .withMessage('State is required and between 2 and 10 characters'),
     check('country')
         .exists({checkFalsy:true})
         .isLength({min:2, max:20})
-        .withMessage('Country is required and no more than 20 characters'),
+        .withMessage('Country is required and between 2 than 20 characters'),
     check('lat')
         .exists({checkFalsy:false})
         .notEmpty()
