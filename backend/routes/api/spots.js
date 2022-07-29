@@ -324,7 +324,7 @@ const validateSpot = [
         .exists({checkFalsy:true})
         .notEmpty()
         .isLength({min:2, max:30})
-        .withMessage('name is required and must be less than 30 characters'),
+        .withMessage('name is required and must be between 2 and 30 characters'),
     check('address')
         .exists({checkFalsy:true})
         .isLength({min:3, max:256})
