@@ -24,7 +24,7 @@ function BookingList({sessionLoaded}){
     }
 
 
-    const dateString = (new Date()).toISOString();
+    const dateString = (new Date()).toISOString().slice(0,10);
 
     const getBookingStatus = (startDate,endDate) => {
         if(startDate > dateString){
