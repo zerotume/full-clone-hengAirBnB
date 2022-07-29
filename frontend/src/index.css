@@ -304,7 +304,7 @@ img.detail-img-5{
 
 .spot-form h2{
     margin-top: 0vw;
-    margin-bottom: 6.61vh;
+    margin-bottom: 3vh;
 }
 
 .close-booking-form-button{
@@ -529,4 +529,14 @@ span.log-in-warning{
     color:#888888;
     align-self: flex-end;
     margin-right: 2vw;
+}
+
+input.error{
+    color:#dd1262;
+    font-weight: 600;
+}
+
+.typing-h2{
+    display: inline;
+    margin-top:-2vh;
 }

@@ -18,7 +18,15 @@ function SpotForm({spot, formType, sessionLoaded}){
     const [price, setPrice] = useState(spot.price || "");
     const [description, setDescription] = useState(spot.description || '');
     const [errors, setErrors] = useState([]);
+    const [errorsObj, setErrorsObj] = useState({});
+    const [typing, setTyping] = useState('');
     const history = useHistory();
+
+    // const handleTyping = field => e => {
+    //     e.stopPropagation();
+    //     e.preventDefault();
+    //     setTyping(field);
+    // }
 
     if(!user) {
         return (
@@ -51,6 +59,7 @@ function SpotForm({spot, formType, sessionLoaded}){
             description
         }
         setErrors([]);
+        setErrorsObj({});
         // console.log(spot);
 
         let newSpot = await dispatch(actions[formType](spot,spot.id))
@@ -61,7 +70,10 @@ function SpotForm({spot, formType, sessionLoaded}){
                     .catch(async prevData => {
                         if(!prevData.name){
                             const data = await prevData.json();
-                            if(data && data.errors) setErrors(Object.values(data.errors[0].errors));
+                            if(data && data.errors) {
+                                setErrorsObj(data.errors[0].errors);
+                                setErrors(Object.values(data.errors[0].errors));
+                            }
                         }
                         // console.log(prevData);
                     });
@@ -78,10 +90,14 @@ function SpotForm({spot, formType, sessionLoaded}){
                 </div>
                 <div className="cat-form-wrapper">
                     <form className="catbnb-form spot-form" onSubmit={handleSubmit}>
-                        <h2>{formType==="create"?"Create a new spot":"Update an exist spot"}</h2>
+                        <h2>{formType==="create"?"Create a new spot":"Update an exist spot"}
+                        </h2>
+                        <h3 className="typing-h2" visible={!!typing}>Tell us about the {!!typing?typing+'!':' spot!'}</h3>
+                        <div className="show-input-which"></div>
                     <ul>
                         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                     </ul>
+
                     <label>
 
                         <input
@@ -90,6 +106,9 @@ function SpotForm({spot, formType, sessionLoaded}){
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         required
+                        className={errorsObj.name?'error':''}
+                        onFocus={() => setTyping("name")}
+                        onBlur={() => setTyping('')}
                         />
                     </label>
                     <label>
@@ -100,6 +119,9 @@ function SpotForm({spot, formType, sessionLoaded}){
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
                         required
+                        className={errorsObj.address?'error':''}
+                        onFocus={() => setTyping("address")}
+                        onBlur={() => setTyping('')}
                         />
                     </label>
                     <label>
@@ -110,6 +132,9 @@ function SpotForm({spot, formType, sessionLoaded}){
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
                         required
+                        className={errorsObj.city?'error':''}
+                        onFocus={() => setTyping("city")}
+                        onBlur={() => setTyping('')}
                         />
                     </label>
                     <label>
@@ -120,6 +145,9 @@ function SpotForm({spot, formType, sessionLoaded}){
                         value={state}
                         onChange={(e) => setState(e.target.value)}
                         required
+                        className={errorsObj.state?'error':''}
+                        onFocus={() => setTyping("state")}
+                        onBlur={() => setTyping('')}
                         />
                     </label>
                     <label>
@@ -130,6 +158,9 @@ function SpotForm({spot, formType, sessionLoaded}){
                         value={country}
                         onChange={(e) => setCountry(e.target.value)}
                         required
+                        className={errorsObj.country?'error':''}
+                        onFocus={() => setTyping("country")}
+                        onBlur={() => setTyping('')}
                         />
                     </label>
                     <label>
@@ -140,6 +171,9 @@ function SpotForm({spot, formType, sessionLoaded}){
                         value={lat}
                         onChange={(e) => setLat(e.target.value)}
                         required
+                        className={errorsObj.lat?'error':''}
+                        onFocus={() => setTyping("lat")}
+                        onBlur={() => setTyping('')}
                         />
                     </label>
                     <label>
@@ -150,6 +184,9 @@ function SpotForm({spot, formType, sessionLoaded}){
                         value={lng}
                         onChange={(e) => setLng(e.target.value)}
                         required
+                        className={errorsObj.lng?'error':''}
+                        onFocus={() => setTyping("lng")}
+                        onBlur={() => setTyping('')}
                         />
                     </label>
                     <label>
@@ -160,16 +197,22 @@ function SpotForm({spot, formType, sessionLoaded}){
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
                         required
+                        className={errorsObj.price?'error':''}
+                        onFocus={() => setTyping("price")}
+                        onBlur={() => setTyping('')}
                         />
                     </label>
                     <label>
 
-                        <input className="spot-form-textarea"
+                        <input className={errorsObj.description?'error':''}
                         type="textarea"
                         placeholder="Describe your spot!"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         required
+                        onFocus={() => setTyping("description")}
+                        onBlur={() => setTyping('')}
+
                         />
                     </label>
                     <input className="spot-submit" type="Submit" value={formType==="create"?"Create New Spot":"Update Your Spot"} />

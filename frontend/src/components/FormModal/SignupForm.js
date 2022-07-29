@@ -15,23 +15,38 @@ function SignupForm() {
     const [lastName, setLastName] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState([]);
+    const [errorsObj, setErrorsObj] = useState({});
+    const [pwdError, setPwdError] = useState(false);
+
 
     if(sessionUser) return <Redirect to="/" />
 
-    const handleSubmit = e => {
+    // const initErrorObj = {
+    //   username:'',
+    //   email:'',
+    //   password:'',
+    //   firstName:'',
+    //   lastName:'',
+    //   confirmPassword:''
+    // }
+
+    const handleSubmit = async e => {
         e.preventDefault();
-
-        console.log({firstName, lastName, email, username, password});
-
         if(password !== confirmPassword){
-            return setErrors(["password is not equal to confirm password"]);
+            setErrors(["password is not equal to confirm password"]);
+            setErrorsObj({});
+            return setPwdError(true);
         }else{
+            setPwdError(false);
             setErrors([]);
+            setErrorsObj({});
             return dispatch(sessionActions.signupAction({firstName, lastName, email, username, password}))
                 .catch(async (res) => {
                     const data = await res.json();
-                    console.log(data);
-                    if(data && data.errors) setErrors(Object.values(data.errors[0].errors));
+                    if(data && data.errors) {
+                      setErrorsObj(data.errors[0].errors);
+                      setErrors(Object.values(data.errors[0].errors));
+                  }
                 });
         }
     }
@@ -50,6 +65,7 @@ function SignupForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            className={errorsObj.email?'error':''}
           />
         </label>
         <label>
@@ -59,6 +75,7 @@ function SignupForm() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
+            className={errorsObj.username?'error':''}
           />
         </label>
         <label>
@@ -68,6 +85,7 @@ function SignupForm() {
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
+            className={errorsObj.firstName?'error':''}
           />
         </label>
         <label>
@@ -77,6 +95,7 @@ function SignupForm() {
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
+            className={errorsObj.name?'lastName':''}
           />
         </label>
         <label>
@@ -86,6 +105,7 @@ function SignupForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            className={errorsObj.password || pwdError?'error':''}
           />
         </label>
         <label>
@@ -95,6 +115,7 @@ function SignupForm() {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
+            className={pwdError?'error':''}
           />
         </label>
       </div>
