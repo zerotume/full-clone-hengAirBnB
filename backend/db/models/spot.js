@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:false,
       validate:{
         len:[3,256],
-        is:/([A-Za-z0-9\-\# ])*/g
+        // is:/([A-Za-z0-9\-\# ])*/g
       }
     },
     city: {
@@ -50,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:false,
       validate:{
         len:[1,100],
-        is:/([A-Za-z\- ])*/g
+        // is:/([A-Za-z\- ])*/g
       }
     },
     state: {
@@ -58,7 +58,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:false,
       validate:{
         len:[2,50],
-        isAlpha:true
+        // isAlpha:true
       }
     },
     country: {
@@ -66,7 +66,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:false,
       validate:{
         len:[2,50],
-        is:/([A-Za-z ])*/g
+        // is:/([A-Za-z ])*/g
       }
     },
     lat: {
