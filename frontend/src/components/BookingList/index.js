@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteSpotAction, readUserSpotsAction } from "../../store/spots";
 import HeaderBar from "../HeaderBar";
 import {Link} from "react-router-dom"
-import {readUserBookingsAction, deleteBookingAction} from '../../store/bookings';
+import {readUserBookingsAction, deleteBookingAction, readSpotBookingsAction} from '../../store/bookings';
 import BookingForm from '../BookingForm/BookingForm';
 
 function BookingList({sessionLoaded}){
     const user = useSelector(state => state.session.user);
     const [showEdit,setShowEdit] = useState(-1);
+    const [conflictDates, setConflictDates] = useState({});
 
     const dispatch = useDispatch();
     let bookings = useSelector(state => state.bookings);
@@ -21,6 +22,14 @@ function BookingList({sessionLoaded}){
     const deleteClick = id => async e => {
         e.preventDefault();
         await dispatch(deleteBookingAction(id));
+    }
+
+    const showClick = (id, spotId) => async e => {
+        e.preventDefault()
+        const conflicts = await dispatch(readSpotBookingsAction(spotId));
+        setConflictDates({...conflictDates, spotId:conflicts});
+        console.log(conflictDates);
+        setShowEdit(e.id)
     }
 
 
@@ -124,7 +133,7 @@ function BookingList({sessionLoaded}){
                                 </td>
 
                                 <td className='table-edit'>
-                                    <button onClick={() => setShowEdit(e.id)} disabled={dateString > e.startDate}>
+                                    <button onClick={showClick(e.id, e.spotId)} disabled={dateString > e.startDate}>
                                         Edit Booking
                                     </button>
                                 </td>

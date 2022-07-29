@@ -63,7 +63,7 @@ function BookingForm({booking, formType, setShowEdit}){
 
     return(
         <div className="booking-form-holder">
-                <form className="catbnb-form booking-form" onSubmit={handleSubmit}>
+                <form className="catbnb-form booking-form" onSubmit={handleSubmit} >
                 <h2>{formType}</h2>
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
