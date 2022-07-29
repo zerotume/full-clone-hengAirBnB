@@ -29,6 +29,7 @@ Catbnb is a web application for practicing web developent. It is inspired by Air
 
 You don't have to log in at this page.
 For demo user, you can click the Demouser Login button in the profile menu.
+![demoLogin](./feature_screenshots/demologin.JPG)
 The route for main page is '/'
 And '/spots' also works for the main page.
 ![indexPage](./feature_screenshots/mainpage.JPG)
