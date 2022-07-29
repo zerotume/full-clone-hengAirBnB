@@ -28,7 +28,7 @@ Catbnb is a web application for practicing web developent. It is inspired by Air
 ### Index Page
 
 You don't have to log in at this page.
-For demo user, we highly recommend using the username "catuser1" and password "password1".
+For demo user, you can click the Demouser Login button in the profile menu.
 The route for main page is '/'
 And '/spots' also works for the main page.
 ![indexPage](./feature_screenshots/mainpage.JPG)
