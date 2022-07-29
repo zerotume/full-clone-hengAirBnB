@@ -295,8 +295,8 @@ router.get('/:id', async (req, res, next) => {
 const validateSpot = [
     check('address')
         .exists({checkFalsy:true})
-        .notEmpty()
-        .withMessage('Street address is required'),
+        .isLength({min:2, max:256})
+        .withMessage('Street address is required and between 2 and 256 charactors'),
     check('city')
         .exists({checkFalsy:true})
         .notEmpty()
@@ -326,8 +326,8 @@ const validateSpot = [
         .withMessage('name is required and must be less than 50 characters'),
     check('description')
         .exists({checkFalsy:true})
-        .notEmpty()
-        .withMessage('Description is required'),
+        .isLength({min:2, max:256})
+        .withMessage('Description is required between 2 and 256 characters'),
     check('price')
         .exists({checkFalsy:true})
         .notEmpty()
