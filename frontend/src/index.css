@@ -524,3 +524,9 @@ span.log-in-warning{
 .detail-info-right-booking h1{
     margin-left: 1.5vw;
 }
+
+.spot-form a{
+    color:#888888;
+    align-self: flex-end;
+    margin-right: 2vw;
+}

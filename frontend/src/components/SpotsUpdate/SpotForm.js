@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect, useHistory, Link } from "react-router-dom";
 import { createSpotAction, updateSpotAction } from "../../store/spots";
 import HeaderBar from "../HeaderBar";
 
@@ -173,6 +173,7 @@ function SpotForm({spot, formType, sessionLoaded}){
                         />
                     </label>
                     <input className="spot-submit" type="Submit" value={formType==="create"?"Create New Spot":"Update Your Spot"} />
+                    <Link to='/'>Return to main page</Link>
                     </form>
                 </div>
             </div>
