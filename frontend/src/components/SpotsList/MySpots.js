@@ -104,7 +104,7 @@ function MySpots({sessionLoaded}){
                     {mySpots.mySpotsArray.map(e => (
                         <tr className="my-spots-table-content my-table-content">
                             <td>
-                                <button onClick={deleteClick(e.id)}><i class="fa-solid fa-trash"></i></button>
+                                <button className='td-delete-button' onClick={deleteClick(e.id)}><i class="fa-solid fa-trash"></i></button>
                             </td>
                             <td className="my-spots-table-img-text my-table-img-text">
                                 <Link to={`/spots/${e.id}`}>
@@ -126,7 +126,7 @@ function MySpots({sessionLoaded}){
                             </td>
                             <td className="table-edit">
                                 <Link to={`/spots/${e.id}/edit`}>
-                                    Edit
+                                    Edit Spot
                                 </Link>
                             </td>
                         </tr>

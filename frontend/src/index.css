@@ -493,3 +493,15 @@ form ul{
     width:100%;
     margin-bottom: 1vh;
 }
+
+.table-edit button, .td-delete-button{
+    cursor: pointer;
+}
+
+.table-edit button:disabled{
+    cursor: not-allowed;
+}
+
+.td-delete-button:disabled {
+    cursor:not-allowed;
+}

@@ -91,7 +91,7 @@ function BookingList({sessionLoaded}){
 
                             <tr className="my-bookings-table-content my-table-content">
                                 <td>
-                                    <button onClick={deleteClick(e.id)} disabled={dateString > e.startDate}><i class="fa-solid fa-trash"></i></button>
+                                    <button className='td-delete-button' onClick={deleteClick(e.id)} disabled={dateString > e.startDate}><i class="fa-solid fa-trash"></i></button>
                                 </td>
                                 <td className="my-bookings-table-img-text my-table-img-text">
                                     <Link to={`/spots/${e.spotId}`}>
