@@ -320,6 +320,11 @@ router.get('/:id', async (req, res, next) => {
 
 
 const validateSpot = [
+    check('name')
+        .exists({checkFalsy:true})
+        .notEmpty()
+        .isLength({min:2, max:30})
+        .withMessage('name is required and must be less than 30 characters'),
     check('address')
         .exists({checkFalsy:true})
         .isLength({min:3, max:256})
@@ -346,20 +351,15 @@ const validateSpot = [
         .notEmpty()
         .isFloat({min:-179.9999999, max:179.9999999})
         .withMessage('Longitude is not valid'),
-    check('name')
-        .exists({checkFalsy:true})
-        .notEmpty()
-        .isLength({min:2, max:30})
-        .withMessage('name is required and must be less than 30 characters'),
+    check('price')
+            .exists({checkFalsy:true})
+            .notEmpty()
+            .isInt()
+            .withMessage('Price per day is required and must be an integer'),
     check('description')
         .exists({checkFalsy:true})
         .isLength({min:2, max:256})
         .withMessage('Description is required between 2 and 256 characters'),
-    check('price')
-        .exists({checkFalsy:true})
-        .notEmpty()
-        .isInt()
-        .withMessage('Price per day is required and must be an integer'),
     handleValidationErrors
 ];
 
