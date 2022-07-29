@@ -55,6 +55,40 @@ router.put('/:id', restoreUser, requireAuth, bookingReq, AuthorCheck,
             err.status = 400;
             return next(err);
         }
+
+        if(endDate < startDate){
+            const err = Error('End date must be after the start date.');
+            err.title = 'End date must be after the start date.';
+            err.message = 'End date must be after the start date.';
+            err.status = 400;
+            return next(err);
+        }
+
+        const alredayBookings = bookings = await Booking.scope('notOwner').findAll({
+            where:{spotId:booking.spotId},
+            raw:true
+        });
+
+        // console.log(alredayBookings);
+
+        const noconflict = alredayBookings.every(e => (startDate <= e.startDate && endDate <= e.startDate) ||
+                                                    (startDate >= e.endDate && endDate >= e.endDate));
+
+        if(!noconflict){
+            const err = Error('Booking conflict: this date interval is occupied.');
+            err.title = 'Booking conflict: this date interval is occupied.'
+            err.message = 'Booking conflict: this date interval is occupied.';
+            err.status = 400;
+            return next(err);
+        }
+
+        // if(endDate < today){
+        //     const err = Error('You cannot end the booking to the past.');
+        //     err.title = 'You cannot end the booking to the past.'
+        //     err.message = 'You cannot end the booking to the past.';
+        //     err.status = 400;
+        //     return next(err);
+        // }
         try{
             booking.set({
                 startDate,
@@ -63,7 +97,7 @@ router.put('/:id', restoreUser, requireAuth, bookingReq, AuthorCheck,
             await booking.save();
         }catch(e){
             if(e.name === 'SequelizeUniqueConstraintError'){
-                const err = Error('User already has a review for this spot');
+                const err = Error('Date conflicts with an existing booking');
                 err.title = 'Sorry, this spot is already booked for the specified dates'
                 err.message = 'Sorry, this spot is already booked for the specified dates';
                 err.errors = {

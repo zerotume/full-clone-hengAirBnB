@@ -101,8 +101,35 @@ router.post('/:id/bookings', restoreUser, requireAuth, spotReq, refuseOwner,
             return next(err);
         }
 
+        if(endDate < startDate){
+            const err = Error('End date must be after the start date.');
+            err.title = 'End date must be after the start date.';
+            err.message = 'End date must be after the start date.';
+            err.status = 400;
+            return next(err);
+        }
+
         let userId = req.user.toJSON().id;
         let spotId = req.spot.toJSON().id;
+
+        const alredayBookings = bookings = await Booking.scope('notOwner').findAll({
+            where:{spotId:spotId},
+            raw:true
+        });
+
+        // console.log(alredayBookings);
+
+        const conflict = alredayBookings.every(e => (startDate <= e.startDate && endDate <= e.startDate) ||
+                                                    (startDate >= e.endDate && endDate >= e.endDate));
+
+        if(!conflict){
+            const err = Error('Booking conflict: this date interval is occupied.');
+            err.title = 'Booking conflict: this date interval is occupied.'
+            err.message = 'Booking conflict: this date interval is occupied.';
+            err.status = 400;
+            return next(err);
+        }
+
         let newBooking;
         try{
             newBooking = await Booking.create({
