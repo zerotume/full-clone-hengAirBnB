@@ -47,7 +47,7 @@ function BookingForm({booking, formType, setShowEdit}){
                     //     return res;
                     // })
                     .catch(async prevData => {
-                        if(!prevData.name){
+                        if(!prevData.startDate){
                             const data = await prevData.json();
                             // console.log(data.errors[0]);
                             if(data && data.errors) setErrors([data.errors[0].message]);
