@@ -21,7 +21,7 @@ function SpotsDetailShow({sessionLoaded}){
 
     useEffect(() => {
         dispatch(readSpotBookingsAction(id));
-    },[dispatch,id]);
+    },[dispatch,id,user]);
     const history = useHistory();
 
     const deleteClick = async e => {
