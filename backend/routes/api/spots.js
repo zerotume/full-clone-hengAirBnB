@@ -296,19 +296,19 @@ const validateSpot = [
     check('address')
         .exists({checkFalsy:true})
         .isLength({min:2, max:256})
-        .withMessage('Street address is required and between 2 and 256 charactors'),
+        .withMessage('Street address is required and between 2 and 256 characters'),
     check('city')
         .exists({checkFalsy:true})
-        .notEmpty()
-        .withMessage('City is required'),
+        .isLength({min:1, max:20})
+        .withMessage('City is required and no more than 20 characters'),
     check('state')
         .exists({checkFalsy:true})
-        .notEmpty()
-        .withMessage('State is required'),
+        .isLength({min:1, max:10})
+        .withMessage('State is required and no more than 10 characters'),
     check('country')
         .exists({checkFalsy:true})
-        .notEmpty()
-        .withMessage('Country is required'),
+        .isLength({min:1, max:20})
+        .withMessage('Country is required and no more than 20 characters'),
     check('lat')
         .exists({checkFalsy:false})
         .notEmpty()
@@ -322,8 +322,8 @@ const validateSpot = [
     check('name')
         .exists({checkFalsy:true})
         .notEmpty()
-        .isLength({min:1, max:50})
-        .withMessage('name is required and must be less than 50 characters'),
+        .isLength({min:1, max:30})
+        .withMessage('name is required and must be less than 30 characters'),
     check('description')
         .exists({checkFalsy:true})
         .isLength({min:2, max:256})
