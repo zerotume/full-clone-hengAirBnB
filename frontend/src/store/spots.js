@@ -11,6 +11,15 @@ const GET_USER_SPOTS = 'spots/getUserSpots';
 const ADD_ONE_SPOT = 'spots/addOneSpot';
 const EDIT_ONE_SPOT = 'spots/editOneSpot';
 const DELETE_ONE_SPOT = 'spots/deleteOneSpot';
+const RESET_MY_SPOTS = 'booking/resetMySpots';
+
+
+
+export const resetMySpots = () => {
+    return {
+        type:RESET_MY_SPOTS
+    }
+}
 
 // const loginSession = (user) => {
 //     return {
@@ -184,6 +193,9 @@ export const readOneSpotAction = (id) => async dispatch => {
 const spotsReducer = (state = {}, action) => {
     let newState = {...state};
     switch(action.type){
+        case RESET_MY_SPOTS:
+            delete newState.mySpots;
+            return newState;
         case GET_ALL_SPOTS:
             newState.spotsArray = action.spots;
             action.spots.forEach(e => newState[e.id] = e);

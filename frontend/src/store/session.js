@@ -1,5 +1,7 @@
 
+import { resetMyBookings } from "./bookings";
 import { csrfFetch } from "./csrf";
+import { resetMySpots } from "./spots";
 
 
 const LOGIN_SESSION = 'session/loginSession';
@@ -61,6 +63,8 @@ export const logoutAction = () => async dispatch => {
         method:'DELETE'
     });
     if(response.ok){
+        dispatch(resetMySpots());
+        dispatch(resetMyBookings());
         dispatch(logoutSession());
         return response;
     }

@@ -7,6 +7,14 @@ const GET_SPOT_BOOKINGS = 'booking/getSpotBookings';
 const ADD_ONE_BOOKING = 'booking/addOneBooking';
 const EDIT_ONE_BOOKING = 'booking/editOneBooking';
 const DELETE_ONE_BOOKING = 'booking/deleteOneBooking';
+const RESET_MY_BOOKINGS = 'booking/resetMyBookings';
+
+
+export const resetMyBookings = () => {
+    return {
+        type:RESET_MY_BOOKINGS
+    }
+}
 
 const getUserBookings = (myBookings) => {
     return {
@@ -113,6 +121,9 @@ export const readSpotBookingsAction = (spotId) => async dispatch => {
 const bookingReducer = (state = {myBookings:{}}, action) => {
     let newState = {...state};
     switch(action.type){
+        case RESET_MY_BOOKINGS:
+            delete newState.myBookings;
+            return newState;
         case GET_USER_BOOKINGS:
             newState.myBookings = {};
             newState.myBookings.myBookingsArray = action.myBookings;
