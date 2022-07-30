@@ -122,7 +122,7 @@ const bookingReducer = (state = {myBookings:{}}, action) => {
     let newState = {...state};
     switch(action.type){
         case RESET_MY_BOOKINGS:
-            delete newState.myBookings;
+            newState.myBookings = {};
             return newState;
         case GET_USER_BOOKINGS:
             newState.myBookings = {};

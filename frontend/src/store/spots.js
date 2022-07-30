@@ -194,7 +194,7 @@ const spotsReducer = (state = {}, action) => {
     let newState = {...state};
     switch(action.type){
         case RESET_MY_SPOTS:
-            delete newState.mySpots;
+            newState.mySpots = {};
             return newState;
         case GET_ALL_SPOTS:
             newState.spotsArray = action.spots;

@@ -72,7 +72,8 @@ router.put('/:id', restoreUser, requireAuth, bookingReq, AuthorCheck,
         // console.log(alredayBookings);
 
         const noconflict = alredayBookings.every(e => (startDate <= e.startDate && endDate <= e.startDate) ||
-                                                    (startDate >= e.endDate && endDate >= e.endDate));
+                                                    (startDate >= e.endDate && endDate >= e.endDate) ||
+                                                    e.id === booking.id);
 
         if(!noconflict){
             const err = Error('Booking conflict: this date interval is occupied.');

@@ -91,7 +91,7 @@ function BookingList({sessionLoaded}){
 
                             <tr className="my-bookings-table-content my-table-content">
                                 <td>
-                                    <button className='td-delete-button' onClick={deleteClick(e.id)} disabled={dateString > e.startDate}><i class="fa-solid fa-trash"></i></button>
+                                    <button className='td-delete-button' onClick={deleteClick(e.id)} disabled={dateString >= e.startDate}><i class="fa-solid fa-trash"></i></button>
                                 </td>
                                 <td className="my-bookings-table-img-text my-table-img-text">
                                     <Link to={`/spots/${e.spotId}`}>
@@ -124,7 +124,7 @@ function BookingList({sessionLoaded}){
                                 </td>
 
                                 <td className='table-edit'>
-                                    <button onClick={() => setShowEdit(e.id)} disabled={dateString > e.startDate}>
+                                    <button onClick={() => setShowEdit(e.id)} disabled={dateString >= e.startDate}>
                                         Edit Booking
                                     </button>
                                 </td>
