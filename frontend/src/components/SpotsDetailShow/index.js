@@ -73,7 +73,7 @@ function SpotsDetailShow({sessionLoaded}){
              <ul>
                 <span className="spot-booking-header">Bookings for this spot</span>
                 {spotBookings.spotBookingsArray.map(e => (
-                    <li>
+                    <li key={e.id}>
                         <span>
                             {getBookingStatus(e.startDate)} Booking: <br />
                         </span>
