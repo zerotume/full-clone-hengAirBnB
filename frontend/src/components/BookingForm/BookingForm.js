@@ -79,6 +79,8 @@ function BookingForm({booking, formType, setShowEdit}){
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
                 required
+                min={todayString}
+                max={"9999-12-31"}
                 />
 
             <label>
@@ -89,6 +91,8 @@ function BookingForm({booking, formType, setShowEdit}){
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
                 required
+                min={todayString}
+                max="9999-12-31"
                 />
 
             <input className="user-form-input-button booking-form-input-button" type="Submit" value={formType} />
