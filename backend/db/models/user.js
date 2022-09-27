@@ -101,6 +101,13 @@ module.exports = (sequelize, DataTypes) => {
         len:[3,256]
       }
     },
+    profileImg: {
+      type:DataTypes.STRING,
+      allowNull:true,
+      validate:{
+        len:[3,256]
+      }
+    },
     hashedpwd: {
       type:DataTypes.STRING.BINARY,
       allowNull:false,
