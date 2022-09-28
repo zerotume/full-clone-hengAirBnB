@@ -30,7 +30,7 @@
     flex-direction: column;
     row-gap: 1.65vh;
     align-items: center;
-    height:58.7vh;
+    height:67.7vh;
     width:28.6vw;
 }
 
@@ -43,17 +43,15 @@
 }
 
 
-
-
 .user-form{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width:100%
+    width:100%;
 }
 
 .user-form button{
-    margin-top: 6.61vh;
+    margin-top: 5.61vh;
 }
 
 .form-welcome{
@@ -96,6 +94,12 @@
 
 .user-form-input-holder label:first-child{
     border-top:none;
+}
+
+.label-img-upload{
+    font-size: 13px;
+    margin-left: 2rem;
+    margin-top:1rem;
 }
 
 .user-form ul{

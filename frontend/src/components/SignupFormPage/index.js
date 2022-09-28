@@ -91,7 +91,16 @@ function SignupFormPage() {
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
-      </label><br />
+      </label><br /><br />
+
+      <label for="image_uploads">Upload your avantar (PNG, JPG)
+        <input
+          type="file"
+          id="image_uploads"
+          name="image_uploads"
+          accept=".jpg, .jpeg, .png"
+        /></label><br />
+
       <button type="submit">Sign Up</button>
     </form>
     );

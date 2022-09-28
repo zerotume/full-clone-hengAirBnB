@@ -13,6 +13,7 @@ function SignupForm() {
     const [password, setPassword] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
+    const [image, setImage] = useState(null);
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState([]);
     const [errorsObj, setErrorsObj] = useState({});
@@ -30,6 +31,11 @@ function SignupForm() {
     //   confirmPassword:''
     // }
 
+  const updateFile = e => {
+    const img = e.target.files[0];
+    if(image) setImage(img);
+  }
+
     const handleSubmit = async e => {
         e.preventDefault();
         if(password !== confirmPassword){
@@ -40,7 +46,13 @@ function SignupForm() {
             setPwdError(false);
             setErrors([]);
             setErrorsObj({});
-            return dispatch(sessionActions.signupAction({firstName, lastName, email, username, password}))
+            setUsername("");
+            setEmail("");
+            setPassword("");
+            setFirstName("");
+            setLastName("");
+            setImage(null);
+            return dispatch(sessionActions.signupAction({firstName, lastName, email, username, password, image}))
                 .catch(async (res) => {
                     const data = await res.json();
                     if(data && data.errors) {
@@ -118,7 +130,18 @@ function SignupForm() {
             className={pwdError?'error':''}
           />
         </label>
+
+
       </div>
+      <label for="image_uploads" className="label-img-upload">Upload your avanter (like png or jpg)
+        <input
+          type="file"
+          placeholder="Upload avantar(like png or jpg)"
+          id="image_uploads"
+          name="image_uploads"
+          accept="Image/*"
+          onChange={updateFile}
+        /></label>
       <button type="submit">Sign Up</button>
     </form>
     );
