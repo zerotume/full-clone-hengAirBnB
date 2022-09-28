@@ -32,6 +32,7 @@ export const restoreSession = () => async dispatch => {
 }
 
 export const signupAction = (user) => async dispatch => {
+
     const {firstName, lastName, email, username, password, image} = user;
     const formData = new FormData();
     formData.append("username", username)
@@ -41,14 +42,16 @@ export const signupAction = (user) => async dispatch => {
     formData.append("password", password)
 
     if(image) formData.append("image",image);
-
-
+    // for (const key of formData.keys()) {
+    //     console.log(key);
+    //     console.log(formData.get(key));
+    //   }
     const response = await csrfFetch('/api/users/signup',{
-        method:"POST",
-        headers:{
-            "Content-Type":"multipart/form-data"
+        method: "POST",
+        headers: {
+        "Content-Type": "multipart/form-data",
         },
-        body: formData
+        body: formData,
     });
 
     if(response.ok){

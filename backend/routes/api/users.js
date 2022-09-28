@@ -82,12 +82,12 @@ const validateSignup = [
     handleValidationErrors
 ];
 
-router.post('/signup', singleMulterUpload ,validateSignup, async (req,res,next) => {
+router.post('/signup', singleMulterUpload("image"), validateSignup, async (req,res,next) => {
     const {email, password, username, firstName, lastName} = req.body;
-    const profileImageUrl = await singlePublicFileUpload(req.file);
+    const profileImg = req.file?(await singlePublicFileUpload(req.file)):null;
     let user;
     try{
-        user = await User.signup({email, password, username, firstName, lastName, profileImageUrl});
+        user = await User.signup({email, password, username, firstName, lastName, profileImg});
     }catch(e){
         if(e.name === 'SequelizeUniqueConstraintError'){
             const err = Error('User already exists');

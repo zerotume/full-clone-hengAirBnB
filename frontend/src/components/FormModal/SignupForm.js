@@ -33,7 +33,7 @@ function SignupForm() {
 
   const updateFile = e => {
     const img = e.target.files[0];
-    if(image) setImage(img);
+    if(img) setImage(img);
   }
 
     const handleSubmit = async e => {
@@ -43,15 +43,6 @@ function SignupForm() {
             setErrorsObj({});
             return setPwdError(true);
         }else{
-            // setPwdError(false);
-            // setErrors([]);
-            // setErrorsObj({});
-            // setUsername("");
-            // setEmail("");
-            // setPassword("");
-            // setFirstName("");
-            // setLastName("");
-            // setImage(null);
             return dispatch(sessionActions.signupAction({firstName, lastName, email, username, password, image}))
                 .then(() => {
                   setPwdError(false);
@@ -60,6 +51,7 @@ function SignupForm() {
                   setUsername("");
                   setEmail("");
                   setPassword("");
+                  setConfirmPassword("");
                   setFirstName("");
                   setLastName("");
                   setImage(null);
