@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, Link } from "react-router-dom";
 import { createSpotAction, updateSpotAction } from "../../store/spots";
 import HeaderBar from "../HeaderBar";
+import ImageUploading from "react-images-uploading";
 
 
 function SpotForm({spot, formType, sessionLoaded}){
