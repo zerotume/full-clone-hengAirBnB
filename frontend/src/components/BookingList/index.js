@@ -130,7 +130,7 @@ function BookingList({sessionLoaded}){
                                 </td>
                             </tr>
                             <div className='update-booking-show' hidden={e.id!==showEdit}>
-                                <BookingForm formType={"Update Booking"} booking={e} setShowEdit={setShowEdit}/>
+                                <BookingForm formType={"Update Booking"} booking={e} setShowEdit={setShowEdit} showEdit={showEdit}/>
                                 <button className='close-booking-form-button' onClick={() => setShowEdit(-1)}>x</button>
                             </div>
                         </>

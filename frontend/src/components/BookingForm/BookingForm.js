@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 // import { createSpotAction, updateSpotAction } from "../../store/spots";
@@ -6,7 +6,7 @@ import { createBookingAction,updateBookingAction } from "../../store/bookings";
 import HeaderBar from "../HeaderBar";
 
 
-function BookingForm({booking, formType, setShowEdit}){
+function BookingForm({booking, formType, setShowEdit, showEdit}){
     const todayString = (new Date()).toISOString().slice(0,10);
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
@@ -14,6 +14,10 @@ function BookingForm({booking, formType, setShowEdit}){
     const [endDate, setEndDate] = useState(booking.endDate || todayString);
     const [errors, setErrors] = useState([]);
     const history = useHistory();
+
+    useEffect(() => {
+
+    },[showEdit]);
 
     if(!user) {
         return (

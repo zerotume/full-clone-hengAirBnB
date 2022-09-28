@@ -20,6 +20,7 @@
     width: 15.82vw;
     height: 30vh;
     border-radius: 3.31vh;
+    object-fit: cover;
 }
 
 .my-table-img-text img{
