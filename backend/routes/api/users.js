@@ -4,6 +4,7 @@ const {handleValidationErrors} = require('../../utils/validation.js');
 
 const {setTokenCookie, restoreUser, requireAuth} = require('../../utils/auth.js');
 const {User} = require('../../db/models');
+const { singleMulterUpload, singlePublicFileUpload } = require('../../awsS3.js');
 
 const router = express.Router();
 
@@ -81,11 +82,12 @@ const validateSignup = [
     handleValidationErrors
 ];
 
-router.post('/signup', validateSignup, async (req,res,next) => {
+router.post('/signup', singleMulterUpload ,validateSignup, async (req,res,next) => {
     const {email, password, username, firstName, lastName} = req.body;
+    const profileImageUrl = await singlePublicFileUpload(req.file);
     let user;
     try{
-        user = await User.signup({email, password, username, firstName, lastName});
+        user = await User.signup({email, password, username, firstName, lastName, profileImageUrl});
     }catch(e){
         if(e.name === 'SequelizeUniqueConstraintError'){
             const err = Error('User already exists');

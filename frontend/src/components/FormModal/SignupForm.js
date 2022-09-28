@@ -43,19 +43,31 @@ function SignupForm() {
             setErrorsObj({});
             return setPwdError(true);
         }else{
-            setPwdError(false);
-            setErrors([]);
-            setErrorsObj({});
-            setUsername("");
-            setEmail("");
-            setPassword("");
-            setFirstName("");
-            setLastName("");
-            setImage(null);
+            // setPwdError(false);
+            // setErrors([]);
+            // setErrorsObj({});
+            // setUsername("");
+            // setEmail("");
+            // setPassword("");
+            // setFirstName("");
+            // setLastName("");
+            // setImage(null);
             return dispatch(sessionActions.signupAction({firstName, lastName, email, username, password, image}))
+                .then(() => {
+                  setPwdError(false);
+                  setErrors([]);
+                  setErrorsObj({});
+                  setUsername("");
+                  setEmail("");
+                  setPassword("");
+                  setFirstName("");
+                  setLastName("");
+                  setImage(null);
+                })
                 .catch(async (res) => {
-                    const data = await res.json();
-                    if(data && data.errors) {
+                  console.log(res)
+                  const data = await res.json();
+                  if(data && data.errors) {
                       setErrorsObj(data.errors[0].errors);
                       setErrors(Object.values(data.errors[0].errors));
                   }
@@ -133,7 +145,7 @@ function SignupForm() {
 
 
       </div>
-      <label for="image_uploads" className="label-img-upload">Upload your avanter (like png or jpg)
+      <label htmlFor="image_uploads" className="label-img-upload">Upload your avanter (like png or jpg)
         <input
           type="file"
           placeholder="Upload avantar(like png or jpg)"

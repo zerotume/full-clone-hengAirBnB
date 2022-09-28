@@ -33,14 +33,14 @@ export const restoreSession = () => async dispatch => {
 
 export const signupAction = (user) => async dispatch => {
     const {firstName, lastName, email, username, password, image} = user;
-    const formData = new formData();
+    const formData = new FormData();
     formData.append("username", username)
     formData.append("firstName", firstName)
     formData.append("lastName", lastName)
     formData.append("email", email)
     formData.append("password", password)
 
-    if(image) formData.append("profileImg",image);
+    if(image) formData.append("image",image);
 
 
     const response = await csrfFetch('/api/users/signup',{
