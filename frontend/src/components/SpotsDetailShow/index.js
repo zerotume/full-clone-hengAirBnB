@@ -6,15 +6,24 @@ import "./SpotsDetailShow.css";
 import HeaderBar from "../HeaderBar";
 import { readSpotBookingsAction } from "../../store/bookings";
 import BookingForm from "../BookingForm/BookingForm";
+import ImageUploading from "react-images-uploading";
+import Modal from "../../context/Modal";
+import catWait from "../../assets/meowWaiting.jpg"
+
+const meowWaiting = process.env.PUBLIC_URL+"/assets/meowWaiting.jpg"
 
 
 function SpotsDetailShow({sessionLoaded}){
     // const [loaded, setLoaded] = useState(false);
+
+    const maxNumber = 5;
     const dispatch = useDispatch();
     const {id} = useParams();
     let currentSpot = useSelector(state => state.spots[id]);
     let user = useSelector(state => state.session.user);
     let bookings = useSelector(state => state.bookings)
+    const [showPicModal, setShowPicModal] = useState(-1);
+    const [images, setImages] = useState(currentSpot.images || []);
     useEffect(() => {
         dispatch(readOneSpotAction(id));
     },[dispatch,id]);
@@ -34,6 +43,18 @@ function SpotsDetailShow({sessionLoaded}){
     }
 
     const dateString = (new Date()).toISOString().slice(0,10);
+
+    const onImgChange = (imageList, addUpdateIndex) => {
+        // data for submit
+        // console.log(imageList, addUpdateIndex);
+        setImages(imageList);
+    };
+
+    const picClick = e => {
+        e.preventDefault();
+        e.stopPropagation();
+        setShowPicModal(true);
+    }
 
     const getBookingStatus = (startDate,endDate) => {
         if(startDate > dateString){
@@ -98,15 +119,16 @@ function SpotsDetailShow({sessionLoaded}){
                             <div className="title-owner-buttons">
                                 <Link to={`/spots/${id}/edit`}>edit</Link>
                                 <button onClick={deleteClick}>delete this spot</button>
+                                {/* <button onClick={picClick}>Image Change</button> */}
                             </div>
                         )}
                     </div>
                     <div className="image-holder">
-                        <img className="detail-img-1 detail-img-big" src={currentSpot.images.length?currentSpot.images[0]:'https://images.freeimages.com/images/large-previews/064/cat-1537181.jpg'} alt=""></img>
-                        <img className="detail-img-2 detail-img-small" src={currentSpot.images.length?currentSpot.images[0]:'https://images.freeimages.com/images/large-previews/064/cat-1537181.jpg'} alt=""></img>
-                        <img className="detail-img-3 detail-img-small" src={currentSpot.images.length?currentSpot.images[0]:'https://images.freeimages.com/images/large-previews/064/cat-1537181.jpg'} alt=""></img>
-                        <img className="detail-img-4 detail-img-small" src={currentSpot.images.length?currentSpot.images[0]:'https://images.freeimages.com/images/large-previews/064/cat-1537181.jpg'} alt=""></img>
-                        <img className="detail-img-5 detail-img-small" src={currentSpot.images.length?currentSpot.images[0]:'https://images.freeimages.com/images/large-previews/064/cat-1537181.jpg'} alt=""></img>
+                        <img className="detail-img-1 detail-img-big" src={currentSpot.images[0]?currentSpot.images[0]:'https://images.freeimages.com/images/large-previews/064/cat-1537181.jpg'} alt=""></img>
+                        <img className="detail-img-2 detail-img-small" src={currentSpot.images[1]?currentSpot.images[1]:catWait} alt=""></img>
+                        <img className="detail-img-3 detail-img-small" src={currentSpot.images[2]?currentSpot.images[2]:catWait} alt=""></img>
+                        <img className="detail-img-4 detail-img-small" src={currentSpot.images[3]?currentSpot.images[3]:catWait} alt=""></img>
+                        <img className="detail-img-5 detail-img-small" src={currentSpot.images[4]?currentSpot.images[4]:catWait} alt=""></img>
                     </div>
                     <div className="detail-info">
                         <div className="detail-info-left-wrap">
@@ -140,6 +162,11 @@ function SpotsDetailShow({sessionLoaded}){
                         </div>
                     </div>
                 </div>
+                {/* {showPicModal && (
+                    <Modal className="picset-modal" onClose={() => setShowPicModal(false)}>
+
+                    </Modal>
+                )} */}
             </>
         );
 }

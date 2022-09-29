@@ -308,7 +308,8 @@ router.get('/:id', async (req, res, next) => {
     result = result.toJSON();
     let imgs = await Image.findAll({
         where:{
-            spotId:req.params.id
+            spotId:req.params.id,
+            imageType:'spot'
         },
         attributes:['id','url'],
         raw:true
