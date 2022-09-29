@@ -108,6 +108,9 @@ function SpotsDetailShow({sessionLoaded}){
              </ul>
             )
         }
+
+
+
         return (
             <>
                 <HeaderBar sessionLoaded={sessionLoaded} main={false}/>
@@ -124,11 +127,19 @@ function SpotsDetailShow({sessionLoaded}){
                         )}
                     </div>
                     <div className="image-holder">
-                        <img className="detail-img-1 detail-img-big" src={currentSpot.images[0]?currentSpot.images[0]:'https://images.freeimages.com/images/large-previews/064/cat-1537181.jpg'} alt=""></img>
+                        {(() => {
+                            let imgs = [];
+                            for(let i = 0; i <= 4; i++){
+                                let size = i===0?'big':'small';
+                                imgs.push(<img className={`detail-img-${(i+1).toString()} detail-img-${size}`} src={currentSpot.images[i]?currentSpot.images[i]:catWait} alt=""></img>)
+                            }
+                            return imgs;
+                        })()}
+                        {/* <img className="detail-img-1 detail-img-big" src={currentSpot.images[0]?currentSpot.images[0]:catWait} alt=""></img>
                         <img className="detail-img-2 detail-img-small" src={currentSpot.images[1]?currentSpot.images[1]:catWait} alt=""></img>
                         <img className="detail-img-3 detail-img-small" src={currentSpot.images[2]?currentSpot.images[2]:catWait} alt=""></img>
                         <img className="detail-img-4 detail-img-small" src={currentSpot.images[3]?currentSpot.images[3]:catWait} alt=""></img>
-                        <img className="detail-img-5 detail-img-small" src={currentSpot.images[4]?currentSpot.images[4]:catWait} alt=""></img>
+                        <img className="detail-img-5 detail-img-small" src={currentSpot.images[4]?currentSpot.images[4]:catWait} alt=""></img> */}
                     </div>
                     <div className="detail-info">
                         <div className="detail-info-left-wrap">
