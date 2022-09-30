@@ -7,6 +7,7 @@ const {check} = require('express-validator');
 const user = require('../../db/models/user');
 const { Op } = require('sequelize');
 const { ResultWithContext } = require('express-validator/src/chain');
+const { singlePublicFileUpload, singleMulterUpload } = require('../../awsS3');
 
 // const validateBooking = [
 //     check('startDate')
@@ -41,9 +42,25 @@ const validateImage = [
     handleValidationErrors
 ];
 
-router.post('/:id/images', validateImage, restoreUser, requireAuth, spotReq, AuthorCheck,
+router.post('/:id/images', singleMulterUpload("image"), validateImage, restoreUser, requireAuth, spotReq, AuthorCheck,
     async (req, res, next) => {
-        let {url} = req.body;
+        // let {url} = req.body;
+        let imgs = await Image.findAll({
+            where:{
+                spotId:req.params.id,
+                imageType:'spot'
+            },
+            attributes:['id','url'],
+            raw:true
+        });
+        if(imgs.length >= 5){
+            const err = Error('Maximumly 5 images are permitted!');
+            err.title = 'Maximumly 5 images are permitted!'
+            err.message = 'Maximumly 5 images are permitted!';
+            err.status = 400;
+            return next(err);
+        }
+        const url = await singlePublicFileUpload(req.file);
         let reviewId = null;
         let spotId = req.spot.toJSON().id;
         let imageType = 'spot';
@@ -314,7 +331,7 @@ router.get('/:id', async (req, res, next) => {
         attributes:['id','url'],
         raw:true
     });
-    result.images = imgs.map(e => e.url);
+    result.images = imgs;
     return res.json(result);
 });
 

@@ -131,16 +131,38 @@ function SpotsDetailShow({sessionLoaded}){
                             let imgs = [];
                             for(let i = 0; i <= 4; i++){
                                 let size = i===0?'big':'small';
-                                imgs.push(<img className={`detail-img-${(i+1).toString()} detail-img-${size}`} src={currentSpot.images[i]?currentSpot.images[i]:catWait} alt=""></img>)
+                                let img = currentSpot.images[i];
+                                imgs.push(
+                                    // <button onClick={() => setShowPicModal(i)}>
+                                    <div
+                                        className={`detail-img-${(i+1).toString()}-wrapper detail-img-${size}-wrapper detail-img-wrapper`}
+                                        onClick={() => setShowPicModal(i)}
+                                        >
+                                        <img
+                                            className={`detail-img-${(i+1).toString()} detail-img-${size} detail-img`}
+                                            src={currentSpot.images[i]?currentSpot.images[i].url:catWait}
+                                            alt=""
+                                        />
+                                        <div className={`img-text img-text-${size}`}>{currentSpot.images[i]?'Click to Change':'Click to Add'}</div>
+                                    </div>
+                                    // </button>
+                                )
                             }
                             return imgs;
                         })()}
+                    </div>
+                    {showPicModal !== -1 && (
+                        <Modal className="img-modal spot-img-modal" onClose={() => setShowPicModal(-1)}>
+                            {/* <p>Looking At {showPicModal}</p> */}
+                            <p>Change your {showPicModal+1}-th image!</p>
+                        </Modal>
+                    )}
+
                         {/* <img className="detail-img-1 detail-img-big" src={currentSpot.images[0]?currentSpot.images[0]:catWait} alt=""></img>
                         <img className="detail-img-2 detail-img-small" src={currentSpot.images[1]?currentSpot.images[1]:catWait} alt=""></img>
                         <img className="detail-img-3 detail-img-small" src={currentSpot.images[2]?currentSpot.images[2]:catWait} alt=""></img>
                         <img className="detail-img-4 detail-img-small" src={currentSpot.images[3]?currentSpot.images[3]:catWait} alt=""></img>
                         <img className="detail-img-5 detail-img-small" src={currentSpot.images[4]?currentSpot.images[4]:catWait} alt=""></img> */}
-                    </div>
                     <div className="detail-info">
                         <div className="detail-info-left-wrap">
                             <div className="detail-info-head">
