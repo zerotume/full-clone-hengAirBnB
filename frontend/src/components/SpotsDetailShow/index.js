@@ -9,6 +9,7 @@ import BookingForm from "../BookingForm/BookingForm";
 import ImageUploading from "react-images-uploading";
 import Modal from "../../context/Modal";
 import catWait from "../../assets/meowWaiting.jpg"
+import ImageUploader from "./imageUploader";
 
 const meowWaiting = process.env.PUBLIC_URL+"/assets/meowWaiting.jpg"
 
@@ -26,7 +27,7 @@ function SpotsDetailShow({sessionLoaded}){
     const [images, setImages] = useState(currentSpot.images || []);
     useEffect(() => {
         dispatch(readOneSpotAction(id));
-    },[dispatch,id]);
+    },[dispatch,id, showPicModal]);
 
     useEffect(() => {
         dispatch(readSpotBookingsAction(id));
@@ -134,29 +135,43 @@ function SpotsDetailShow({sessionLoaded}){
                                 let img = currentSpot.images[i];
                                 imgs.push(
                                     // <button onClick={() => setShowPicModal(i)}>
-                                    <div
-                                        className={`detail-img-${(i+1).toString()}-wrapper detail-img-${size}-wrapper detail-img-wrapper`}
-                                        onClick={() => setShowPicModal(i)}
-                                        >
-                                        <img
-                                            className={`detail-img-${(i+1).toString()} detail-img-${size} detail-img`}
-                                            src={currentSpot.images[i]?currentSpot.images[i].url:catWait}
-                                            alt=""
-                                        />
-                                        <div className={`img-text img-text-${size}`}>{currentSpot.images[i]?'Click to Change':'Click to Add'}</div>
-                                    </div>
+                                    <>
+                                        <div
+                                            className={`detail-img-${(i+1).toString()}-wrapper detail-img-${size}-wrapper detail-img-wrapper`}
+                                            onClick={() => setShowPicModal(i)}
+                                            >
+                                            <img
+                                                className={`detail-img-${(i+1).toString()} detail-img-${size} detail-img`}
+                                                src={currentSpot.images[i]?currentSpot.images[i].url:catWait}
+                                                alt=""
+                                            />
+                                            <div className={`img-text img-text-${size}`}>{currentSpot.images[i]?'Click to Change':'Click to Add'}</div>
+                                        </div>
+                                        {showPicModal === i && (
+                                            <Modal className="img-modal spot-img-modal" onClose={() => setShowPicModal(-1)}>
+                                                {/* <p>Looking At {showPicModal}</p> */}
+                                                <div className="img-modal-holder spot-img-modal-holder">
+                                                    {!img? (<p>Add a image to this spot!</p>):(<p>upload your {showPicModal+1}-th image!</p>)}
+                                                    <ImageUploader
+                                                        url={img?.url}
+                                                        spotId={currentSpot.id}
+                                                        imageData={img || {}}
+                                                        type={img?'edit':'add'}
+                                                        imgnum={currentSpot.images.length}
+                                                        showPicModal={showPicModal}
+                                                        setShowPicModal={setShowPicModal}
+                                                    />
+                                                </div>
+                                            </Modal>
+                                        )}
+                                    </>
                                     // </button>
                                 )
                             }
                             return imgs;
                         })()}
                     </div>
-                    {showPicModal !== -1 && (
-                        <Modal className="img-modal spot-img-modal" onClose={() => setShowPicModal(-1)}>
-                            {/* <p>Looking At {showPicModal}</p> */}
-                            <p>Change your {showPicModal+1}-th image!</p>
-                        </Modal>
-                    )}
+
 
                         {/* <img className="detail-img-1 detail-img-big" src={currentSpot.images[0]?currentSpot.images[0]:catWait} alt=""></img>
                         <img className="detail-img-2 detail-img-small" src={currentSpot.images[1]?currentSpot.images[1]:catWait} alt=""></img>

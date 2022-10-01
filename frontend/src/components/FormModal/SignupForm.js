@@ -57,7 +57,7 @@ function SignupForm() {
                   setImage(null);
                 })
                 .catch(async (res) => {
-                  console.log(res)
+                  // console.log(res)
                   const data = await res.json();
                   if(data && data.errors) {
                       setErrorsObj(data.errors[0].errors);

@@ -42,7 +42,7 @@ const validateImage = [
     handleValidationErrors
 ];
 
-router.post('/:id/images', singleMulterUpload("image"), validateImage, restoreUser, requireAuth, spotReq, AuthorCheck,
+router.post('/:id/images', singleMulterUpload("image"), restoreUser, requireAuth, spotReq, AuthorCheck,
     async (req, res, next) => {
         // let {url} = req.body;
         let imgs = await Image.findAll({
