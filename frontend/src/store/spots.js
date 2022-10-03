@@ -139,6 +139,18 @@ export const editSpotImageAction = (payload, id, spotId) => async dispatch => {
         dispatch(readOneSpotAction(spotId));
     }
 }
+
+export const deleteSpotImageAction = (id, spotId) => async dispatch => {
+
+    const response = await csrfFetch(`/api/images/${id}`,{
+        method: "DELETE"
+    });
+
+    if(response.ok){
+        dispatch(readOneSpotAction(spotId));
+    }
+}
+
 // export const changeSpotImageAction = (payload, id, spotId) => async dispatch => {
 //     const {image} = payload;
 //     const formData = new FormData();

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import catWait from "../../assets/meowWaiting.jpg"
-import { addSpotImageAction, editSpotImageAction } from "../../store/spots";
+import { addSpotImageAction, deleteSpotAction, deleteSpotImageAction, editSpotImageAction } from "../../store/spots";
 
 
 function ImageUploader({spotId, imageData, type, imgnum, showPicModal, setShowPicModal}){
-    const [url, setUrl] = useState(imageData.url || '');
+    const [url, setUrl] = useState(imageData?.url || '');
     const [image, setImage] = useState(null);
     const [errors, setErrors] = useState([]);
     const [errorsObj, setErrorsObj] = useState({});
@@ -16,18 +16,34 @@ function ImageUploader({spotId, imageData, type, imgnum, showPicModal, setShowPi
     },[imgnum, showPicModal]);
 
     const deleteClick = e => {
-
+        e.preventDefault();
+        if(!imageData.id){
+            return setErrors(['Unknown error, please contact the developer!'])
+        }
+        return dispatch(deleteSpotImageAction(imageData.id, spotId))
+                        .then(() => {
+                            setImage(null);
+                            setShowPicModal(-1);
+                        })
+                        .catch(async (res) => {
+                            const data = await res.json();
+                            if(data && data.errors) {
+                                setErrorsObj(data.errors[0].errors);
+                                setErrors(Object.values(data.errors[0].errors));
+                            }
+                        });
     }
 
 
     const handleSubmit = e => {
         e.preventDefault();
 
-        if(imgnum >= 5){
-            return setErrors(["Cannot add more than 5 pics to one spot!"])
-        }else if(!image){
+        if(!image){
             return setErrors(["No image chosen!"])
         }else{
+            if(imgnum >= 5){
+                return setErrors(["Cannot add more than 5 pics to one spot!"])
+            }
             setErrors([]);
             if(type === 'add'){
                 return dispatch(addSpotImageAction({image}, spotId))
@@ -96,7 +112,7 @@ function ImageUploader({spotId, imageData, type, imgnum, showPicModal, setShowPi
                 </div>
                 <button type="submit">Submit your image</button>
             </form>
-            <button onClick={deleteClick}>Delete this image</button>
+            {imageData && (<button onClick={deleteClick}>Delete this image</button>)}
         </div>
     );
 }

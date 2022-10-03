@@ -155,7 +155,7 @@ function SpotsDetailShow({sessionLoaded}){
                                                     <ImageUploader
                                                         url={img?.url}
                                                         spotId={currentSpot.id}
-                                                        imageData={img || {}}
+                                                        imageData={img || null}
                                                         type={img?'edit':'add'}
                                                         imgnum={currentSpot.images.length}
                                                         showPicModal={showPicModal}
