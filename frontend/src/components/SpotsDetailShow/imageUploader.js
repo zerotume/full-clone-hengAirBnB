@@ -15,6 +15,10 @@ function ImageUploader({spotId, imageData, type, imgnum, showPicModal, setShowPi
 
     },[imgnum, showPicModal]);
 
+    const deleteClick = e => {
+
+    }
+
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -92,6 +96,7 @@ function ImageUploader({spotId, imageData, type, imgnum, showPicModal, setShowPi
                 </div>
                 <button type="submit">Submit your image</button>
             </form>
+            <button onClick={deleteClick}>Delete this image</button>
         </div>
     );
 }
