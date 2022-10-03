@@ -51,11 +51,11 @@ function SpotsDetailShow({sessionLoaded}){
         setImages(imageList);
     };
 
-    const picClick = e => {
-        e.preventDefault();
-        e.stopPropagation();
-        setShowPicModal(true);
-    }
+    // const picClick = e => {
+    //     e.preventDefault();
+    //     e.stopPropagation();
+    //     setShowPicModal(true);
+    // }
 
     const getBookingStatus = (startDate,endDate) => {
         if(startDate > dateString){

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import catWait from "../../assets/meowWaiting.jpg"
-import { addSpotImageAction } from "../../store/spots";
+import { addSpotImageAction, editSpotImageAction } from "../../store/spots";
 
 
-function ImageUploader({imgId,spotId, imageData, type, imgnum, showPicModal, setShowPicModal}){
+function ImageUploader({spotId, imageData, type, imgnum, showPicModal, setShowPicModal}){
     const [url, setUrl] = useState(imageData.url || '');
     const [image, setImage] = useState(null);
     const [errors, setErrors] = useState([]);
@@ -33,7 +33,7 @@ function ImageUploader({imgId,spotId, imageData, type, imgnum, showPicModal, set
                         setShowPicModal(-1);
                     })
                     .catch(async (res) => {
-                        console.log(res);
+
                         const data = await res.json();
                         if(data && data.errors) {
                             setErrorsObj(data.errors[0].errors);
@@ -41,7 +41,21 @@ function ImageUploader({imgId,spotId, imageData, type, imgnum, showPicModal, set
                         }
                     })
             }else if(type === 'edit'){
-
+                if(!imageData.id){
+                    return setErrors(['Unknown error, please contact the developer!'])
+                }
+                return dispatch(editSpotImageAction({image}, imageData.id, spotId))
+                                .then(() => {
+                                    setImage(null);
+                                    setShowPicModal(-1);
+                                })
+                                .catch(async (res) => {
+                                    const data = await res.json();
+                                    if(data && data.errors) {
+                                        setErrorsObj(data.errors[0].errors);
+                                        setErrors(Object.values(data.errors[0].errors));
+                                    }
+                                });
             }else{
                 return setErrors(["Unknown Error, please contact the developer."]);
             }

@@ -120,7 +120,24 @@ export const addSpotImageAction = (payload, id) => async dispatch => {
     if(response.ok){
         dispatch(readOneSpotAction(id));
     }
+}
 
+export const editSpotImageAction = (payload, id, spotId) => async dispatch => {
+    const {image} = payload;
+    const formData = new FormData();
+    if(image) formData.append("image", image);
+
+    const response = await csrfFetch(`/api/images/${id}`,{
+        method: "PUT",
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+        body: formData,
+    });
+
+    if(response.ok){
+        dispatch(readOneSpotAction(spotId));
+    }
 }
 // export const changeSpotImageAction = (payload, id, spotId) => async dispatch => {
 //     const {image} = payload;
