@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import catWait from "../../assets/meowWaiting.jpg"
-import { addSpotImageAction, deleteSpotAction, deleteSpotImageAction, editSpotImageAction } from "../../store/spots";
+import { addSpotImageAction, deleteSpotImageAction, editSpotImageAction } from "../../store/spots";
 
 
 function ImageUploader({spotId, imageData, type, imgnum, showPicModal, setShowPicModal}){
@@ -53,7 +53,6 @@ function ImageUploader({spotId, imageData, type, imgnum, showPicModal, setShowPi
                         setShowPicModal(-1);
                     })
                     .catch(async (res) => {
-
                         const data = await res.json();
                         if(data && data.errors) {
                             setErrorsObj(data.errors[0].errors);
@@ -90,7 +89,7 @@ function ImageUploader({spotId, imageData, type, imgnum, showPicModal, setShowPi
             setUrl(imgUrl);
             URL.revokeObjectURL(file);
         }
-      };
+    };
 
     return(
         <div className="img-upload-holder spot-img-upload-holder">

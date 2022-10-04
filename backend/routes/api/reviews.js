@@ -50,7 +50,7 @@ router.post('/:id/images', validateImage, restoreUser, requireAuth, reviewReq, A
             }
         });
 
-        if(imgCount >= 10){
+        if(imgCount >= 5){
             const err = Error("Maximum number of images for this resource was reached");
             err.title = "Maximum number of images for this resource was reached"
             err.message = "Maximum number of images for this resource was reached";
