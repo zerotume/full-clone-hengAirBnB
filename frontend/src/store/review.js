@@ -107,3 +107,65 @@ export const deleteReviewAction = (id) => async dispatch => {
         return data;
     }
 }
+
+const reviewReducer = (state = {myReviews:{}}, action) => {
+    let newState = {...state};
+    switch(action.type){
+        case RESET_MY_REVIEWS:
+            newState.myReviews = {};
+            return newState;
+
+        case GET_USER_REVIEWS:
+            newState.myReviews = {};
+            newState.myReviews.myReviewsArray = action.myReviews;
+            action.myReviews.forEach(e => {
+                newState.myReviews[e.id] = e;
+            });
+            return newState;
+
+        case GET_SPOT_REVIEWS:
+            newState.spotReviews = {};
+            newState.spotReviews.spotReviewsArray = action.spotReviews;
+            action.spotReviews.forEach(e => {
+                newState.spotReviews[e.id] = e;
+            });
+            return newState;
+
+        case ADD_ONE_REVIEW:
+        case EDIT_ONE_REVIEW:
+            newState.myReviews = {
+                ...state.myReviews,
+                [action.review.id]:{
+                    ...newState.myReviews[action.review.id],
+                    ...action.review,
+                }
+            }
+            if(newState.spotReviews[action.review.id]){
+                newState.spotReviews = {
+                    ...state.spotReviews,
+                    [action.review.id]:{
+                        ...newState.spotReviews[action.review.id],
+                        ...action.review,
+                    }
+                }
+            }
+            return newState;
+            //remember to dispatch the spot review
+        case DELETE_ONE_REVIEW:
+            newState.myReviews = {...state.myReviews};
+            newState.spotReviews = {...state.spotReviews};
+            if(newState.myReviews[action.id]){
+                delete newState.myReviews[action.id];
+                delete newState.myReviews.myReviewsArray;
+                newState.myReviews.myReviewsArray = Object.values(newState.myReviews);
+            }
+            if(newState.spotReviews[action.id]){
+                delete newState.spotReviews[action.id];
+                delete newState.spotReviews.spotReviewsArray;
+                newState.spotReviews.spotReviewsArray = Object.values(newState.spotReviews);
+            }
+            return newState;
+        default:
+            return newState;
+    }
+}
