@@ -47,3 +47,63 @@ const deleteOneReview = (id) => {
         id
     }
 }
+
+export const readUserReviewsAction = () => async dispatch => {
+    const response = await csrfFetch('/api/reviews/myreview');
+
+    if(response.ok){
+        const data = await response.json();
+        dispatch(getUserReviews(data.Reviews));
+        return data;
+    }
+}
+
+export const readSpotReviewsAction = (spotId) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
+
+    if(response.ok){
+        const data = await response.json();
+        dispatch(getSpotReviews(data.Reviews));
+        return data;
+    }
+}
+
+export const createReviewAction = (review) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${review.spotId}/reviews`,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(review)
+    });
+
+    if(response.ok){
+        const newReivew = await response.json();
+        dispatch(createOneReview(newReivew));
+        return newReivew;
+    }
+}
+
+export const updateReviewAction = (review) => async dispatch => {
+    const response = await csrfFetch(`/api/reviews/${review.id}`, {
+        method:'PUT',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(review)
+    });
+
+    if(response.ok){
+        const newReview = await response.json();
+        dispatch(updateOneReview(newReview));
+        return newReview;
+    }
+}
+
+export const deleteReviewAction = (id) => async dispatch => {
+    const response = await csrfFetch(`/api/reviews/${id}`, {
+        method:'DELETE'
+    });
+
+    if(response.ok){
+        const data = await response.json();
+        dispatch(deleteOneReview(id));
+        return data;
+    }
+}
