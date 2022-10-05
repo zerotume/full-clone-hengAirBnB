@@ -137,17 +137,17 @@ function SpotsDetailShow({sessionLoaded}){
                                     // <button onClick={() => setShowPicModal(i)}>
                                     <>
                                         <div
-                                            className={`detail-img-${(i+1).toString()}-wrapper detail-img-${size}-wrapper detail-img-wrapper`}
-                                            onClick={() => setShowPicModal(i)}
+                                            className={`detail-img-${(i+1).toString()}-wrapper detail-img-${size}-wrapper ${currentSpot.ownerId===userId?'detail-img-wrapper':''}`}
+                                            onClick={() => currentSpot.ownerId === userId?setShowPicModal(i):null}
                                             >
                                             <img
                                                 className={`detail-img-${(i+1).toString()} detail-img-${size} detail-img`}
                                                 src={currentSpot.images[i]?currentSpot.images[i].url:catWait}
                                                 alt=""
                                             />
-                                            <div className={`img-text img-text-${size}`}>{currentSpot.images[i]?'Click to Change':'Click to Add'}</div>
+                                            {currentSpot.ownerId === userId && (<div className={`img-text img-text-${size}`}>{currentSpot.images[i]?'Click to Change':'Click to Add'}</div>)}
                                         </div>
-                                        {showPicModal === i && (
+                                        {currentSpot.ownerId === userId && showPicModal === i && (
                                             <Modal className="img-modal spot-img-modal" onClose={() => setShowPicModal(-1)}>
                                                 {/* <p>Looking At {showPicModal}</p> */}
                                                 <div className="img-modal-holder spot-img-modal-holder">
@@ -210,11 +210,7 @@ function SpotsDetailShow({sessionLoaded}){
                         </div>
                     </div>
                 </div>
-                {/* {showPicModal && (
-                    <Modal className="picset-modal" onClose={() => setShowPicModal(false)}>
 
-                    </Modal>
-                )} */}
             </>
         );
 }

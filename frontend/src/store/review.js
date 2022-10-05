@@ -169,3 +169,5 @@ const reviewReducer = (state = {myReviews:{}}, action) => {
             return newState;
     }
 }
+
+export default reviewReducer;
