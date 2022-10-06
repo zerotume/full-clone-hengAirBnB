@@ -14,6 +14,7 @@ import MySpots from "./components/SpotsList/MySpots";
 import CreateSpotForm from "./components/SpotsUpdate/CreateSpotForm";
 import EditSpotForm from "./components/SpotsUpdate/EditSpotFrom";
 import BookingList from "./components/BookingList";
+import BottomNav from "./components/BottomNav/BottomNav";
 
 function App() {
   const dispatch = useDispatch();
@@ -58,7 +59,12 @@ function App() {
         <Route exact path='/mybookings'>
           {spotsLoaded && <BookingList sessionLoaded={sessionLoaded}/>}
         </Route>
+        <Route path='*' >
+          <HeaderBar sessionLoaded={sessionLoaded} main={true}/>
+          <div className="not-found"><h1>Page not found</h1></div>
+        </Route>
       </Switch>
+      <BottomNav />
     </div>
   );
 }

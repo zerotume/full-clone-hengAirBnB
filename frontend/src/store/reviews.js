@@ -1,11 +1,11 @@
 import { csrfFetch } from "./csrf";
 
-const GET_USER_REVIEWS = 'review/getUserReviews';
-const GET_SPOT_REVIEWS = 'review/getSpotReviews';
-const ADD_ONE_REVIEW = 'review/addOneReview';
-const EDIT_ONE_REVIEW = 'review/editOneReview';
-const DELETE_ONE_REVIEW = 'review/deleteOneReview';
-const RESET_MY_REVIEWS = 'review/resetMyReviews';
+const GET_USER_REVIEWS = 'reviews/getUserReviews';
+const GET_SPOT_REVIEWS = 'reviews/getSpotReviews';
+const ADD_ONE_REVIEW = 'reviews/addOneReview';
+const EDIT_ONE_REVIEW = 'reviews/editOneReview';
+const DELETE_ONE_REVIEW = 'reviews/deleteOneReview';
+const RESET_MY_REVIEWS = 'reviews/resetMyReviews';
 
 export const resetMyReviews = () => {
     return{
@@ -63,6 +63,7 @@ export const readSpotReviewsAction = (spotId) => async dispatch => {
 
     if(response.ok){
         const data = await response.json();
+        // console.log(data);
         dispatch(getSpotReviews(data.Reviews));
         return data;
     }
@@ -125,6 +126,7 @@ const reviewReducer = (state = {myReviews:{}}, action) => {
 
         case GET_SPOT_REVIEWS:
             newState.spotReviews = {};
+            console.log(action.spotReviews);
             newState.spotReviews.spotReviewsArray = action.spotReviews;
             action.spotReviews.forEach(e => {
                 newState.spotReviews[e.id] = e;

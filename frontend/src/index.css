@@ -432,3 +432,9 @@ input.error{
     padding-bottom:1vh;
     font-family: 'Nunito', sans-serif;
 }
+
+div.not-found{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12.3rem;
+}

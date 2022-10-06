@@ -10,6 +10,7 @@ import ImageUploading from "react-images-uploading";
 import Modal from "../../context/Modal";
 import catWait from "../../assets/meowWaiting.jpg"
 import ImageUploader from "./imageUploader";
+import { readSpotReviewsAction } from "../../store/reviews";
 
 const meowWaiting = process.env.PUBLIC_URL+"/assets/meowWaiting.jpg"
 
@@ -23,6 +24,7 @@ function SpotsDetailShow({sessionLoaded}){
     let currentSpot = useSelector(state => state.spots[id]);
     let user = useSelector(state => state.session.user);
     let bookings = useSelector(state => state.bookings)
+    let reviews = useSelector(state => state.reviews)
     const [showPicModal, setShowPicModal] = useState(-1);
     const [images, setImages] = useState(currentSpot.images || []);
     useEffect(() => {
@@ -31,6 +33,10 @@ function SpotsDetailShow({sessionLoaded}){
 
     useEffect(() => {
         dispatch(readSpotBookingsAction(id));
+    },[dispatch,id,user]);
+
+    useEffect(() => {
+        dispatch(readSpotReviewsAction(id));
     },[dispatch,id,user]);
     const history = useHistory();
 
@@ -87,7 +93,16 @@ function SpotsDetailShow({sessionLoaded}){
         !bookings.spotBookings ||
         !bookings.spotBookings.spotBookingsArray ||
         !bookings.spotBookings.spotBookingsArray.length){
-            bookingContent = (<span>No bookings for this spot!</span>)
+            bookingContent = currentSpot.ownerId === userId?
+                                            (
+                                                <span className="no-booking">
+                                                    No bookings for this spot! Try to tell others about it?
+                                                </span>
+                                            ):(
+                                                <span className="no-booking">
+                                                    No bookings for this spot! Be the first visitor of it?
+                                                </span>
+                                            );
         }else{
             let spotBookings = bookings.spotBookings;
 
@@ -109,6 +124,68 @@ function SpotsDetailShow({sessionLoaded}){
              </ul>
             )
         }
+        let reviewContent;
+        if(!reviews ||
+            !reviews.spotReviews ||
+            !reviews.spotReviews.spotReviewsArray ||
+            !reviews.spotReviews.spotReviewsArray.length){
+                reviewContent = currentSpot.ownerId === userId?
+                                    (
+                                        <span className="no-review">
+                                            No reviews for this spot! Try to get in touch with your visitors?
+                                        </span>
+                                    ):(
+                                        <span className="no-review">
+                                            No reviews for this spot! Be the first one giving thanks or thunks?
+                                        </span>
+                                    );
+            }else{
+                let spotReviews = reviews.spotReviews;
+
+                reviewContent = (
+                 <ul>
+                    <span className="spot-review-header"><h2>Reviews</h2></span>
+                    {spotReviews.spotReviewsArray.map(e => (
+                        <li key={e.id}>
+                            <div className="spot-single-review">
+                                <div className="spot-single-review-user">
+                                    <div className="spot-single-review-avatar-container">
+                                        {e.User.profileImg?
+                                            (
+                                                <img className="spot-single-review-avater" src={e.user.profileImg} />
+                                            ):(
+                                                <i className="spot-single-review-icon fas fa-user-circle"></i>
+                                            )
+                                        }
+                                    </div>
+                                    <div className="spot-single-review-info-container">
+                                        <p className="spot-single-review-info-name">{e.User.firstName} {e.User.lastName}</p>
+                                        <p className="spot-single-review-info-date">{e.createdAt.slice(0,10)}</p>
+                                    </div>
+                                </div>
+                                <div className="spot-single-review-content">
+                                    <div className="spot-single-review-text"><p>{e.review}</p></div>
+                                    <div className="spot-single-review-images">
+                                        {e.images && !!e.images.length && e.images.map(img => (
+                                            <img className="review-img" src={img.url} />
+                                        ))}
+                                    </div>
+
+                                </div>
+                            </div>
+                            {/* <span>
+                                {getBookingStatus(e.startDate)} Booking: <br />
+                            </span>
+                            <span>Start Date: {e.startDate}</span><br />
+                            <span>End Date: {e.endDate}</span><br />
+                            {currentSpot.ownerId === userId && e.User && (
+                                <span>Booked by: {e.User.firstName} {e.User.lastName}<br /></span>
+                            )} */}
+                        </li>
+                    ))}
+                 </ul>
+                )
+            }
 
 
 
@@ -198,6 +275,8 @@ function SpotsDetailShow({sessionLoaded}){
                             {/* <div className="detail-info-sleep"></div>
                             <div className="detail-info-amenities"></div> */}
                             <div className="detail-info-current-bookings">{bookingContent}</div>
+                            <div className="detail-info-current-reviews">{reviewContent}</div>
+
                         </div>
                         <div className="detail-info-right-booking">
                             {currentSpot.ownerId !== userId && (

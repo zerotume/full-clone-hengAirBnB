@@ -233,3 +233,76 @@ img.detail-img-5{
     object-fit: cover;
     margin-left: 1rem;
 }
+
+.detail-info-current-bookings{
+    padding-bottom:1vh;
+    margin-bottom:1vh;
+    border-bottom:1px solid #AAAAAA;
+    font-size:2.2vh;
+    margin-top:2vh;
+    margin-top: 2vh;
+}
+
+.detail-info-current-reviews{
+    padding-bottom:1vh;
+    margin-bottom:1vh;
+    font-size:2.2vh;
+    margin-top:0.2vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.spot-review-header h2{
+    margin-bottom: 1.2rem;
+}
+
+.spot-single-review{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+}
+
+.spot-single-review-user{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.spot-single-review-avatar-container{
+    width:10%;
+    height:10%;
+}
+
+.spot-single-review-avatar-container i{
+    font-size: 200%;
+}
+
+.spot-single-review-info-container{
+    margin-left: 1.2rem;
+    line-height: 0.7rem;
+}
+
+.spot-single-review-content{
+    margin-top: -0.8rem;
+}
+
+.spot-single-review-info-name{
+    font-weight: 700;
+}
+
+.spot-single-review-info-date{
+    color:#888999;
+    font-size: 0.8rem;
+}
+
+.review-img{
+    width:5rem;
+    height:5rem;
+    max-width:5rem;
+    max-height: 5rem;
+    overflow: hidden;
+    object-fit: cover;
+    margin-right: 0.3rem;
+    border-radius: 1rem;
+}
