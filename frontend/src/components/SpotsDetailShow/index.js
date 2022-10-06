@@ -55,7 +55,7 @@ function SpotsDetailShow({sessionLoaded}){
 
     const dateString = (new Date()).toISOString().slice(0,10);
 
-    const deleteReviewClick = async e => {
+    const deleteReviewClick = id => async e => {
         e.preventDefault();
         //todo
     }
