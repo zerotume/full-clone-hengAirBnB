@@ -1,6 +1,6 @@
 # Heng's `AirBnB` Clone: `Heng's CatBnB`
 
-Catbnb is a web application for practicing web developent. It is inspired by Airbnb. It provides an online platform for cats to find and book their hang-out places.
+Catbnb is a web application for practicing web development. It is inspired by Airbnb. It provides a platform for cats to find and book their hang-out places.
 
 ## How to launch the full site:
 [Heng's CatBnB](https://heng-catbnb.herokuapp.com/)

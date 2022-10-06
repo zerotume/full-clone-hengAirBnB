@@ -285,6 +285,10 @@ img.detail-img-5{
 
 .spot-single-review-content{
     margin-top: -0.8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: initial;
+    word-break: break-word;
 }
 
 .spot-single-review-info-name{
