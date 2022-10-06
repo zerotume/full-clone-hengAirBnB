@@ -11,6 +11,7 @@ import Modal from "../../context/Modal";
 import catWait from "../../assets/meowWaiting.jpg"
 import ImageUploader from "./imageUploader";
 import { readSpotReviewsAction } from "../../store/reviews";
+import ReviewForm from "../ReviewForm/ReviewForm";
 
 const meowWaiting = process.env.PUBLIC_URL+"/assets/meowWaiting.jpg"
 
@@ -27,6 +28,9 @@ function SpotsDetailShow({sessionLoaded}){
     let reviews = useSelector(state => state.reviews)
     const [showPicModal, setShowPicModal] = useState(-1);
     const [images, setImages] = useState(currentSpot.images || []);
+    const [showReviewEdit, setShowReviewEdit] = useState(-1);
+    const [showReviewCreate, setShowReviewCreate] = useState(false);
+    const [renderer, setRenderer] = useState({});
     useEffect(() => {
         dispatch(readOneSpotAction(id));
     },[dispatch,id, showPicModal]);
@@ -50,6 +54,11 @@ function SpotsDetailShow({sessionLoaded}){
     }
 
     const dateString = (new Date()).toISOString().slice(0,10);
+
+    const deleteReviewClick = async e => {
+        e.preventDefault();
+        //todo
+    }
 
     const onImgChange = (imageList, addUpdateIndex) => {
         // data for submit
@@ -164,13 +173,33 @@ function SpotsDetailShow({sessionLoaded}){
                                     </div>
                                 </div>
                                 <div className="spot-single-review-content">
-                                    <div className="spot-single-review-text"><p>{e.review}</p></div>
+                                    <div className="spot-single-review-text">
+                                        <p>{e.review}</p>
+                                        <div className="review-buttons">
+                                            <button className="review-edit-button" onClick={() => setShowReviewEdit(e.id)} disabled={e.userId !== user.id} hidden={e.userId !== user.id}><i class="fa-solid fa-gear"></i></button>
+                                            <button className='review-delete-button' onClick={deleteReviewClick(e.id)} disabled={e.userId !== user.id} hidden={e.userId !== user.id}><i class="fa-solid fa-trash"></i></button>
+                                        </div>
+                                    </div>
                                     <div className="spot-single-review-images">
                                         {e.images && !!e.images.length && e.images.map(img => (
                                             <img className="review-img" src={img.url} />
                                         ))}
                                     </div>
-
+                                </div>
+                                <div className="update-review-show" hidden={e.id!==showReviewEdit}>
+                                    <ReviewForm type={'edit'} spotId={id} review={e}
+                                                showReviewCreate={showReviewCreate}
+                                                setShowReviewCreate={setShowReviewCreate}
+                                                showReviewEdit={showReviewEdit}
+                                                setShowReviewEdit={setShowReviewEdit}
+                                                sessionLoaded={sessionLoaded}
+                                                setRenderer={setRenderer}
+                                    />
+                                    <button className="close-review-form-button"
+                                        onClick={() => setShowReviewEdit(-1)}>
+                                                Cancel
+                                                <i class="fa-solid fa-xmark"></i>
+                                    </button>
                                 </div>
                             </div>
                         </li>

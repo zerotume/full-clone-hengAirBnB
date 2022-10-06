@@ -9,10 +9,10 @@ import { readOneSpotAction } from "../../store/spots";
 function ReviewForm({spotId, review,
                         showReviewEdit, setShowReviewEdit,
                         showReviewCreate, setShowReviewCreate,
-                        sessionLoaded, type, setRerender}){
+                        sessionLoaded, type, setRenderer}){
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
-    const [reviewContent, setReviewContent] = useState(review.content || '');
+    const [reviewContent, setReviewContent] = useState(review.review || '');
     const [errors, setErrors] = useState([]);
     const history = useHistory();
 
@@ -23,7 +23,7 @@ function ReviewForm({spotId, review,
 
 
     useEffect(() => {
-        setReviewContent(review.content || '');
+        setReviewContent(review.review || '');
     }, [showReviewEdit]);
 
     const handleSubmit = async e => {
@@ -33,12 +33,12 @@ function ReviewForm({spotId, review,
             review:reviewContent
         };
         // let data = await dispatch(actions[formType](channel));
-        let data = await dispatch(actions[formType](channel));
+        let data = await dispatch(actions[type](review));
         setErrors([]);
         if(data?.errors){
 
         }else{
-            if(type === "create")setShowReviewCreate(false);
+            // if(type === "create")setShowReviewCreate(false);
             if(type === "edit")setShowReviewEdit(-1);
             dispatch(readSpotReviewsAction(spotId));
             setReviewContent('');
