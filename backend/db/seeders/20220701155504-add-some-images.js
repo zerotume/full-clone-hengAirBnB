@@ -16,7 +16,7 @@ module.exports = {
         reviewId:2
       },
       {
-        url:'catInBath.jpg',
+        url:'https://stat.ameba.jp/user_images/20131001/22/ysugi522/92/44/j/t02200295_0350047012702521284.jpg',
         imageType:'review',
         spotId:3,
         reviewId:2
