@@ -193,7 +193,9 @@ router.get('/:id/bookings',restoreUser, requireAuth, spotReq,
         return res.json({Bookings:bookings});
 });
 
-router.get('/:id/reviews', spotReq, async (req, res) => {
+router.get('/:id/reviews', restoreUser, spotReq, async (req, res) => {
+    let currentUser = req.user.toJSON().id;
+    let spot = req.spot.toJSON();
     let reviews = await Review.findAll({
         where:{
             spotId:req.params.id
@@ -210,12 +212,31 @@ router.get('/:id/reviews', spotReq, async (req, res) => {
                 },
                 attributes:['id','url'],
                 required:false,
-                raw:true
+                raw:true,
             }
-        ]
+        ],
     });
+    // console.log(reviews);
+    reviews = reviews.map(e => e.toJSON());
+    // let booked = false;
+    // if(currentUser !== spot.ownerId){
+    //     let bookings = await Booking.findAll({
+    //         where:{userId:currentUser},
+    //         include:{
+    //             model:Spot.scope('noCreateUpdate')
+    //         },
+    //         raw:true,
+    //         nest:true
+    //     });
+    //     booked = bookings.some(e => e.spotId === spot.id)
+    // }
 
-    return res.json({Reviews:reviews});
+
+    let reviewed = reviews.some(e => e.userId === currentUser);
+
+    return res.json({Reviews:reviews,
+                        // booked:booked,
+                        reviewed:reviewed});
 });
 
 

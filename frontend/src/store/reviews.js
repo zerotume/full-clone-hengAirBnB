@@ -20,10 +20,12 @@ const getUserReviews = (myReviews) => {
     }
 }
 
-const getSpotReviews = (spotReviews) => {
+const getSpotReviews = (spotReviews, reviewed) => {
     return {
         type:GET_SPOT_REVIEWS,
-        spotReviews
+        spotReviews,
+        // booked,
+        reviewed
     }
 }
 
@@ -64,7 +66,7 @@ export const readSpotReviewsAction = (spotId) => async dispatch => {
     if(response.ok){
         const data = await response.json();
         // console.log(data);
-        dispatch(getSpotReviews(data.Reviews));
+        dispatch(getSpotReviews(data.Reviews, data.reviewed));
         return data;
     }
 }
@@ -126,7 +128,7 @@ const reviewReducer = (state = {myReviews:{}}, action) => {
 
         case GET_SPOT_REVIEWS:
             newState.spotReviews = {};
-            console.log(action.spotReviews);
+            newState.spotReviews.reviewed = action.reviewed;
             newState.spotReviews.spotReviewsArray = action.spotReviews;
             action.spotReviews.forEach(e => {
                 newState.spotReviews[e.id] = e;
@@ -156,6 +158,7 @@ const reviewReducer = (state = {myReviews:{}}, action) => {
         case DELETE_ONE_REVIEW:
             newState.myReviews = {...state.myReviews};
             newState.spotReviews = {...state.spotReviews};
+            newState.spotReviews.reviewed = false;
             if(newState.myReviews[action.id]){
                 delete newState.myReviews[action.id];
                 delete newState.myReviews.myReviewsArray;

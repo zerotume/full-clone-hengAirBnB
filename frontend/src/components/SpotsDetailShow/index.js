@@ -10,7 +10,7 @@ import ImageUploading from "react-images-uploading";
 import Modal from "../../context/Modal";
 import catWait from "../../assets/meowWaiting.jpg"
 import ImageUploader from "./imageUploader";
-import { readSpotReviewsAction } from "../../store/reviews";
+import { deleteReviewAction, readSpotReviewsAction } from "../../store/reviews";
 import ReviewForm from "../ReviewForm/ReviewForm";
 
 const meowWaiting = process.env.PUBLIC_URL+"/assets/meowWaiting.jpg"
@@ -57,7 +57,11 @@ function SpotsDetailShow({sessionLoaded}){
 
     const deleteReviewClick = id => async e => {
         e.preventDefault();
-        //todo
+        const data = await dispatch(deleteReviewAction(id));
+
+        if(data.statusCode === 200){
+            setRenderer({});
+        }
     }
 
     const onImgChange = (imageList, addUpdateIndex) => {
@@ -134,6 +138,7 @@ function SpotsDetailShow({sessionLoaded}){
             )
         }
         let reviewContent;
+        let userReviewed;
         if(!reviews ||
             !reviews.spotReviews ||
             !reviews.spotReviews.spotReviewsArray ||
@@ -150,7 +155,7 @@ function SpotsDetailShow({sessionLoaded}){
                                     );
             }else{
                 let spotReviews = reviews.spotReviews;
-
+                userReviewed = spotReviews.reviewed;
                 reviewContent = (
                  <ul>
                     <span className="spot-review-header"><h2>Reviews</h2></span>
@@ -297,7 +302,23 @@ function SpotsDetailShow({sessionLoaded}){
                             <div className="detail-info-amenities"></div> */}
                             <div className="detail-info-current-bookings">{bookingContent}</div>
                             <div className="detail-info-current-reviews">{reviewContent}</div>
-
+                            {!userReviewed?(
+                                    <div className="create-review-show">
+                                        <ReviewForm type={'create'} spotId={id} review={{}}
+                                                    showReviewCreate={showReviewCreate}
+                                                    setShowReviewCreate={setShowReviewCreate}
+                                                    showReviewEdit={showReviewEdit}
+                                                    setShowReviewEdit={setShowReviewEdit}
+                                                    sessionLoaded={sessionLoaded}
+                                                    setRenderer={setRenderer}
+                                        />
+                                    </div>
+                                ):(
+                                    <div className="already-reviewed">
+                                        <h3>You've already reviewed!</h3>
+                                        <h3>One user, one spot, one review - to ensure our review quality.</h3>
+                                    </div>
+                            )}
                         </div>
                         <div className="detail-info-right-booking">
                             {currentSpot.ownerId !== userId && (
