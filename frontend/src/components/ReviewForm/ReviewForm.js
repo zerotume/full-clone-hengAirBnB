@@ -13,12 +13,35 @@ function ReviewForm({spotId, review,
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
     const [reviewContent, setReviewContent] = useState(review.review || '');
+    // const [stars, setStars] = useState(review.stars || 1);
+    const [reviewStars, setReviewStars] = useState(review.stars || 1);
+    const [allstars, setAllstars] = useState('☆☆☆☆☆');
     const [errors, setErrors] = useState([]);
     const history = useHistory();
 
     const actions = {
         "create":createReviewAction,
         "edit":updateReviewAction
+    }
+
+    const handleStars = async e => {
+        e.preventDefault()
+        if (e.target.value == 1) {
+            setAllstars('☆☆☆☆★')
+        }
+        if (e.target.value == 2) {
+            setAllstars('☆☆☆★★')
+        }
+        if (e.target.value == 3) {
+            setAllstars('☆☆★★★')
+        }
+        if (e.target.value == 4) {
+            setAllstars('☆★★★★')
+        }
+        if (e.target.value == 5) {
+            setAllstars('★★★★★')
+        }
+        setReviewStars(e.target.value)
     }
 
 
@@ -79,6 +102,21 @@ function ReviewForm({spotId, review,
                         required
                         />
                 </div>
+                < div className="star-rating-container" >
+                            <div className="radio-label-container">
+                                <label htmlFor='r6' className='rating-label-all'>{allstars}</label>
+                                <input type="radio" id='r1' className="rating-radio" value="5" onClick={handleStars}></input>
+                                <label htmlFor='r1' className='rating-label'>☆</label>
+                                <input type="radio" id='r2' className="rating-radio" value="4" onClick={handleStars}></input>
+                                <label htmlFor='r2' className='rating-label'>☆</label>
+                                <input type="radio" id='r3' className="rating-radio" value="3" onClick={handleStars}></input>
+                                <label htmlFor='r3' className='rating-label'>☆</label>
+                                <input type="radio" id='r4' className="rating-radio" value="2" onClick={handleStars}></input>
+                                <label htmlFor='r4' className='rating-label'>☆</label>
+                                <input type="radio" id='r5' className="rating-radio" value="1" onClick={handleStars}></input>
+                                <label htmlFor='r5' className='rating-label'>☆</label>
+                            </div>
+                        </div >
                 <button className="review-form-input-button"
                     type="Submit"
                  >{type==='create'?'Send it!':'Confirm Edit'} <i class="fa-solid fa-check"></i></button>
