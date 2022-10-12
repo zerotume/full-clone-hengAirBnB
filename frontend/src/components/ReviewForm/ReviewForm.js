@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createReviewAction, readSpotReviewsAction, updateReviewAction } from "../../store/reviews";
 import { readOneSpotAction } from "../../store/spots";
+import "./ReviewForm.css";
 
 
 
@@ -43,6 +44,7 @@ function ReviewForm({spotId, review,
         }
         setReviewStars(e.target.value)
     }
+
 
 
     useEffect(() => {
