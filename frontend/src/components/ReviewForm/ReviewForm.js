@@ -17,6 +17,9 @@ function ReviewForm({spotId, review,
     // const [stars, setStars] = useState(review.stars || 1);
     const [reviewStars, setReviewStars] = useState(review.stars || 1);
     const [allstars, setAllstars] = useState('☆☆☆☆☆');
+    const [showStars, setShowStars] = useState('');
+    //this will make a render before the sudden black
+    //so the sudden black will be gone
     const [errors, setErrors] = useState([]);
     const history = useHistory();
 
@@ -106,7 +109,7 @@ function ReviewForm({spotId, review,
                 </div>
                 < div className="star-rating-container" >
                             <div className="radio-label-container">
-                                <label htmlFor='r6' className='rating-label-all'>{allstars}</label>
+                                <label htmlFor='r6' className='rating-label-all'>{showStars && allstars}</label>
                                 <input type="radio" id='r1' className="rating-radio" value="5" onClick={handleStars}></input>
                                 <label htmlFor='r1' className='rating-label'>☆</label>
                                 <input type="radio" id='r2' className="rating-radio" value="4" onClick={handleStars}></input>
