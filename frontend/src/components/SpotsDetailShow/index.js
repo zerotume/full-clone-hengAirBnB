@@ -41,7 +41,7 @@ function SpotsDetailShow({sessionLoaded}){
 
     useEffect(() => {
         dispatch(readSpotReviewsAction(id));
-    },[dispatch,id,user]);
+    },[dispatch,id,user, reviews.spotReviewsArray?.length]);
     const history = useHistory();
 
     const deleteClick = async e => {
@@ -159,12 +159,12 @@ function SpotsDetailShow({sessionLoaded}){
                 reviewContent = (
                  <ul>
                     <span className="spot-review-header"><h2>Reviews</h2></span>
-                    {spotReviews.spotReviewsArray.map(e => (
+                    {sessionLoaded && spotReviews && spotReviews.spotReviewsArray && spotReviews.spotReviewsArray.map(e => (
                         <li key={e.id}>
                             <div className="spot-single-review">
                                 <div className="spot-single-review-user">
                                     <div className="spot-single-review-avatar-container">
-                                        {e.User.profileImg?
+                                        {e.User?.profileImg?
                                             (
                                                 <img className="spot-single-review-avater" src={e.user.profileImg} />
                                             ):(
@@ -173,8 +173,8 @@ function SpotsDetailShow({sessionLoaded}){
                                         }
                                     </div>
                                     <div className="spot-single-review-info-container">
-                                        <p className="spot-single-review-info-name">{e.User.firstName} {e.User.lastName}</p>
-                                        <p className="spot-single-review-info-date">{e.createdAt.slice(0,10)}</p>
+                                        <p className="spot-single-review-info-name">{e.User?.firstName} {e.User?.lastName}</p>
+                                        <p className="spot-single-review-info-date">{e.createdAt?.slice(0,10)}</p>
                                     </div>
                                 </div>
                                 <div className="spot-single-review-content">

@@ -72,6 +72,7 @@ export const readSpotReviewsAction = (spotId) => async dispatch => {
 }
 
 export const createReviewAction = (review) => async dispatch => {
+    console.log(review);
     const response = await csrfFetch(`/api/spots/${review.spotId}/reviews`,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
@@ -158,7 +159,7 @@ const reviewReducer = (state = {myReviews:{}}, action) => {
         case DELETE_ONE_REVIEW:
             newState.myReviews = {...state.myReviews};
             newState.spotReviews = {...state.spotReviews};
-            newState.spotReviews.reviewed = false;
+            delete newState.spotReviews.reviewed;
             if(newState.myReviews[action.id]){
                 delete newState.myReviews[action.id];
                 delete newState.myReviews.myReviewsArray;
@@ -169,6 +170,7 @@ const reviewReducer = (state = {myReviews:{}}, action) => {
                 delete newState.spotReviews.spotReviewsArray;
                 newState.spotReviews.spotReviewsArray = Object.values(newState.spotReviews);
             }
+            newState.spotReviews.reviewed = false;
             return newState;
         default:
             return newState;

@@ -10,7 +10,6 @@
 
 .radio-label-container>label:hover:before,
 .radio-label-container>label:hover~label:before {
-    /* content: "\2605"; */
     content: "★";
     position: absolute;
 }
@@ -38,7 +37,7 @@
 .rating-label,
 .rating-label-all {
     cursor: pointer;
-    transition: color 200ms;
+    /* transition: color 200ms; */
     /* size: 200px;
     opacity: 1; */
 }

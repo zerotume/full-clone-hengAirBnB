@@ -48,17 +48,33 @@ function ReviewForm({spotId, review,
         setReviewStars(e.target.value)
     }
 
+    // const changeShowStar = e => {
+
+    // }
+
+    // const changeNoStar = e => {
+    //     e.preventDefault();
+    //     e.stopPropagation();
+    //     setShowStars('')
+    //     console.log('left');
+    // }
+
 
 
     useEffect(() => {
         setReviewContent(review.review || '');
+        // console.log(showStars);
+        // console.log(allstars);
     }, [showReviewEdit]);
 
     const handleSubmit = async e => {
         e.preventDefault();
         review = {
             ...review,
-            review:reviewContent
+            review:reviewContent,
+            stars:reviewStars,
+            userId:user.id,
+            spotId:spotId
         };
         // let data = await dispatch(actions[formType](channel));
         let data = await dispatch(actions[type](review));
@@ -70,6 +86,7 @@ function ReviewForm({spotId, review,
             if(type === "edit")setShowReviewEdit(-1);
             dispatch(readSpotReviewsAction(spotId));
             setReviewContent('');
+            setReviewStars(1);
             return setRenderer({});
         }
         // if(data.errors){
@@ -109,17 +126,47 @@ function ReviewForm({spotId, review,
                 </div>
                 < div className="star-rating-container" >
                             <div className="radio-label-container">
-                                <label htmlFor='r6' className='rating-label-all'>{showStars && allstars}</label>
-                                <input type="radio" id='r1' className="rating-radio" value="5" onClick={handleStars}></input>
-                                <label htmlFor='r1' className='rating-label'>☆</label>
-                                <input type="radio" id='r2' className="rating-radio" value="4" onClick={handleStars}></input>
-                                <label htmlFor='r2' className='rating-label'>☆</label>
-                                <input type="radio" id='r3' className="rating-radio" value="3" onClick={handleStars}></input>
-                                <label htmlFor='r3' className='rating-label'>☆</label>
-                                <input type="radio" id='r4' className="rating-radio" value="2" onClick={handleStars}></input>
-                                <label htmlFor='r4' className='rating-label'>☆</label>
-                                <input type="radio" id='r5' className="rating-radio" value="1" onClick={handleStars}></input>
-                                <label htmlFor='r5' className='rating-label'>☆</label>
+                                <label htmlFor='r6' className='rating-label-all'>{showStars || allstars}</label>
+                                <input type="radio" id='r1' className="rating-radio" value="5"
+                                    onClick={handleStars}
+                                    ></input>
+                                <label htmlFor='r1'
+                                    className='rating-label'
+                                    // onMouseEnter={() => setShowStars('☆☆☆☆★')}
+                                    // onPointerLeave={changeNoStar}
+                                    >☆</label>
+                                <input type="radio" id='r2' className="rating-radio" value="4"
+                                    onClick={handleStars}
+                                    ></input>
+                                <label htmlFor='r2'
+                                    className='rating-label'
+                                    // onMouseEnter={() => setShowStars('☆☆☆★★')}
+                                    // onPointerLeave={changeNoStar}
+                                    >☆</label>
+                                <input type="radio" id='r3' className="rating-radio" value="3"
+                                    onClick={handleStars}
+                                    ></input>
+                                <label htmlFor='r3'
+                                    className='rating-label'
+                                    // onMouseEnter={() => setShowStars('☆☆★★★')}
+                                    // onPointerLeave={changeNoStar}
+                                    >☆</label>
+                                <input type="radio" id='r4' className="rating-radio" value="2"
+                                    onClick={handleStars}
+                                    ></input>
+                                <label htmlFor='r4'
+                                    className='rating-label'
+                                    // onMouseEnter={() => setShowStars('☆★★★★')}
+                                    // onPointerLeave={changeNoStar}
+                                    >☆</label>
+                                <input type="radio" id='r5' className="rating-radio" value="1"
+                                    onClick={handleStars}
+                                    ></input>
+                                <label htmlFor='r5'
+                                    className='rating-label'
+                                    // onMouseEnter={() => setShowStars('★★★★★')}
+                                    // onPointerLeave={changeNoStar}
+                                    >☆</label>
                             </div>
                         </div >
                 <button className="review-form-input-button"
