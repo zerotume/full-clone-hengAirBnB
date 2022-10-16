@@ -300,6 +300,12 @@ img.detail-img-5{
     font-size: 0.8rem;
 }
 
+.img-form{
+    margin-top: 1rem;
+}
+
+
+
 .review-img{
     width:5rem;
     height:5rem;
@@ -309,4 +315,17 @@ img.detail-img-5{
     object-fit: cover;
     margin-right: 0.3rem;
     border-radius: 1rem;
+}
+
+.review-form .review-form-label{
+    display: flex;
+    flex-direction: column;
+}
+
+.review-form-label{
+    width:80%;
+}
+
+.star-rating-container{
+    font-size: 2rem;
 }

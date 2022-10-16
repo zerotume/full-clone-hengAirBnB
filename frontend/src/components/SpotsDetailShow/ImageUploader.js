@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import catWait from "../../assets/meowWaiting.jpg"
 import { addSpotImageAction, deleteSpotImageAction, editSpotImageAction } from "../../store/spots";
-
+import "./ImageUploader.css";
 
 function ImageUploader({spotId, imageData, type, imgnum, showPicModal, setShowPicModal}){
     const [url, setUrl] = useState(imageData?.url || '');
@@ -99,19 +99,21 @@ function ImageUploader({spotId, imageData, type, imgnum, showPicModal, setShowPi
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>
                 <div className='img-form-input-holder spot-img-form-input-holder'>
-                    <label htmlFor="image_uploads" className="label-img-upload">Upload a spot image! (like png or jpg) <br />
-                        <input
-                        type="file"
-                        placeholder="Upload a spot image(like png or jpg)"
-                        id="image_uploads"
-                        name="image_uploads"
-                        accept="Image/jpeg, Image/png"
-                        onChange={updateFile}
-                        /></label>
+                    <label htmlFor="image_uploads"
+                        className="label-img-upload">Upload a spot image! (like png or jpg) <br /></label>
+
+                    <input
+                    type="file"
+                    id="image_uploads"
+                    name="image_uploads"
+                    accept="Image/jpeg, Image/png"
+                    title=" "
+                    onChange={updateFile}
+                    />
                 </div>
-                <button type="submit">Submit your image</button>
+                <button className="img-submit spot-img-submit" type="submit">Submit your image</button>
             </form>
-            {imageData && (<button onClick={deleteClick}>Delete this image</button>)}
+            {imageData && (<button className="img-delete spot-img-delete" onClick={deleteClick}>Delete this image</button>)}
         </div>
     );
 }

@@ -9,7 +9,7 @@ import BookingForm from "../BookingForm/BookingForm";
 import ImageUploading from "react-images-uploading";
 import Modal from "../../context/Modal";
 import catWait from "../../assets/meowWaiting.jpg"
-import ImageUploader from "./imageUploader";
+import ImageUploader from "./ImageUploader";
 import { deleteReviewAction, readSpotReviewsAction } from "../../store/reviews";
 import ReviewForm from "../ReviewForm/ReviewForm";
 
@@ -302,7 +302,7 @@ function SpotsDetailShow({sessionLoaded}){
                             <div className="detail-info-amenities"></div> */}
                             <div className="detail-info-current-bookings">{bookingContent}</div>
                             <div className="detail-info-current-reviews">{reviewContent}</div>
-                            {!userReviewed?(
+                            {!userReviewed?currentSpot.ownerId !== userId?(
                                     <div className="create-review-show">
                                         <ReviewForm type={'create'} spotId={id} review={{}}
                                                     showReviewCreate={showReviewCreate}
@@ -314,6 +314,12 @@ function SpotsDetailShow({sessionLoaded}){
                                         />
                                     </div>
                                 ):(
+                                    <div className="already-reviewed">
+                                        <h3>Don't review yourselves spot!</h3>
+                                        <h3>Instead, why not ask who visited for a review?</h3>
+                                    </div>
+                                )
+                                :(
                                     <div className="already-reviewed">
                                         <h3>You've already reviewed!</h3>
                                         <h3>One user, one spot, one review - to ensure our review quality.</h3>

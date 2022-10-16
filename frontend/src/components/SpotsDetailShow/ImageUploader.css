@@ -1,0 +1,35 @@
+input#image_uploads{
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+
+input::file-selector-button{
+    display: block;
+    text-align: center;
+    background-color: #dd1262;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: whitesmoke;
+    width: 10.1vw;
+    height: 3.31vh;
+    line-height: 1rem;
+    border-radius: 0.83vh;
+    margin: 0.83vh;
+    border:none;
+    cursor: pointer;
+}
+
+.img-submit, .img-delete{
+    height: 2.2rem;
+    margin-top: 1rem;
+    width: 80%;
+    align-self: flex-start;
+    border: none;
+    color: white;
+    background-color: #111111;
+    border-radius: 0.83vh;
+    margin-left: 2rem;
+    font-weight: 600;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+}
