@@ -15,7 +15,7 @@ function ReviewForm({spotId, review,
     const user = useSelector(state => state.session.user);
     const [reviewContent, setReviewContent] = useState(review.review || '');
     // const [stars, setStars] = useState(review.stars || 1);
-    const [reviewStars, setReviewStars] = useState(review.stars || 1);
+    const [reviewStars, setReviewStars] = useState(review.stars || 0);
     const [allstars, setAllstars] = useState('☆☆☆☆☆');
     const [showStars, setShowStars] = useState('');
     //this will make a render before the sudden black
@@ -69,6 +69,10 @@ function ReviewForm({spotId, review,
 
     const handleSubmit = async e => {
         e.preventDefault();
+        if(reviewContent.length === 0)return setErrors(["Type in your review!"]);
+        console.log(reviewStars);
+        if(reviewStars < 1 || reviewStars > 5)return setErrors(["Choose how many stars you want to give!"]);
+
         review = {
             ...review,
             review:reviewContent,
@@ -77,16 +81,17 @@ function ReviewForm({spotId, review,
             spotId:spotId
         };
         // let data = await dispatch(actions[formType](channel));
-        let data = await dispatch(actions[type](review));
+        let res = await dispatch(actions[type](review));
         setErrors([]);
-        if(data?.errors){
-
+        if(res.errors){
+            // const data = await res.json();
+            // console.log(data);
         }else{
             // if(type === "create")setShowReviewCreate(false);
             if(type === "edit")setShowReviewEdit(-1);
             dispatch(readSpotReviewsAction(spotId));
             setReviewContent('');
-            setReviewStars(1);
+            setReviewStars(0);
             return setRenderer({});
         }
         // if(data.errors){

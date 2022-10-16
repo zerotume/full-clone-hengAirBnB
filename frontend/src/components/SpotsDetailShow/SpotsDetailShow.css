@@ -316,16 +316,3 @@ img.detail-img-5{
     margin-right: 0.3rem;
     border-radius: 1rem;
 }
-
-.review-form .review-form-label{
-    display: flex;
-    flex-direction: column;
-}
-
-.review-form-label{
-    width:80%;
-}
-
-.star-rating-container{
-    font-size: 2rem;
-}

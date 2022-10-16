@@ -45,3 +45,49 @@
 .rating-label-all {
     position: absolute;
 }
+
+
+.review-form,.review-form-label{
+    display: flex;
+    flex-direction: column;
+}
+
+.review-form-label{
+    width:80%;
+}
+
+.star-rating-container{
+    font-size: 2rem;
+}
+
+.review-form textarea{
+    margin-top:0.4rem;
+}
+
+.review-form-input-button{
+    height: 2rem;
+    margin-bottom: 1rem;
+    width: 80%;
+    align-self:center;
+    border: none;
+    color: white;
+    background-color: #111111;
+    border-radius: 0.83vh;
+    font-weight: 600;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+
+}
+
+.review-form li{
+    font-size: 0.8rem;
+    margin-top: 0.4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: initial;
+    word-break: break-word;
+}
+
+.review-edit-button, .review-delete-button{
+    cursor: pointer;
+}
