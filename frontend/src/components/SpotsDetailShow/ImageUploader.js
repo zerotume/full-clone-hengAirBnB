@@ -9,6 +9,8 @@ function ImageUploader({spotId, imageData, type, imgnum, showPicModal, setShowPi
     const [image, setImage] = useState(null);
     const [errors, setErrors] = useState([]);
     const [errorsObj, setErrorsObj] = useState({});
+    const [uploading, setUploading] = useState('');
+    const [disabled, setDisabled] = useState(false);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -45,18 +47,24 @@ function ImageUploader({spotId, imageData, type, imgnum, showPicModal, setShowPi
                 return setErrors(["Cannot add more than 5 pics to one spot!"])
             }
             setErrors([]);
+            setDisabled(true);
+            setUploading('Uploading! Please wait a sec...')
             if(type === 'add'){
                 return dispatch(addSpotImageAction({image}, spotId))
                     .then(() => {
                         setImage(null);
                         // setUrl(img.url);
                         setShowPicModal(-1);
+                        setDisabled(false);
+                        setUploading('');
                     })
                     .catch(async (res) => {
                         const data = await res.json();
                         if(data && data.errors) {
                             setErrorsObj(data.errors[0].errors);
                             setErrors(Object.values(data.errors[0].errors));
+                            setDisabled(false);
+                            setUploading('');
                         }
                     })
             }else if(type === 'edit'){
@@ -67,12 +75,16 @@ function ImageUploader({spotId, imageData, type, imgnum, showPicModal, setShowPi
                                 .then(() => {
                                     setImage(null);
                                     setShowPicModal(-1);
+                                    setDisabled(false);
+                                    setUploading('');
                                 })
                                 .catch(async (res) => {
                                     const data = await res.json();
                                     if(data && data.errors) {
                                         setErrorsObj(data.errors[0].errors);
                                         setErrors(Object.values(data.errors[0].errors));
+                                        setDisabled(false);
+                                        setUploading('');
                                     }
                                 });
             }else{
@@ -109,11 +121,13 @@ function ImageUploader({spotId, imageData, type, imgnum, showPicModal, setShowPi
                     accept="Image/jpeg, Image/png"
                     title=" "
                     onChange={updateFile}
+                    disabled={disabled}
                     />
                 </div>
-                <button className="img-submit spot-img-submit" type="submit">Submit your image</button>
+                <button disabled={disabled} className={`${disabled?'img-submit-disabled':'img-submit'} spot-img-submit`} type="submit">Submit your image</button>
             </form>
-            {imageData && (<button className="img-delete spot-img-delete" onClick={deleteClick}>Delete this image</button>)}
+            {imageData && (<button disabled={disabled} className={`${disabled?'img-delete-disabled':'img-delete'} spot-img-delete`} onClick={deleteClick}>Delete this image</button>)}
+            <p>{uploading}</p>
         </div>
     );
 }

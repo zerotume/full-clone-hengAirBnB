@@ -20,7 +20,7 @@ input::file-selector-button{
 }
 
 .img-submit, .img-delete{
-    height: 2.2rem;
+    height: 2rem;
     margin-top: 1rem;
     width: 80%;
     align-self: flex-start;
@@ -32,4 +32,23 @@ input::file-selector-button{
     font-weight: 600;
     font-family: 'Nunito', sans-serif;
     cursor: pointer;
+}
+
+.img-submit-disabled, .img-delete-disabled{
+    height: 2rem;
+    margin-top: 1rem;
+    width: 80%;
+    align-self: flex-start;
+    border: none;
+    color: white;
+    background-color: #777777;
+    border-radius: 0.83vh;
+    margin-left: 2rem;
+    font-weight: 600;
+    font-family: 'Nunito', sans-serif;
+    cursor:wait;
+}
+
+.img-modal-holder{
+    height:90%;
 }
