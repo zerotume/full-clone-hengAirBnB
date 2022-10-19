@@ -18,7 +18,7 @@ function ImageUploader({spotId ,reviewId, imageData, type, imgnum, showReviewPic
 
     useEffect(() => {
 
-    },[imgnum, showPicModal]);
+    },[imgnum, showReviewPicModal]);
 
     const deleteClick = e => {
         e.preventDefault();
