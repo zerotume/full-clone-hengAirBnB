@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import catWait from "../../assets/meowWaiting.jpg"
+import { addReviewImageAction, deleteReviewImageAction, editReviewImageAction } from "../../store/reviews";
 import { addSpotImageAction, deleteSpotImageAction, editSpotImageAction } from "../../store/spots";
 import "./ImageUploader.css";
 
-function ImageUploader({spotId ,reviewId, imageData, type, imgnum, showReviewPicModal, setShowReviewPicModal}){
+function ReviewImageUploader({spotId ,reviewId, imageData, type, imgnum, showReviewPicModal, setShowReviewPicModal}){
     //only reviewId and url needed for backend
     //redux store action requires spotId
 
@@ -74,7 +75,7 @@ function ImageUploader({spotId ,reviewId, imageData, type, imgnum, showReviewPic
                 if(!imageData.id){
                     return setErrors(['Unknown error, please contact the developer!'])
                 }
-                return dispatch(editSpotImageAction({image}, imageData.id, spotId))
+                return dispatch(editReviewImageAction({image}, imageData.id, spotId))
                                 .then(() => {
                                     setImage(null);
                                     setShowReviewPicModal(-1);
@@ -135,4 +136,4 @@ function ImageUploader({spotId ,reviewId, imageData, type, imgnum, showReviewPic
     );
 }
 
-export default ImageUploader;
+export default ReviewImageUploader;

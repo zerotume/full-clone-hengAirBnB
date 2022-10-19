@@ -12,6 +12,7 @@ import catWait from "../../assets/meowWaiting.jpg"
 import ImageUploader from "./ImageUploader";
 import { deleteReviewAction, readSpotReviewsAction } from "../../store/reviews";
 import ReviewForm from "../ReviewForm/ReviewForm";
+import ReviewImageUploader from "./ReviewImageUploader";
 
 const meowWaiting = process.env.PUBLIC_URL+"/assets/meowWaiting.jpg"
 
@@ -189,12 +190,49 @@ function SpotsDetailShow({sessionLoaded}){
                                     </div>
                                     <div className="spot-single-review-images">
                                         {e.images && !!e.images.length && e.images.map(img => (
-                                            <img className="review-img" src={img.url} />
+                                            <>
+                                                <img className={`review-img ${e.userId===user.id?'review-img-click':''}`}
+                                                    src={img.url}
+                                                    onClick={() => e.userId === user.id?setShowReviewPicModal(e.id):null}
+
+                                                />
+                                                {e.userId === user.id && showReviewPicModal === e.id && (
+                                                    <Modal className="img-modal review-img-modal" onClose={() => setShowReviewPicModal(-1)} >
+                                                        <p>Upload your review image!</p>
+                                                        <ReviewImageUploader
+                                                            spotId={currentSpot.id}
+                                                            reviewId={e.id}
+                                                            imageData={img || null}
+                                                            type={'edit'}
+                                                            imgnum={e.images.length}
+                                                            showReviewPicModal={showReviewPicModal}
+                                                            setShowReviewPicModal={setShowReviewPicModal}
+                                                        />
+                                                    </Modal>
+                                                )}
+                                            </>
                                         ))}
-                                        {e.userId === user.id && e?.images?.length < 5 && (
-                                            <div className="add-review-image-button">
-                                                <i class="fa-solid fa-plus"></i>
-                                            </div>
+                                        {e.userId === user.id && e.images.length < 5 && (
+                                            <>
+                                                <div className="add-review-image-button" onClick={() => setShowReviewPicModal(-5)}>
+                                                    <i class="fa-solid fa-plus"></i>
+                                                    {/* <span><br/>{showReviewPicModal} {e.userId} {user.id}</span> */}
+                                                </div>
+                                                {e.userId === user.id && showReviewPicModal === -5 && (
+                                                    <Modal className="img-modal review-img-modal" onClose={() => setShowReviewPicModal(-1)} >
+                                                    <p>Upload your review image!</p>
+                                                    <ReviewImageUploader
+                                                        spotId={currentSpot.id}
+                                                        reviewId={e.id}
+                                                        imageData={null}
+                                                        type={'add'}
+                                                        imgnum={e.images.length}
+                                                        showReviewPicModal={showReviewPicModal}
+                                                        setShowReviewPicModal={setShowReviewPicModal}
+                                                    />
+                                                </Modal>
+                                                )}
+                                            </>
                                         )}
                                     </div>
                                 </div>
