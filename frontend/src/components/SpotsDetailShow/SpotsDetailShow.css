@@ -304,6 +304,29 @@ img.detail-img-5{
     margin-top: 1rem;
 }
 
+.spot-single-review-images{
+    display: flex;
+    align-items: center;
+    margin-top: 0.2rem;
+}
+
+.add-review-image-button{
+    width:5rem;
+    height:5rem;
+    max-width:5rem;
+    max-height: 5rem;
+    margin-right: 0.3rem;
+    border-radius: 1rem;
+    background-color: #CCCCCC;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-review-image-button i{
+    font-size: 2rem;
+    color: #EEEDDD;
+}
 
 
 .review-img{
@@ -315,4 +338,8 @@ img.detail-img-5{
     object-fit: cover;
     margin-right: 0.3rem;
     border-radius: 1rem;
+}
+
+.review-edit-button, .review-delete-button{
+    margin-bottom: 1rem;
 }

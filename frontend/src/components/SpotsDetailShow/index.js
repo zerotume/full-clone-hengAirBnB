@@ -28,6 +28,8 @@ function SpotsDetailShow({sessionLoaded}){
     let reviews = useSelector(state => state.reviews)
     const [showPicModal, setShowPicModal] = useState(-1);
     const [images, setImages] = useState(currentSpot.images || []);
+    const [showReviewPicModal, setShowReviewPicModal] = useState(-1);
+    const [reviewImages, setReviewImages] = useState([]);
     const [showReviewEdit, setShowReviewEdit] = useState(-1);
     const [showReviewCreate, setShowReviewCreate] = useState(false);
     const [renderer, setRenderer] = useState({});
@@ -189,6 +191,11 @@ function SpotsDetailShow({sessionLoaded}){
                                         {e.images && !!e.images.length && e.images.map(img => (
                                             <img className="review-img" src={img.url} />
                                         ))}
+                                        {e.userId === user.id && e?.images?.length < 5 && (
+                                            <div className="add-review-image-button">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                                 <div className="update-review-show" hidden={e.id!==showReviewEdit}>
