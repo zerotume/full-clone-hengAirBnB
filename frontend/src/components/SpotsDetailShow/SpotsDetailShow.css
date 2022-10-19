@@ -321,11 +321,13 @@ img.detail-img-5{
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor:pointer;
 }
 
 .add-review-image-button i{
     font-size: 2rem;
     color: #EEEDDD;
+    cursor:pointer;
 }
 
 

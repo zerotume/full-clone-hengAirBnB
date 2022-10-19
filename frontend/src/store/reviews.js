@@ -116,6 +116,52 @@ export const deleteReviewAction = (id) => async dispatch => {
     }
 }
 
+export const addReviewImageAction = (payload, id, spotId) => async dispatch => {
+    const {image} = payload;
+    const formData = new FormData();
+    if(image) formData.append("image", image);
+
+    const response = await csrfFetch(`/api/reviews/${id}/images`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+        body: formData,
+    });
+
+    if(response.ok){
+        dispatch(readSpotReviewsAction(spotId));
+    }
+}
+
+export const editReviewImageAction = (payload, id, spotId) => async dispatch => {
+    const {image} = payload;
+    const formData = new FormData();
+    if(image) formData.append("image", image);
+
+    const response = await csrfFetch(`/api/images/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+        body: formData,
+    });
+
+    if(response.ok){
+        dispatch(readSpotReviewsAction(spotId));
+    }
+}
+
+export const deleteReviewImageAction = (id, spotId) => async dispatch => {
+    const response = await csrfFetch(`/api/images/${id}`,{
+        method: "DELETE"
+    });
+
+    if(response.ok){
+        dispatch(readSpotReviewsAction(spotId));
+    }
+}
+
 const reviewReducer = (state = {myReviews:{}}, action) => {
     let newState = {...state};
     switch(action.type){

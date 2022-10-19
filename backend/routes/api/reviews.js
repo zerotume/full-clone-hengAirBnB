@@ -5,6 +5,7 @@ const {setTokenCookie, restoreUser, requireAuth, AuthorCheck, refuseOwner, revie
 const {handleValidationErrors} = require('../../utils/validation.js');
 const {check} = require('express-validator');
 const user = require('../../db/models/user');
+const { singleMulterUpload, singlePublicFileUpload } = require('../../awsS3');
 
 router.get('/myreview', restoreUser, requireAuth, async (req, res) => {
     let myId = req.user.toJSON().id;
@@ -31,18 +32,27 @@ router.get('/myreview', restoreUser, requireAuth, async (req, res) => {
     res.json({Reviews:reviews});
 });
 
-const validateImage = [
-    check('url')
-        .exists({checkFalsy:true})
-        .notEmpty()
-        .withMessage('Url must be a valid picture url'),
-    handleValidationErrors
-];
+// const validateImage = [
+//     check('url')
+//         .exists({checkFalsy:true})
+//         .notEmpty()
+//         .withMessage('Url must be a valid picture url'),
+//     handleValidationErrors
+// ];
 
-router.post('/:id/images', validateImage, restoreUser, requireAuth, reviewReq, AuthorCheck,
+router.post('/:id/images', singleMulterUpload("image"), restoreUser, requireAuth, reviewReq, AuthorCheck,
     async (req, res, next) => {
-        let {url} = req.body;
-        let reviewId = req.review.toJSON().id;
+        // let {url} = req.body;
+        let imgs = await Image.findAll({
+            where:{
+                reviewId:req.params.id,
+                imageType:'review'
+            },
+            attributes:['id','url'],
+            raw:true
+        });
+
+        let reviewId = req.params.id;
 
         let imgCount = await Image.count({
             where:{
@@ -59,9 +69,9 @@ router.post('/:id/images', validateImage, restoreUser, requireAuth, reviewReq, A
         }
 
         let spotId = req.review.toJSON().spotId;
+        const url = await singlePublicFileUpload(req.file);
         let imageType = 'review';
         let newImage;
-
 
         try{
             newImage = await Image.create({
