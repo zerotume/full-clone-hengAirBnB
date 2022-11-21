@@ -27,12 +27,38 @@ module.exports = {
         spotId:4,
         reviewId:4
       },
+
       {
-        url:'https://backofthebrain.files.wordpress.com/2012/06/many-cats-in-the-room.jpg',
+        url:'https://catbnbimage.s3.us-west-1.amazonaws.com/57523101_3e1021f49e_z.jpg',
         imageType:'spot',
         spotId:1,
         reviewId:null
       },
+      {
+        url:'https://catbnbimage.s3.us-west-1.amazonaws.com/331736815_6a9f8bb37f_b.jpg',
+        imageType:'spot',
+        spotId:1,
+        reviewId:null
+      },
+      {
+        url:'https://catbnbimage.s3.us-west-1.amazonaws.com/4062257255_d5538f77c7_b.jpg',
+        imageType:'spot',
+        spotId:1,
+        reviewId:null
+      },
+      {
+        url:'https://catbnbimage.s3.us-west-1.amazonaws.com/1808205717_aa616b69cb_b.jpg',
+        imageType:'spot',
+        spotId:1,
+        reviewId:null
+      },
+      {
+        url:'https://catbnbimage.s3.us-west-1.amazonaws.com/4427561580_82e0e14d04_b.jpg',
+        imageType:'spot',
+        spotId:1,
+        reviewId:null
+      },
+
       {
         url:'https://www.gtgoodtimes.com/wp-content/uploads/2019/02/15022019catnip.jpg',
         imageType:'spot',
@@ -51,12 +77,38 @@ module.exports = {
         spotId:4,
         reviewId:null
       },
+
       {
-        url:'https://backofthebrain.files.wordpress.com/2012/06/many-cats-in-the-room.jpg',
+        url:'https://catbnbimage.s3.us-west-1.amazonaws.com/11315834234_0a07f924e2_b.jpg',
         imageType:'spot',
         spotId:5,
         reviewId:null
       },
+      {
+        url:'https://catbnbimage.s3.us-west-1.amazonaws.com/cat-kitten-adidas-mackerel-preview.jpg',
+        imageType:'spot',
+        spotId:5,
+        reviewId:null
+      },
+      {
+        url:'https://catbnbimage.s3.us-west-1.amazonaws.com/alexander-and-some-other-cats-1929-17327069164-cropped-2e0c5d-1024.jpg',
+        imageType:'spot',
+        spotId:5,
+        reviewId:null
+      },
+      {
+        url:'https://catbnbimage.s3.us-west-1.amazonaws.com/30450791070_978aefc2a2_b.jpg',
+        imageType:'spot',
+        spotId:5,
+        reviewId:null
+      },
+      {
+        url:'https://catbnbimage.s3.us-west-1.amazonaws.com/Cats_in_Catania_Amphitheatre_2925.jpg',
+        imageType:'spot',
+        spotId:5,
+        reviewId:null
+      },
+
       {
         url:'https://www.gtgoodtimes.com/wp-content/uploads/2019/02/15022019catnip.jpg',
         imageType:'spot',
