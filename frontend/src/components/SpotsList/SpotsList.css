@@ -1,5 +1,5 @@
 .spots-index{
-    top:9.92vh;
+    top:3.92vh;
     position: relative;
     width:82.5vw;
     left:8vw;
@@ -25,4 +25,33 @@
 
 .my-table-img-text img{
 
+}
+
+div.index-header-container{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h2.index-header{
+    margin:0px;
+    font-family: 'Nurito', sans-serif;
+    font-weight: 600;
+    color:#767676;
+}
+
+h2.index-header-top{
+    margin:0px;
+    font-family: 'Nurito', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+h2.index-header-down{
+    margin:0px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
 }
