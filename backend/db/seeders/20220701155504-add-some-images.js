@@ -87,66 +87,66 @@ module.exports = {
         spotId:10,
         reviewId:null
       },
-      {
-        url:'https://live.staticflickr.com/8175/7937196104_11ba2a548b.jpg',
-        imageType:'spot',
-        spotId:11,
-        reviewId:null
-      },
-      {
-        url:'https://www.indy100.com/media-library/image.jpg?id=28042782&width=1245&quality=85&coordinates=111%2C0%2C111%2C0&height=700',
-        imageType:'spot',
-        spotId:12,
-        reviewId:null
-      },
-      {
-        url:'https://backofthebrain.files.wordpress.com/2012/06/many-cats-in-the-room.jpg',
-        imageType:'spot',
-        spotId:13,
-        reviewId:null
-      },
-      {
-        url:'https://www.gtgoodtimes.com/wp-content/uploads/2019/02/15022019catnip.jpg',
-        imageType:'spot',
-        spotId:14,
-        reviewId:null
-      },
-      {
-        url:'https://live.staticflickr.com/8175/7937196104_11ba2a548b.jpg',
-        imageType:'spot',
-        spotId:15,
-        reviewId:null
-      },
-      {
-        url:'https://www.indy100.com/media-library/image.jpg?id=28042782&width=1245&quality=85&coordinates=111%2C0%2C111%2C0&height=700',
-        imageType:'spot',
-        spotId:16,
-        reviewId:null
-      },
-      {
-        url:'https://backofthebrain.files.wordpress.com/2012/06/many-cats-in-the-room.jpg',
-        imageType:'spot',
-        spotId:17,
-        reviewId:null
-      },
-      {
-        url:'https://www.gtgoodtimes.com/wp-content/uploads/2019/02/15022019catnip.jpg',
-        imageType:'spot',
-        spotId:18,
-        reviewId:null
-      },
-      {
-        url:'https://live.staticflickr.com/8175/7937196104_11ba2a548b.jpg',
-        imageType:'spot',
-        spotId:19,
-        reviewId:null
-      },
-      {
-        url:'https://www.indy100.com/media-library/image.jpg?id=28042782&width=1245&quality=85&coordinates=111%2C0%2C111%2C0&height=700',
-        imageType:'spot',
-        spotId:20,
-        reviewId:null
-      },
+      // {
+      //   url:'https://live.staticflickr.com/8175/7937196104_11ba2a548b.jpg',
+      //   imageType:'spot',
+      //   spotId:11,
+      //   reviewId:null
+      // },
+      // {
+      //   url:'https://www.indy100.com/media-library/image.jpg?id=28042782&width=1245&quality=85&coordinates=111%2C0%2C111%2C0&height=700',
+      //   imageType:'spot',
+      //   spotId:12,
+      //   reviewId:null
+      // },
+      // {
+      //   url:'https://backofthebrain.files.wordpress.com/2012/06/many-cats-in-the-room.jpg',
+      //   imageType:'spot',
+      //   spotId:13,
+      //   reviewId:null
+      // },
+      // {
+      //   url:'https://www.gtgoodtimes.com/wp-content/uploads/2019/02/15022019catnip.jpg',
+      //   imageType:'spot',
+      //   spotId:14,
+      //   reviewId:null
+      // },
+      // {
+      //   url:'https://live.staticflickr.com/8175/7937196104_11ba2a548b.jpg',
+      //   imageType:'spot',
+      //   spotId:15,
+      //   reviewId:null
+      // },
+      // {
+      //   url:'https://www.indy100.com/media-library/image.jpg?id=28042782&width=1245&quality=85&coordinates=111%2C0%2C111%2C0&height=700',
+      //   imageType:'spot',
+      //   spotId:16,
+      //   reviewId:null
+      // },
+      // {
+      //   url:'https://backofthebrain.files.wordpress.com/2012/06/many-cats-in-the-room.jpg',
+      //   imageType:'spot',
+      //   spotId:17,
+      //   reviewId:null
+      // },
+      // {
+      //   url:'https://www.gtgoodtimes.com/wp-content/uploads/2019/02/15022019catnip.jpg',
+      //   imageType:'spot',
+      //   spotId:18,
+      //   reviewId:null
+      // },
+      // {
+      //   url:'https://live.staticflickr.com/8175/7937196104_11ba2a548b.jpg',
+      //   imageType:'spot',
+      //   spotId:19,
+      //   reviewId:null
+      // },
+      // {
+      //   url:'https://www.indy100.com/media-library/image.jpg?id=28042782&width=1245&quality=85&coordinates=111%2C0%2C111%2C0&height=700',
+      //   imageType:'spot',
+      //   spotId:20,
+      //   reviewId:null
+      // },
     ]
     /**
      * Add seed commands here.
