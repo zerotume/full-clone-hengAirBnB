@@ -19,7 +19,7 @@ function SpotsList({sessionLoaded}) {
         <>
             <HeaderBar sessionLoaded={sessionLoaded} main={true}/>
             <div className="index-header-container">
-                <h2 className="index-header index-header-top">Hanging out with other cats!</h2>
+                <h2 className="index-header index-header-top">Furry friends, let's hang out with other cats!</h2>
                 <h2 className="index-header index-header-down">Travel Meow, Meet Meow, Know Meow</h2>
             </div>
             <div className="spots-index">
